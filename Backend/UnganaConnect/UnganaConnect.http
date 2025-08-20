@@ -1,0 +1,6 @@
+@UnganaConnect_HostAddress = http://localhost:5217
+
+GET {{UnganaConnect_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
