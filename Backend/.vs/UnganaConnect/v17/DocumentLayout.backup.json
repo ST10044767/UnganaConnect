@@ -1,0 +1,465 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\users\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\users\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\service\\blobservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\service\\blobservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\service\\fileservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\service\\fileservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\training \u0026 learning\\certificate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\certificate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\users\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\users\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\migrations\\20250912085911_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\migrations\\20250912085911_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\unganaconnect.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\unganaconnect.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\unganaconnect.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\unganaconnect.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\data\\unganaconnectdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\data\\unganaconnectdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\resources repo\\cresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\resources repo\\cresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\event management\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\event management\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\forum\\forumthread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\forum\\forumthread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\forum\\forumreply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\forum\\forumreply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\event management\\eventregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\event management\\eventregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\resources repo\\resourceengagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\resources repo\\resourceengagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\training \u0026 learning\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\training \u0026 learning\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\models\\training \u0026 learning\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\unganaconnect.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\unganaconnect.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\ict 2023\\source\\repos\\st10044767\\unganaconnect\\backend\\unganaconnect\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BlobServices.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Service\\BlobServices.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Service\\BlobServices.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Service\\BlobServices.cs",
+              "RelativeToolTip": "UnganaConnect\\Service\\BlobServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T19:42:21.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FileServices.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Service\\FileServices.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Service\\FileServices.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Service\\FileServices.cs",
+              "RelativeToolTip": "UnganaConnect\\Service\\FileServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T19:41:55.637Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Profile.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Users\\Profile.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Users\\Profile.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Users\\Profile.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Users\\Profile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T19:31:52.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\.env",
+              "RelativeDocumentMoniker": "UnganaConnect\\.env",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\.env",
+              "RelativeToolTip": "UnganaConnect\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-12T07:10:14.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Program.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Program.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Program.cs",
+              "RelativeToolTip": "UnganaConnect\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T01:39:40.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Users\\User.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Users\\User.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Users\\User.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Users\\User.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-11T08:43:47.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Users\\Admin.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Users\\Admin.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Users\\Admin.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Users\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T00:59:47.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\appsettings.json",
+              "RelativeDocumentMoniker": "UnganaConnect\\appsettings.json",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\appsettings.json",
+              "RelativeToolTip": "UnganaConnect\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-12T07:01:30.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Certificate.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:28:05.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20250912085911_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Migrations\\20250912085911_InitialCreate.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Migrations\\20250912085911_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Migrations\\20250912085911_InitialCreate.cs",
+              "RelativeToolTip": "UnganaConnect\\Migrations\\20250912085911_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T08:59:13.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UnganaConnect",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\UnganaConnect.csproj",
+              "RelativeDocumentMoniker": "UnganaConnect\\UnganaConnect.csproj",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\UnganaConnect.csproj",
+              "RelativeToolTip": "UnganaConnect\\UnganaConnect.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-12T07:14:00.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAABsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T01:09:01.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "UnganaConnect\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\appsettings.Development.json",
+              "RelativeToolTip": "UnganaConnect\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-13T08:54:35.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UnganaConnectDBcontext.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "RelativeToolTip": "UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAxwB4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T01:16:13.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CResource.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:30:41.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Event Management\\Event.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Event Management\\Event.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Event Management\\Event.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Event Management\\Event.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAABQwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:43:32.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UnganaConnect.csproj",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\UnganaConnect.csproj",
+              "RelativeDocumentMoniker": "UnganaConnect\\UnganaConnect.csproj",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\UnganaConnect.csproj*",
+              "RelativeToolTip": "UnganaConnect\\UnganaConnect.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-12T01:15:24.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ForumThread.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Forum\\ForumThread.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Forum\\ForumThread.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Forum\\ForumThread.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Forum\\ForumThread.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAIBWwAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:51:59.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ForumReply.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Forum\\ForumReply.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Forum\\ForumReply.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Forum\\ForumReply.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Forum\\ForumReply.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:53:18.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "EventRegistration.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Event Management\\EventRegistration.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Event Management\\EventRegistration.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Event Management\\EventRegistration.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Event Management\\EventRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:47:30.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ResourceEngagement.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:39:13.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Quiz.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T06:26:01.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "UnganaConnect.http",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\UnganaConnect.http",
+              "RelativeDocumentMoniker": "UnganaConnect\\UnganaConnect.http",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\UnganaConnect.http",
+              "RelativeToolTip": "UnganaConnect\\UnganaConnect.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-09-12T01:59:20.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Enrollment.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T01:05:20.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Course.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T01:03:52.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\ICT 2023\\source\\repos\\ST10044767\\UnganaConnect\\Backend\\UnganaConnect\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-11T08:40:12.343Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,29 @@
 @UnganaConnect_HostAddress = http://localhost:5217
 
+### Test API health (WeatherForecast example)
 GET {{UnganaConnect_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### Register a new user
+POST {{UnganaConnect_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Jane Doe",
+  "email": "jane@example.com",
+  "passwordHash": "test123", 
+  "role": "CSO Member"
+}
+
+### Login as user
+POST {{UnganaConnect_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "jane@example.com",
+  "password": "test123"
+}
+
+### Get all users
+GET {{UnganaConnect_HostAddress}}/api/auth/users
+Accept: application/json
