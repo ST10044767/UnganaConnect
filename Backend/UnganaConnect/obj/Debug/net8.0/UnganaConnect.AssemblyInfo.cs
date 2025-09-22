@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("851d6eb4-0d2f-417c-a150-6174585643dd")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("UnganaConnect")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+163c84af6d0da4c752185710cd5005f43e1dae80")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cccee4cb9d73c23d8c886df642b30739a477eb41")]
 [assembly: System.Reflection.AssemblyProductAttribute("UnganaConnect")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UnganaConnect")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

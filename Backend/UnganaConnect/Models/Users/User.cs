@@ -12,9 +12,5 @@
         public string Role { get; set; } = "Memeber";
 
 
-        //Foreign Keys
-        public Admin Admin { get; set; }
-        public Profile Profile { get; set; }
-
     }
 }

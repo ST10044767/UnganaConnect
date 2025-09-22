@@ -16,11 +16,13 @@ builder.Services.AddDbContext<UnganaConnectDbcontext>(options =>
     options.UseNpgsql(connectionString));
 
 // JWT authentication
-var jwtSection = builder.Configuration.GetSection("Jwt");
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        var key = Environment.GetEnvironmentVariable("Jwt__Key");
+        var issuer = Environment.GetEnvironmentVariable("Jwt__Issuer");
+        var audience = Environment.GetEnvironmentVariable("Jwt__Audience");
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -28,13 +30,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
-            ValidIssuer = jwtSection["Issuer"],
-            ValidAudience = jwtSection["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtSection["Key"]))
+            ValidIssuer = issuer,
+            ValidAudience = audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

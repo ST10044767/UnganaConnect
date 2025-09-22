@@ -19,7 +19,9 @@ namespace UnganaConnect.Controllers.Auth
 
         public AuthController(UnganaConnectDbcontext context, IConfiguration config)
         {
+            // Context 
             _context = context;
+            // Configrution 
             _config = config;
         }
 
@@ -27,8 +29,7 @@ namespace UnganaConnect.Controllers.Auth
         public IActionResult Register([FromBody] User newUser)
         {
             if (_context.Users.Any(u => u.Email == newUser.Email))
-                return BadRequest("Email already registered.");
-
+                  return BadRequest("Email already registered.");
             
             newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newUser.PasswordHash);
             newUser.CreatedAt = DateTime.UtcNow;

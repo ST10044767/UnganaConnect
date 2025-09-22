@@ -1,6 +1,7 @@
 ﻿using Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using UnganaConnect.Controllers;
 using UnganaConnect.Models;
 using UnganaConnect.Models.Event_Management;
 using UnganaConnect.Models.Forum;
@@ -23,6 +24,8 @@ namespace UnganaConnect.Data
 
         // Training & Learning
         public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Module> Modules { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
