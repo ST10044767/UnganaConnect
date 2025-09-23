@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "MSrxKQijq84=",
+  "dgSpecHash": "2P3VjOwf5OY=",
   "success": true,
   "projectFilePath": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect'\\Backend\\UnganaConnect\\UnganaConnect.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\takas\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
-    "C:\\Users\\takas\\.nuget\\packages\\azure.storage.blobs\\12.25.0\\azure.storage.blobs.12.25.0.nupkg.sha512",
-    "C:\\Users\\takas\\.nuget\\packages\\azure.storage.common\\12.24.0\\azure.storage.common.12.24.0.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\dotnetenv\\3.1.1\\dotnetenv.3.1.1.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
@@ -190,7 +188,6 @@
     "C:\\Users\\takas\\.nuget\\packages\\system.io.compression.zipfile\\4.3.0\\system.io.compression.zipfile.4.3.0.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
-    "C:\\Users\\takas\\.nuget\\packages\\system.io.hashing\\8.0.0\\system.io.hashing.8.0.0.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\system.io.pipelines\\9.0.9\\system.io.pipelines.9.0.9.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Users\\takas\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
