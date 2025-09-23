@@ -931,7 +931,10 @@ C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\n
 C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\UnganaCo.118307BD.Up2Date
 C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\UnganaConnect.genruntimeconfig.cache
 C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\ref\UnganaConnect.dll
+C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\bin\Debug\net8.0\Azure.Storage.Blobs.dll
+C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\bin\Debug\net8.0\Azure.Storage.Common.dll
+C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\bin\Debug\net8.0\System.IO.Hashing.dll
+C:\Users\takas\OneDrive\Desktop\UnganaConnect'\Backend\UnganaConnect\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
