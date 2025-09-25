@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using UnganaConnect.Controllers;
 using UnganaConnect.Models;
+using UnganaConnect.Models.Consultancy_Management;
 using UnganaConnect.Models.Event_Management;
 using UnganaConnect.Models.Forum;
 using UnganaConnect.Models.Resources_Repo;
@@ -42,6 +43,9 @@ namespace UnganaConnect.Data
         // Community Forum
         public DbSet<ForumThread> ForumThreads { get; set; }
         public DbSet<ForumReply> ForumReplies { get; set; }
+
+        // Consultancy Management
+        public DbSet<ConsultancyRequest> ConsultancyRequests { get; set; }
 
     }
 }
