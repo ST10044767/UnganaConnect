@@ -7,13 +7,12 @@ using System.Text;
 using UnganaConnect.Data;
 using UnganaConnect.Models.Users;
 using BCrypt.Net;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace UnganaConnect.Controllers.Auth
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
         private readonly UnganaConnectDbcontext _context;
         private readonly IConfiguration _config;
@@ -27,11 +26,11 @@ namespace UnganaConnect.Controllers.Auth
         }
 
         [HttpPost("register")]
-        public IActionResult ApiRegister([FromBody] User newUser)
+        public IActionResult Register([FromBody] User newUser)
         {
             if (_context.Users.Any(u => u.Email == newUser.Email))
                   return BadRequest("Email already registered.");
-
+            
             newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newUser.PasswordHash);
             newUser.CreatedAt = DateTime.UtcNow;
             newUser.UpdatedAt = DateTime.UtcNow;
@@ -42,9 +41,9 @@ namespace UnganaConnect.Controllers.Auth
             return Ok(new { message = "Registration successful", userId = newUser.Id });
         }
 
-
+       
         [HttpPost("login")]
-        public IActionResult ApiLogin([FromBody] LoginRequest request)
+        public IActionResult Login([FromBody] LoginRequest request)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == request.Email);
             if (user == null)
@@ -73,126 +72,7 @@ namespace UnganaConnect.Controllers.Auth
             return Ok(_context.Users.ToList());
         }
 
-        // MVC Actions
-
-        [HttpGet("~/Auth/Login")]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost("~/Auth/Login")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginRequest request)
-        {
-            var user = _context.Users.FirstOrDefault(u => u.Email == request.Email);
-            if (user == null)
-            {
-                ModelState.AddModelError("", "Invalid credentials.");
-                return View(request);
-            }
-
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-            {
-                ModelState.AddModelError("", "Invalid credentials.");
-                return View(request);
-            }
-
-            // Sign in with cookie
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.ToString())
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpGet("~/Auth/Register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost("~/Auth/Register")]
-        [ValidateAntiForgeryToken]
-        public IActionResult Register(User newUser)
-        {
-            if (_context.Users.Any(u => u.Email == newUser.Email))
-            {
-                ModelState.AddModelError("", "Email already registered.");
-                return View(newUser);
-            }
-
-            newUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newUser.PasswordHash);
-            newUser.CreatedAt = DateTime.UtcNow;
-            newUser.UpdatedAt = DateTime.UtcNow;
-            newUser.Role = newUser.Email == "admin@admin.com" ? "Admin" : "Member";
-
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
-
-            return RedirectToAction("Login");
-        }
-
-        [HttpGet("~/Auth/Users")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult Users()
-        {
-            var users = _context.Users.ToList();
-            return View(users);
-        }
-
-        [HttpGet("~/Auth/Profile")]
-        [Authorize]
-        public IActionResult Profile()
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null) return Unauthorized();
-            var userId = int.Parse(userIdClaim.Value);
-            var user = _context.Users.Find(userId);
-            if (user == null) return NotFound();
-            return View(user);
-        }
-
-        [HttpPost("~/Auth/Profile")]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public IActionResult Profile(User updatedUser)
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null) return Unauthorized();
-            var userId = int.Parse(userIdClaim.Value);
-            var user = _context.Users.Find(userId);
-            if (user == null) return NotFound();
-
-            user.FirstName = updatedUser.FirstName;
-            user.LastName = updatedUser.LastName;
-            user.Email = updatedUser.Email;
-            // etc.
-            _context.SaveChanges();
-            return RedirectToAction("Profile");
-        }
-
-        [HttpPost("~/Auth/Logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpGet("~/Auth/AdminDashboard")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminDashboard()
-        {
-            var users = _context.Users.ToList();
-            return View(users);
-        }
-
+   
         private string GenerateJwtToken(User user)
         {
             var jwtSettings = _config.GetSection("Jwt");
@@ -219,5 +99,9 @@ namespace UnganaConnect.Controllers.Auth
         }
     }
 
-
+    public class LoginRequest
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
 }
