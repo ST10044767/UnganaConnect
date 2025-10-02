@@ -25,10 +25,61 @@
                             <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Training & Learning
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                                <li><a class="dropdown-item" href="/CourseMvc/Catalog">Course Catalog</a></li>
-                                <li><a class="dropdown-item" href="/EnrollmentMvc/MyLearning">My Learning</a></li>
-                                <li><a class="dropdown-item" href="/QuizMvc/Assessment">Assessments</a></li>
+                                <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
+                                    <li><a class="dropdown-item" href="/CourseMvc/Catalog">Course Catalog</a></li>
+                                    <li><a class="dropdown-item" href="/EnrollmentMvc/MyLearning">My Learning</a></li>
+                                    <li><a class="dropdown-item" href="/QuizMvc/Assessment">Assessments</a></li>
+                                    <li><a class="dropdown-item" href="/CertificateMvc/Index">Certificates</a></li>
+                                </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Resources
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                                <li><a class="dropdown-item" href="/ResourceMvc/Index">Resource Library</a></li>
+                                @if (User.IsInRole("Staff") || User.IsInRole("Admin"))
+                                {
+                                    <li><a class="dropdown-item" href="/ResourceMvc/Upload">Upload Resource</a></li>
+                                    <li><a class="dropdown-item" href="/ResourceMvc/Stats">Resource Stats</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="consultancyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Consultancy
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="consultancyDropdown">
+                                <li><a class="dropdown-item" href="/ConsultancyRequestMvc/Index">My Requests</a></li>
+                                @if (User.IsInRole("CSO"))
+                                {
+                                    <li><a class="dropdown-item" href="/ConsultancyRequestMvc/Create">Create Request</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Community
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                                <li><a class="dropdown-item" href="/ForumMvc/Home">Forum</a></li>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                                {
+                                    <li><a class="dropdown-item" href="/ForumMvc/ModeratorDashboard">Moderator Dashboard</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="impactDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Impact
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="impactDropdown">
+                                <li><a class="dropdown-item" href="/ImpactMvc/Overview">Overview</a></li>
+                                <li><a class="dropdown-item" href="/ImpactMvc/Interactive">Interactive Dashboard</a></li>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                                {
+                                    <li><a class="dropdown-item" href="/ImpactMvc/Report">Report</a></li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

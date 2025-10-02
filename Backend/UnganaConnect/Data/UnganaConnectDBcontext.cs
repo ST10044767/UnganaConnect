@@ -48,4 +48,41 @@ namespace UnganaConnect.Data
         public DbSet<ConsultancyRequest> ConsultancyRequests { get; set; }
 
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // ForumThread configuration
+        modelBuilder.Entity<ForumThread>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).IsRequired();
+            entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.CreatedAt).IsRequired();
+
+            entity.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.CreatedById)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ForumReply configuration
+        modelBuilder.Entity<ForumReply>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.RepliedAt).IsRequired();
+
+            entity.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.Thread)
+                .WithMany(t => t.Replies)
+                .HasForeignKey(e => e.ThreadId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+    }
 }

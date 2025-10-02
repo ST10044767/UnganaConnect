@@ -53,6 +53,25 @@ namespace UnganaConnect.Controllers
             return View(course);
         }
 
+        // GET: /CourseMvc/CoursePlayer/5
+        public async Task<IActionResult> CoursePlayer(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var module = await _context.Modules
+                .Include(m => m.Course)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (module == null)
+            {
+                return NotFound();
+            }
+
+            return View(module);
+        }
+
         // GET: /CourseMvc/Create
         public IActionResult Create()
         {

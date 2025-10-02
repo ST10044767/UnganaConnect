@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UnganaConnect")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c211598026bc525a5747540a69c37668744af65")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d7536ddc4dd107a491d6d0e1c061d74ef2fa66a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("UnganaConnect")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UnganaConnect")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

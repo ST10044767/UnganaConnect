@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Interactive Impact Dashboard";
+}
+
+<h1>Interactive Impact Dashboard</h1>
+
+<p>This is a placeholder for an interactive dashboard with filters and dynamic charts.</p>
+
+<!-- Placeholder for interactive elements -->
+<div class="form-group">
+    <label for="filter">Filter by:</label>
+    <select id="filter" class="form-control">
+        <option value="all">All</option>
+        <option value="users">Users</option>
+        <option value="courses">Courses</option>
+        <option value="enrollments">Enrollments</option>
+    </select>
+</div>
+
+<div id="interactiveChart">
+    <canvas id="interactiveChartCanvas" width="400" height="200"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Placeholder script for interactivity
+        document.getElementById('filter').addEventListener('change', function() {
+            // Update chart based on filter
+            console.log('Filter changed to: ' + this.value);
+        });
+
+        var ctx = document.getElementById('interactiveChartCanvas').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sample Data',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}
