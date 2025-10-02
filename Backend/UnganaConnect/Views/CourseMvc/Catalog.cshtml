@@ -1,0 +1,36 @@
+@model IEnumerable<UnganaConnect.Models.Training___Learning.Course>
+
+@{
+    ViewData["Title"] = "Course Catalog";
+}
+
+<h1>Course Catalog</h1>
+
+<!-- Add filter form -->
+<form method="get">
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select name="category" id="category" class="form-control">
+            <option value="">All</option>
+            <!-- Add options dynamically if needed -->
+        </select>
+        <button type="submit" class="btn btn-secondary">Filter</button>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text"><small class="text-muted">@item.Category</small></p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">View Details</a>
+                    <a href="#" class="btn btn-success">Enroll</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

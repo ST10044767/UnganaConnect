@@ -1,0 +1,26 @@
+@model UnganaConnect.Models.Forum.ForumThread
+
+@{
+    ViewData["Title"] = "Create New Thread";
+}
+
+<h1>Create New Thread</h1>
+
+<form asp-action="CreateThread" method="post">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control" rows="5" required></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Thread</button>
+    <a asp-action="Home" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
