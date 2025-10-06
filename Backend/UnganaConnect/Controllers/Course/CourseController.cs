@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using UnganaConnect.Data;
 using UnganaConnect.Models.Training___Learning;
@@ -23,6 +24,7 @@ namespace UnganaConnect.Controllers
         }
 
         // CREATE a new course
+        [Authorize(Roles = "Admin")]
         [HttpPost("create_course")]
         public async Task<IActionResult> CreateCourse(CourseModel course)
         {
@@ -32,6 +34,7 @@ namespace UnganaConnect.Controllers
         }
 
         // EDIT/UPDATE a course
+        [Authorize(Roles = "Admin")]
         [HttpPut("edit_course/{id}")]
         public async Task<IActionResult> EditCourse(int id, CourseModel updatedCourse)
         {
@@ -53,6 +56,7 @@ namespace UnganaConnect.Controllers
         }
 
         // DELETE a course
+        [Authorize(Roles = "Admin")]
         [HttpDelete("delete_course/{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {

@@ -20,6 +20,7 @@ namespace UnganaConnect.Data
 
         // Authentication & Administration
         public DbSet<User> Users { get; set; }
+        public DbSet<Admin> AdminActions { get; set; }
 
 
         // Training & Learning
@@ -29,6 +30,7 @@ namespace UnganaConnect.Data
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<UserProgress> UserProgress { get; set; }
 
         // Resource Repository
         public DbSet<CResource> Resources { get; set; }

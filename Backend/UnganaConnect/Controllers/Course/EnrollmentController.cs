@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using UnganaConnect.Data;
 using UnganaConnect.Models.Training___Learning;
@@ -18,6 +19,7 @@ namespace UnganaConnect.Controllers.Course
 
         
             // Enroll in a course
+            [Authorize]
             [HttpPost("{courseId}/enroll/{userId}")]
             public async Task<IActionResult> EnrollUser(int courseId, string userId)
             {
@@ -41,6 +43,7 @@ namespace UnganaConnect.Controllers.Course
             }
 
             // Get user’s enrolled courses
+            [Authorize]
             [HttpGet("user/{userId}")]
             public async Task<IActionResult> GetUserEnrollments(string userId)
             {

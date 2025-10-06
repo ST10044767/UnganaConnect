@@ -5,6 +5,7 @@ using System;
 using UnganaConnect.Data;
 using UnganaConnect.Models;
 using UnganaConnect.Models.Training___Learning;
+using UnganaConnect.Service;
 
 
 
@@ -17,11 +18,13 @@ namespace UnganaConnect.Controllers.Course
     {
         private readonly UnganaConnectDbcontext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly BlobServices _blobServices;
 
-        public ModuleController(UnganaConnectDbcontext context, IWebHostEnvironment env)
+        public ModuleController(UnganaConnectDbcontext context, IWebHostEnvironment env, BlobServices blobServices)
         {
             _context = context;//From Dbconext
             _env = env;
+            _blobServices = blobServices;
         }
 
    
@@ -107,21 +110,13 @@ namespace UnganaConnect.Controllers.Course
             var module = await _context.Modules.FindAsync(id);
             if (module == null) return NotFound();
 
-            // Save file to wwwroot/uploads
-            var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
-            if (!Directory.Exists(uploadsFolder))
-                Directory.CreateDirectory(uploadsFolder);
-
-            var fileName = $"{Guid.NewGuid()}_{file.FileName}";
-            var filePath = Path.Combine(uploadsFolder, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            // Upload via BlobServices (currently local storage backed)
+            string fileUrl;
+            using (var stream = file.OpenReadStream())
             {
-                await file.CopyToAsync(stream);
+                fileUrl = await _blobServices.UploadAsync(stream, file.FileName, "uploads");
             }
 
-            // Set file URL (accessible by users)
-            var fileUrl = $"/uploads/{fileName}";
             if (file.ContentType.StartsWith("video/"))
                 module.VideoUrl = fileUrl;
             else

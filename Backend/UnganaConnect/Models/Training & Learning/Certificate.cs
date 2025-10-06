@@ -14,6 +14,7 @@
         public string UserId { get; set; } = "";
         public int CourseId { get; set; }
         public DateTime IssuedOn { get; set; } = DateTime.UtcNow;
+        public string? FileUrl { get; set; }
     }
 
 }
