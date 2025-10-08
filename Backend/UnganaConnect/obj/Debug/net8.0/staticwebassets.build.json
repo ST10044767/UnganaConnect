@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"F1exn5CoWr4F8R3NqREScSgaIWZ4xS2sEEJppQ/xeL0=","Source":"UnganaConnect","BasePath":"_content/UnganaConnect","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "FvqwPZoThD9oPNWIl6xzDlPmdFQuk+eAejsdlBg5RW0=",
+  "Source": "UnganaConnect",
+  "BasePath": "_content/UnganaConnect",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

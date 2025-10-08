@@ -1,0 +1,159 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard - UnganaConnect";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-6">Welcome back!</h1>
+            <p class="text-muted">Track your learning progress and stay updated with the latest resources.</p>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="row mb-4">
+        @foreach (var stat in Model.Stats)
+        {
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="card-title text-muted mb-0">@stat.Title</h6>
+                            <i class="fas fa-@stat.Icon @stat.Color"></i>
+                        </div>
+                        <h2 class="mb-1">@stat.Value</h2>
+                        <small class="text-muted">@stat.Change</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <!-- Recent Courses -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Continue Learning</h5>
+                    <small class="text-muted">Pick up where you left off</small>
+                </div>
+                <div class="card-body">
+                    @foreach (var course in Model.RecentCourses)
+                    {
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">@course.Title</h6>
+                                @{
+                                    var badgeClass = course.Status == "Completed" ? "bg-success" : "bg-secondary";
+                                }
+                                <span class="badge @badgeClass">@course.Status</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 8px;">
+                                <div class="progress-bar" role="progressbar" style="width: @course.Progress%" aria-valuenow="@course.Progress" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span>@course.TimeLeft</span>
+                                <span>@course.Progress%</span>
+                            </div>
+                        </div>
+                    }
+                    <a href="#" class="btn btn-primary w-100 mt-3">Browse All Courses</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Upcoming Events</h5>
+                    <small class="text-muted">Don't miss these opportunities</small>
+                </div>
+                <div class="card-body">
+                    @foreach (var eventItem in Model.UpcomingEvents)
+                    {
+                        <div class="d-flex align-items-start p-3 border rounded mb-3">
+                            <i class="fas fa-calendar text-muted me-3 mt-1"></i>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">@eventItem.Title</h6>
+                                <p class="text-muted small mb-2">@eventItem.Date</p>
+                                <div>
+                                    <span class="badge bg-outline-primary me-1">@eventItem.Type</span>
+                                    <span class="badge bg-outline-secondary">@eventItem.Location</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <a href="@Url.Action("Index", "Event")" class="btn btn-outline-primary w-100 mt-3">View All Events</a>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="container text-center my-5">
+    <p>Your platform for learning and resource sharing.</p>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <h3>Courses</h3>
+            <p>Explore our comprehensive course catalog and enhance your skills.</p>
+            <a href="@Url.Action("Index", "Course")" class="btn btn-primary">View Courses »</a>
+        </div>
+        <div class="col-md-3">
+            <h3>Resources</h3>
+            <p>Access a wide range of educational resources and materials.</p>
+            <a href="@Url.Action("Index", "Resource")" class="btn btn-primary">View Resources »</a>
+        </div>
+        <div class="col-md-3">
+            <h3>Community</h3>
+            <p>Connect with other learners, share knowledge, and join events.</p>
+            <a href="@Url.Action("Index", "Forum")" class="btn btn-primary">Join Community »</a>
+        </div>
+        <div class="col-md-3">
+            <h3>Consultancy</h3>
+            <p>Get expert assistance for your organization's needs.</p>
+            <a href="@Url.Action("Index", "Consultancy")" class="btn btn-primary">Get Help »</a>
+        </div>
+    </div>
+    <div class="mt-5">
+        <h4>Track Your Impact</h4>
+        <p>Monitor your organization's progress and measure your social impact.</p>
+        <a href="@Url.Action("Index", "Impact")" class="btn btn-success">View Impact Dashboard »</a>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Quick Actions</h5>
+                <small class="text-muted">Common tasks to get you started</small>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="@Url.Action("Index", "Consultancy")" class="btn btn-outline-primary w-100 py-4 d-flex flex-column align-items-center text-decoration-none">
+                            <i class="fas fa-users fa-2x mb-2"></i>
+                            <span>Request Consultancy</span>
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="@Url.Action("Index", "Resource")" class="btn btn-outline-primary w-100 py-4 d-flex flex-column align-items-center text-decoration-none">
+                            <i class="fas fa-download fa-2x mb-2"></i>
+                            <span>Download Resources</span>
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="@Url.Action("Index", "Forum")" class="btn btn-outline-primary w-100 py-4 d-flex flex-column align-items-center text-decoration-none">
+                            <i class="fas fa-comments fa-2x mb-2"></i>
+                            <span>Join Discussion</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

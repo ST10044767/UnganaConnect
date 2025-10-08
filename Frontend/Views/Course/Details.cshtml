@@ -1,0 +1,187 @@
+@model CourseViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Courses</a></li>
+            <li class="breadcrumb-item"><a href="#">@Model.Category</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Course Header -->
+            <div class="card shadow-sm mb-4">
+                <img src="@Model.Thumbnail" class="card-img-top" alt="@Model.Title" style="height: 300px; object-fit: cover;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h1 class="h3 mb-2">@Model.Title</h1>
+                            <p class="text-muted mb-3">@Model.Description</p>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <span class="badge bg-secondary">@Model.Level</span>
+                                <span class="badge bg-light text-dark">@Model.Category</span>
+                                <span class="badge @GetStatusBadgeClass(Model.Status)">@GetStatusText(Model.Status)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <h6>Instructor</h6>
+                            <p class="text-muted">@Model.Instructor</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Duration</h6>
+                            <p class="text-muted">@Model.Duration</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Enrolled</h6>
+                            <p class="text-muted">@Model.Enrolled students</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Rating</h6>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-1"></i>
+                                <span>@Model.Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @if (Model.Status == "enrolled" && Model.Progress > 0)
+                    {
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h6>Your Progress</h6>
+                                <span>@Model.Progress%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar" style="width: @Model.Progress%"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Course Content -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Course Content</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Modules.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var module in Model.Modules.OrderBy(m => m.Order))
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">@module.Title</h6>
+                                        <p class="mb-1 text-muted">@module.Content</p>
+                                    </div>
+                                    <i class="fas fa-play-circle text-primary"></i>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-book-open fa-2x text-muted mb-3"></i>
+                            <p class="text-muted">Course modules will be available after enrollment.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-center">
+                    @if (Model.Status == "available")
+                    {
+                        <h5 class="mb-3">Ready to start learning?</h5>
+                        <form asp-action="Enroll" method="post">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                                <i class="fas fa-book-open me-2"></i>Enroll Now
+                            </button>
+                        </form>
+                        <small class="text-muted">Join @Model.Enrolled other students</small>
+                    }
+                    else if (Model.Status == "enrolled")
+                    {
+                        <h5 class="mb-3">Continue Learning</h5>
+                        <button class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="fas fa-play me-2"></i>Resume Course
+                        </button>
+                        <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress-bar" style="width: @Model.Progress%"></div>
+                        </div>
+                        <small class="text-muted">@Model.Progress% Complete</small>
+                    }
+                    else if (Model.Status == "completed")
+                    {
+                        <h5 class="mb-3">Course Completed!</h5>
+                        <button class="btn btn-success btn-lg w-100 mb-3">
+                            <i class="fas fa-certificate me-2"></i>View Certificate
+                        </button>
+                        <button class="btn btn-outline-primary w-100">
+                            <i class="fas fa-redo me-2"></i>Review Course
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <!-- Course Stats -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h6 class="mb-0">Course Information</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="h4 text-primary mb-0">@Model.Enrolled</div>
+                            <small class="text-muted">Students</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h4 text-success mb-0">@Model.Rating</div>
+                            <small class="text-muted">Rating</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h4 text-info mb-0">@Model.Modules.Count</div>
+                            <small class="text-muted">Modules</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "completed" => "bg-success",
+            "enrolled" => "bg-primary",
+            _ => "bg-light text-dark"
+        };
+    }
+    
+    string GetStatusText(string status)
+    {
+        return status switch
+        {
+            "completed" => "Completed",
+            "enrolled" => "Enrolled",
+            _ => "Available"
+        };
+    }
+}

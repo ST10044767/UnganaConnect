@@ -1,0 +1,334 @@
+@model ImpactDashboardViewModel
+@{
+    ViewData["Title"] = "Impact Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-4">Impact Dashboard</h1>
+            <p class="text-muted">Track your organization's impact, progress, and outcomes</p>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <select class="form-select" style="width: 160px;" onchange="location.href='@Url.Action("Index")?timeframe=' + this.value">
+                <option value="1month" selected="@(Model.SelectedTimeframe == "1month" ? "selected" : null)">Last Month</option>
+                <option value="3months" selected="@(Model.SelectedTimeframe == "3months" ? "selected" : null)">Last 3 Months</option>
+                <option value="6months" selected="@(Model.SelectedTimeframe == "6months" ? "selected" : null)">Last 6 Months</option>
+                <option value="1year" selected="@(Model.SelectedTimeframe == "1year" ? "selected" : null)">Last Year</option>
+                <option value="all" selected="@(Model.SelectedTimeframe == "all" ? "selected" : null)">All Time</option>
+            </select>
+            <form asp-action="ExportReport" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="fas fa-download me-2"></i>Export Report
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Impact Metrics -->
+    <div class="row mb-5">
+        @foreach (var metric in Model.ImpactMetrics)
+        {
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="card-title text-muted mb-0">@metric.Title</h6>
+                            <i class="@metric.Icon @metric.Color"></i>
+                        </div>
+                        <div class="h3 mb-2">@metric.Value</div>
+                        <div class="d-flex align-items-center text-sm @(metric.ChangeType == "increase" ? "text-success" : "text-danger")">
+                            <i class="fas fa-trending-@(metric.ChangeType == "increase" ? "up" : "down") me-1"></i>
+                            @metric.Change from last period
+                        </div>
+                        <p class="text-muted small mt-2 mb-0">@metric.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" id="impactTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="programs-tab" data-bs-toggle="tab" data-bs-target="#programs" type="button" role="tab">Program Progress</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="sdgs-tab" data-bs-toggle="tab" data-bs-target="#sdgs" type="button" role="tab">SDG Alignment</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab">Reports</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button" role="tab">Analytics</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="impactTabContent">
+        <!-- Program Progress Tab -->
+        <div class="tab-pane fade show active" id="programs" role="tabpanel">
+            <div class="mb-4">
+                <h3>Active Program Progress</h3>
+                <p class="text-muted">Monitor the progress of your ongoing programs</p>
+            </div>
+
+            @foreach (var program in Model.ProgramProgress)
+            {
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1">@program.Name</h5>
+                                <p class="text-muted mb-0">Target: @program.Target • Budget: @program.Budget</p>
+                            </div>
+                            <span class="badge @GetStatusBadgeClass(program.Status)">@program.Status</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Progress</span>
+                                <span>@program.Progress% • @program.Achieved achieved</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar" style="width: @program.Progress%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Budget Utilization</h6>
+                                <p class="mb-1">@program.Spent of @program.Budget</p>
+                                <div class="progress" style="height: 4px;">
+                                    <div class="progress-bar bg-info" style="width: @GetBudgetPercentage(program.Spent, program.Budget)%"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>End Date</h6>
+                                <p class="mb-0">
+                                    <i class="fas fa-calendar me-1"></i>@program.EndDate.ToString("MMM dd, yyyy")
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-primary btn-sm">View Details</button>
+                                    <button class="btn btn-outline-secondary btn-sm">Generate Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- SDG Alignment Tab -->
+        <div class="tab-pane fade" id="sdgs" role="tabpanel">
+            <div class="mb-4">
+                <h3>Sustainable Development Goals Alignment</h3>
+                <p class="text-muted">Track how your programs align with UN SDGs</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    @foreach (var sdg in Model.SDGAlignment)
+                    {
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="mb-0">@sdg.Goal</h6>
+                                    <span class="badge bg-secondary">@sdg.Programs programs</span>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Alignment Score</span>
+                                        <span>@sdg.Alignment%</span>
+                                    </div>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar" style="width: @sdg.Alignment%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">SDG Impact Summary</h5>
+                            <p class="text-muted small mb-0">Overall contribution to sustainable development</p>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="h2 text-primary mb-2">78%</div>
+                            <p class="text-muted mb-4">Average SDG Alignment</p>
+                            
+                            <div class="text-start">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Primary SDGs</span>
+                                    <strong>4 goals</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Secondary SDGs</span>
+                                    <strong>2 goals</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span>Total Programs</span>
+                                    <strong>14 programs</strong>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-outline-primary w-100">
+                                <i class="fas fa-file-text me-2"></i>Download SDG Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div class="tab-pane fade" id="reports" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3>Donor Reports & Compliance</h3>
+                    <p class="text-muted">Manage reporting requirements and deadlines</p>
+                </div>
+                <button class="btn btn-primary">
+                    <i class="fas fa-file-text me-2"></i>Create Report
+                </button>
+            </div>
+
+            @foreach (var report in Model.DonorReports)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1">@report.Type</h5>
+                                <div class="d-flex align-items-center gap-3 text-muted small">
+                                    <span>@report.Donor</span>
+                                    <span>•</span>
+                                    <span>@report.Project</span>
+                                    <span>•</span>
+                                    <span>
+                                        <i class="fas fa-calendar me-1"></i>Due: @report.DueDate.ToString("MMM dd, yyyy")
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="badge @GetStatusBadgeClass(report.Status)">@report.Status</span>
+                                <div class="btn-group">
+                                    <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                    <button class="btn btn-primary btn-sm">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Analytics Tab -->
+        <div class="tab-pane fade" id="analytics" role="tabpanel">
+            <div class="mb-4">
+                <h3>Advanced Analytics</h3>
+                <p class="text-muted">Deep insights into your organization's performance</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-bar me-2"></i>Impact Trends
+                            </h5>
+                            <p class="text-muted small mb-0">Monthly impact metrics over time</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 250px; background-color: #f8f9fa; border-radius: 8px;">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-chart-bar fa-3x mb-3 opacity-50"></i>
+                                    <p>Chart visualization would appear here</p>
+                                    <small>Integration with charting library required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-pie me-2"></i>Program Distribution
+                            </h5>
+                            <p class="text-muted small mb-0">Budget allocation across programs</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 250px; background-color: #f8f9fa; border-radius: 8px;">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-chart-pie fa-3x mb-3 opacity-50"></i>
+                                    <p>Pie chart visualization would appear here</p>
+                                    <small>Integration with charting library required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-activity me-2"></i>Performance Indicators
+                            </h5>
+                            <p class="text-muted small mb-0">Key performance indicators across all programs</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <div class="h2 text-success mb-1">94%</div>
+                                    <p class="text-muted">Program Success Rate</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="h2 text-primary mb-1">87%</div>
+                                    <p class="text-muted">Beneficiary Satisfaction</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="h2 text-purple mb-1">92%</div>
+                                    <p class="text-muted">Budget Efficiency</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "On Track" => "bg-success",
+            "Ahead of Schedule" => "bg-primary",
+            "Needs Attention" => "bg-warning",
+            "Early Stage" => "bg-secondary",
+            "Submitted" => "bg-success",
+            "Draft" => "bg-warning",
+            "Pending" => "bg-warning",
+            "In Review" => "bg-primary",
+            _ => "bg-secondary"
+        };
+    }
+    
+    int GetBudgetPercentage(string spent, string budget)
+    {
+        var spentValue = decimal.Parse(spent.Replace("R", "").Replace(",", ""));
+        var budgetValue = decimal.Parse(budget.Replace("R", "").Replace(",", ""));
+        return (int)((spentValue / budgetValue) * 100);
+    }
+}

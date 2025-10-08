@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "yYfVTvcGEUXV6LSL42Dr+XBTl5CNGz1R8sZro+f4M4A=",
+  "Source": "UnganaConnect.Frontend",
+  "BasePath": "_content/UnganaConnect.Frontend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "UnganaConnect.Frontend\\wwwroot",
+      "Source": "UnganaConnect.Frontend",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\UnganaConnect\\Frontend\\wwwroot\\",
+      "BasePath": "_content/UnganaConnect.Frontend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\USER\\Desktop\\UnganaConnect\\Frontend\\wwwroot\\css\\site.css",
+      "SourceId": "UnganaConnect.Frontend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\UnganaConnect\\Frontend\\wwwroot\\",
+      "BasePath": "_content/UnganaConnect.Frontend",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\USER\\Desktop\\UnganaConnect\\Frontend\\wwwroot\\js\\site.js",
+      "SourceId": "UnganaConnect.Frontend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USER\\Desktop\\UnganaConnect\\Frontend\\wwwroot\\",
+      "BasePath": "_content/UnganaConnect.Frontend",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ]
+}

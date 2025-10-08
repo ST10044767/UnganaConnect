@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\UnganaConnect.Frontend.props" />
+</Project>

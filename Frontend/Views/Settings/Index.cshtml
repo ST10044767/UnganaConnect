@@ -1,0 +1,491 @@
+@model UnganaConnect.Frontend.Models.SettingsViewModel
+@{
+    ViewData["Title"] = "Profile Settings";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h3 mb-1">Profile Settings</h1>
+            <p class="text-muted mb-4">Manage your account, organization details, and preferences</p>
+        </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
+                <i class="fas fa-user me-2"></i>Profile
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="organization-tab" data-bs-toggle="tab" data-bs-target="#organization" type="button" role="tab">
+                <i class="fas fa-building me-2"></i>Organization
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab">
+                <i class="fas fa-bell me-2"></i>Notifications
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">
+                <i class="fas fa-shield-alt me-2"></i>Security
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab">
+                <i class="fas fa-clock me-2"></i>Activity
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="settingsTabContent">
+        <!-- Profile Tab -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Personal Information</h5>
+                            <button class="btn btn-outline-primary btn-sm" id="editProfileBtn">
+                                <i class="fas fa-edit me-2"></i>Edit
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="UpdateProfile" method="post" id="profileForm">
+                                <div class="row mb-4">
+                                    <div class="col-auto">
+                                        <div class="avatar-lg bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 1.5rem;">
+                                            @(Model.UserProfile.Name.Split(' ').Select(n => n.FirstOrDefault()).Take(2).Aggregate("", (acc, c) => acc + c))
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm mb-2" disabled>
+                                            <i class="fas fa-upload me-2"></i>Upload Photo
+                                        </button>
+                                        <p class="text-muted small mb-0">JPG, PNG up to 5MB</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label asp-for="UserProfile.Name" class="form-label">Full Name</label>
+                                        <input asp-for="UserProfile.Name" class="form-control profile-input" readonly />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label asp-for="UserProfile.Email" class="form-label">Email</label>
+                                        <input asp-for="UserProfile.Email" class="form-control profile-input" readonly />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label asp-for="UserProfile.Phone" class="form-label">Phone</label>
+                                        <input asp-for="UserProfile.Phone" class="form-control profile-input" readonly />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label asp-for="UserProfile.Role" class="form-label">Role</label>
+                                        <input asp-for="UserProfile.Role" class="form-control profile-input" readonly />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label asp-for="UserProfile.Location" class="form-label">Location</label>
+                                        <input asp-for="UserProfile.Location" class="form-control profile-input" readonly />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label asp-for="UserProfile.Website" class="form-label">Website</label>
+                                        <input asp-for="UserProfile.Website" class="form-control profile-input" readonly />
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="UserProfile.Bio" class="form-label">Bio</label>
+                                    <textarea asp-for="UserProfile.Bio" class="form-control profile-input" rows="3" readonly></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Languages</label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        @foreach (var language in Model.UserProfile.Languages)
+                                        {
+                                            <span class="badge bg-secondary">@language</span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Areas of Expertise</label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        @foreach (var skill in Model.UserProfile.Expertise)
+                                        {
+                                            <span class="badge bg-outline-primary">@skill</span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="d-none" id="profileActions">
+                                    <button type="submit" class="btn btn-primary me-2">
+                                        <i class="fas fa-save me-2"></i>Save Changes
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" id="cancelEditBtn">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Profile Stats -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Profile Stats</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <h2 class="text-primary">@Model.ProfileStats.CompletionPercentage%</h2>
+                                <p class="text-muted mb-0">Profile Completion</p>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Member since</small>
+                                    <div class="fw-bold">@Model.UserProfile.JoinDate.ToString("MMM yyyy")</div>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Courses completed</small>
+                                    <div class="fw-bold">@Model.ProfileStats.CoursesCompleted</div>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Forum posts</small>
+                                    <div class="fw-bold">@Model.ProfileStats.ForumPosts</div>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Resources downloaded</small>
+                                    <div class="fw-bold">@Model.ProfileStats.ResourcesDownloaded</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Achievements</h5>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var achievement in Model.Achievements)
+                            {
+                                <div class="d-flex align-items-center p-2 mb-2 bg-light rounded">
+                                    <span class="fs-4 me-3">@achievement.Icon</span>
+                                    <div>
+                                        <div class="fw-bold small">@achievement.Title</div>
+                                        <div class="text-muted small">@achievement.Description</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organization Tab -->
+        <div class="tab-pane fade" id="organization" role="tabpanel">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Organization Details</h5>
+                    <p class="text-muted mb-0">Manage your organization's profile and information</p>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateOrganization" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OrganizationProfile.Name" class="form-label">Organization Name</label>
+                                <input asp-for="OrganizationProfile.Name" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OrganizationProfile.Type" class="form-label">Organization Type</label>
+                                <select asp-for="OrganizationProfile.Type" class="form-select">
+                                    <option value="Non-Profit Organization">Non-Profit Organization</option>
+                                    <option value="Community Based Organization">Community Based Organization</option>
+                                    <option value="Faith Based Organization">Faith Based Organization</option>
+                                    <option value="Social Enterprise">Social Enterprise</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OrganizationProfile.RegistrationNumber" class="form-label">Registration Number</label>
+                                <input asp-for="OrganizationProfile.RegistrationNumber" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OrganizationProfile.TaxId" class="form-label">Tax ID</label>
+                                <input asp-for="OrganizationProfile.TaxId" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OrganizationProfile.FoundedYear" class="form-label">Founded Year</label>
+                                <input asp-for="OrganizationProfile.FoundedYear" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="OrganizationProfile.Website" class="form-label">Website</label>
+                                <input asp-for="OrganizationProfile.Website" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="OrganizationProfile.Address" class="form-label">Address</label>
+                            <textarea asp-for="OrganizationProfile.Address" class="form-control" rows="2"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="OrganizationProfile.Description" class="form-label">Description</label>
+                            <textarea asp-for="OrganizationProfile.Description" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Focus Areas</label>
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                @foreach (var area in Model.OrganizationProfile.FocusAreas)
+                                {
+                                    <span class="badge bg-secondary">@area</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="OrganizationProfile.Staff" class="form-label">Staff Members</label>
+                                <input asp-for="OrganizationProfile.Staff" type="number" class="form-control" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="OrganizationProfile.Volunteers" class="form-label">Volunteers</label>
+                                <input asp-for="OrganizationProfile.Volunteers" type="number" class="form-control" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="OrganizationProfile.Beneficiaries" class="form-label">Beneficiaries</label>
+                                <input asp-for="OrganizationProfile.Beneficiaries" type="number" class="form-control" />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Save Organization Details
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Tab -->
+        <div class="tab-pane fade" id="notifications" role="tabpanel">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Notification Preferences</h5>
+                    <p class="text-muted mb-0">Control how and when you receive notifications</p>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateNotifications" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.EmailNotifications" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.EmailNotifications" class="form-check-label">
+                                        <strong>Email Notifications</strong><br>
+                                        <small class="text-muted">Receive email updates and alerts</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.CourseUpdates" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.CourseUpdates" class="form-check-label">
+                                        <strong>Course Updates</strong><br>
+                                        <small class="text-muted">Notifications about course progress and new content</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.EventReminders" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.EventReminders" class="form-check-label">
+                                        <strong>Event Reminders</strong><br>
+                                        <small class="text-muted">Reminders for upcoming events and deadlines</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.ForumActivity" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.ForumActivity" class="form-check-label">
+                                        <strong>Forum Activity</strong><br>
+                                        <small class="text-muted">Updates on forum discussions and replies</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.WeeklyDigest" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.WeeklyDigest" class="form-check-label">
+                                        <strong>Weekly Digest</strong><br>
+                                        <small class="text-muted">Weekly summary of platform activity</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.MarketingEmails" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.MarketingEmails" class="form-check-label">
+                                        <strong>Marketing Emails</strong><br>
+                                        <small class="text-muted">Promotional content and platform updates</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.SmsNotifications" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.SmsNotifications" class="form-check-label">
+                                        <strong>SMS Notifications</strong><br>
+                                        <small class="text-muted">Important alerts via text message</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="NotificationSettings.PushNotifications" class="form-check-input" type="checkbox" />
+                                    <label asp-for="NotificationSettings.PushNotifications" class="form-check-label">
+                                        <strong>Push Notifications</strong><br>
+                                        <small class="text-muted">Browser notifications for real-time updates</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Save Notification Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Tab -->
+        <div class="tab-pane fade" id="security" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Password & Security</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="ChangePassword" method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Current Password</label>
+                                    <input name="CurrentPassword" type="password" class="form-control" placeholder="Enter current password" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">New Password</label>
+                                    <input name="NewPassword" type="password" class="form-control" placeholder="Enter new password" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input name="ConfirmPassword" type="password" class="form-control" placeholder="Confirm new password" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-key me-2"></i>Update Password
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Security Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="UpdateSecurity" method="post">
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="SecuritySettings.TwoFactorAuth" class="form-check-input" type="checkbox" />
+                                    <label asp-for="SecuritySettings.TwoFactorAuth" class="form-check-label">
+                                        <strong>Two-Factor Authentication</strong><br>
+                                        <small class="text-muted">Add extra security to your account</small>
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input asp-for="SecuritySettings.LoginNotifications" class="form-check-input" type="checkbox" />
+                                    <label asp-for="SecuritySettings.LoginNotifications" class="form-check-label">
+                                        <strong>Login Notifications</strong><br>
+                                        <small class="text-muted">Get notified of new device logins</small>
+                                    </label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Profile Visibility</label>
+                                    <select asp-for="SecuritySettings.ProfileVisibility" class="form-select">
+                                        <option value="public">Public</option>
+                                        <option value="members">Members Only</option>
+                                        <option value="private">Private</option>
+                                    </select>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Save Security Settings</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("ExportData")'">
+                                        <i class="fas fa-download me-2"></i>Download My Data
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger">Delete Account</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Tab -->
+        <div class="tab-pane fade" id="activity" role="tabpanel">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Activity</h5>
+                    <p class="text-muted mb-0">Your recent interactions on the platform</p>
+                </div>
+                <div class="card-body">
+                    @foreach (var activity in Model.RecentActivity)
+                    {
+                        <div class="d-flex align-items-center p-3 mb-3 border rounded">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    @switch (activity.Type)
+                                    {
+                                        case "learning":
+                                            <i class="fas fa-book-open"></i>
+                                            break;
+                                        case "community":
+                                            <i class="fas fa-comments"></i>
+                                            break;
+                                        case "resource":
+                                            <i class="fas fa-download"></i>
+                                            break;
+                                        case "event":
+                                            <i class="fas fa-calendar"></i>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">@activity.Action</div>
+                                <div class="text-muted">@activity.Item</div>
+                            </div>
+                            <div class="text-muted small">
+                                @activity.Date.ToString("MMM dd, yyyy")
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const editBtn = document.getElementById('editProfileBtn');
+    const cancelBtn = document.getElementById('cancelEditBtn');
+    const profileInputs = document.querySelectorAll('.profile-input');
+    const profileActions = document.getElementById('profileActions');
+
+    editBtn.addEventListener('click', function() {
+        profileInputs.forEach(input => input.removeAttribute('readonly'));
+        profileActions.classList.remove('d-none');
+        editBtn.textContent = 'Editing...';
+        editBtn.disabled = true;
+    });
+
+    cancelBtn.addEventListener('click', function() {
+        profileInputs.forEach(input => input.setAttribute('readonly', true));
+        profileActions.classList.add('d-none');
+        editBtn.textContent = 'Edit';
+        editBtn.disabled = false;
+    });
+});
+</script>
