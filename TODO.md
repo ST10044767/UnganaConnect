@@ -1,7 +1,0 @@
-- [ ] Update Frontend/appsettings.json to set ApiSettings.BaseUrl to https://localhost:7056/api
-- [ ] Restore NuGet packages for Backend: cd Backend && dotnet restore
-- [ ] Build Backend: cd Backend && dotnet build
-- [ ] Restore NuGet packages for Frontend: cd Frontend && dotnet restore
-- [ ] Build Frontend: cd Frontend && dotnet build
-- [ ] Run Backend: cd Backend && dotnet run (in background)
-- [ ] Run Frontend: cd Frontend && dotnet run
