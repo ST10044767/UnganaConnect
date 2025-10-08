@@ -1,0 +1,232 @@
+@model ConsultancyIndexViewModel
+@{
+    ViewData["Title"] = "Consultancy Management";
+}
+
+<div class="container-fluid">
+    <div class="mb-4">
+        <h1 class="display-4">Consultancy Management</h1>
+        <p class="text-muted">Request expert assistance and manage your consultancy projects</p>
+    </div>
+
+    <ul class="nav nav-tabs mb-4" id="consultancyTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="requests-tab" data-bs-toggle="tab" data-bs-target="#requests" type="button" role="tab">My Requests</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="new-request-tab" data-bs-toggle="tab" data-bs-target="#new-request" type="button" role="tab">New Request</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="consultants-tab" data-bs-toggle="tab" data-bs-target="#consultants" type="button" role="tab">Find Consultants</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="consultancyTabContent">
+        <!-- My Requests Tab -->
+        <div class="tab-pane fade show active" id="requests" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3>Your Consultancy Requests</h3>
+                        <button class="btn btn-primary" onclick="showNewRequestTab()">
+                            <i class="fas fa-file-text me-2"></i>New Request
+                        </button>
+                    </div>
+                    
+                    @foreach (var request in Model.MyRequests)
+                    {
+                        <div class="card mb-3 shadow-sm request-card" data-request-id="@request.Id">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="card-title">@request.Title</h5>
+                                        <p class="card-text text-muted">@request.Area</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge @GetStatusBadgeClass(request.Status) mb-2">@request.Status</span>
+                                        <br>
+                                        <span class="badge @GetPriorityBadgeClass(request.Priority)">@request.Priority</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between text-muted small">
+                                    <span><i class="fas fa-user me-1"></i>@request.Consultant</span>
+                                    <span><i class="fas fa-calendar me-1"></i>Due: @request.Deadline.ToString("MMM dd, yyyy")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card" id="request-details">
+                        <div class="card-body text-center text-muted">
+                            <i class="fas fa-file-text fa-3x mb-3 opacity-50"></i>
+                            <p>Select a request to view details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Request Tab -->
+        <div class="tab-pane fade" id="new-request" role="tabpanel">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Submit New Consultancy Request</h3>
+                    <p class="text-muted mb-0">Describe your consultation needs and we'll match you with the right expert</p>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateRequest" method="post">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Request Title</label>
+                                <input name="Title" class="form-control" placeholder="Brief title for your request" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Consultancy Area</label>
+                                <select name="Area" class="form-select" required>
+                                    <option value="">Select area of expertise</option>
+                                    @foreach (var area in Model.ConsultancyAreas)
+                                    {
+                                        <option value="@area">@area</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Priority Level</label>
+                                <select name="Priority" class="form-select" required>
+                                    <option value="">Select priority</option>
+                                    <option value="High">High - Urgent</option>
+                                    <option value="Medium">Medium - Standard</option>
+                                    <option value="Low">Low - Flexible</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Preferred Deadline</label>
+                                <input name="Deadline" type="date" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Detailed Description</label>
+                            <textarea name="Description" class="form-control" rows="5" placeholder="Provide detailed information about your consultancy needs..." required></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Budget Range (Optional)</label>
+                            <select name="BudgetRange" class="form-select">
+                                <option value="">Select budget range</option>
+                                <option value="under-500">Under R500</option>
+                                <option value="500-1000">R500 - R1,000</option>
+                                <option value="1000-2500">R1,000 - R2,500</option>
+                                <option value="2500-5000">R2,500 - R5,000</option>
+                                <option value="over-5000">Over R5,000</option>
+                            </select>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary flex-fill">Submit Request</button>
+                            <button type="button" class="btn btn-outline-secondary">Save as Draft</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Find Consultants Tab -->
+        <div class="tab-pane fade" id="consultants" role="tabpanel">
+            <div class="mb-4">
+                <h3>Available Consultants</h3>
+                <p class="text-muted">Browse and connect with our network of CSO experts</p>
+            </div>
+            
+            <div class="row">
+                @foreach (var consultant in Model.AvailableConsultants)
+                {
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="card-title">@consultant.Name</h5>
+                                        <p class="card-text text-muted">@consultant.Location • @consultant.Experience</p>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-star text-warning me-1"></i>
+                                        <span>@consultant.Rating</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Areas of Expertise</label>
+                                    <div class="d-flex flex-wrap gap-1">
+                                        @foreach (var skill in consultant.Expertise)
+                                        {
+                                            <span class="badge bg-secondary">@skill</span>
+                                        }
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Languages</label>
+                                    <p class="small text-muted mb-0">@string.Join(", ", consultant.Languages)</p>
+                                </div>
+                                
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-primary btn-sm flex-fill">Request Consultation</button>
+                                    <button class="btn btn-outline-secondary btn-sm">View Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Completed" => "bg-success",
+            "In Progress" => "bg-primary",
+            "Pending Review" => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+    
+    string GetPriorityBadgeClass(string priority)
+    {
+        return priority switch
+        {
+            "High" => "bg-danger",
+            "Medium" => "bg-warning",
+            "Low" => "bg-success",
+            _ => "bg-secondary"
+        };
+    }
+}
+
+<script>
+function showNewRequestTab() {
+    document.getElementById('new-request-tab').click();
+}
+
+document.querySelectorAll('.request-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const requestId = this.dataset.requestId;
+        // Update request details panel
+        document.getElementById('request-details').innerHTML = `
+            <div class="card-body">
+                <h5>Request Details</h5>
+                <p>Details for request ID: ${requestId}</p>
+            </div>
+        `;
+    });
+});
+</script>

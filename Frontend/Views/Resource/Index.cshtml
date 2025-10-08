@@ -1,0 +1,181 @@
+@model ResourceLibraryViewModel
+@{
+    ViewData["Title"] = "Resource Library";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-4">Resource Library</h1>
+            <p class="text-muted">Access toolkits, templates, and guides to support your organization.</p>
+        </div>
+        <button class="btn btn-outline-secondary">
+            <i class="fas fa-filter me-2"></i>Advanced Filters
+        </button>
+    </div>
+
+    <!-- Search -->
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" name="search" class="form-control" placeholder="Search resources, tags, or authors..." value="@Model.SearchTerm">
+            <input type="hidden" name="category" value="@Model.SelectedCategory">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Category Tabs -->
+    <ul class="nav nav-tabs mb-4" id="categoryTabs">
+        @foreach (var category in Model.Categories)
+        {
+            <li class="nav-item">
+                <a class="nav-link @(Model.SelectedCategory == category ? "active" : "")" 
+                   href="@Url.Action("Index", new { search = Model.SearchTerm, category = category })">
+                    @(category == "all" ? "All" : category)
+                </a>
+            </li>
+        }
+    </ul>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <i class="fas fa-file-text fa-2x text-muted me-3"></i>
+                    <div>
+                        <p class="card-text mb-0">Total Resources</p>
+                        <h4 class="card-title mb-0">@Model.Stats.TotalResources</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <i class="fas fa-download fa-2x text-muted me-3"></i>
+                    <div>
+                        <p class="card-text mb-0">Total Downloads</p>
+                        <h4 class="card-title mb-0">@Model.Stats.TotalDownloads.ToString("N0")</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <i class="fas fa-calendar fa-2x text-muted me-3"></i>
+                    <div>
+                        <p class="card-text mb-0">This Month</p>
+                        <h4 class="card-title mb-0">@Model.Stats.ThisMonth</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <i class="fas fa-users fa-2x text-muted me-3"></i>
+                    <div>
+                        <p class="card-text mb-0">Contributors</p>
+                        <h4 class="card-title mb-0">@Model.Stats.Contributors</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Grid -->
+    @if (Model.Resources.Any())
+    {
+        <div class="row">
+            @foreach (var resource in Model.Resources)
+            {
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 shadow-sm resource-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="d-flex align-items-start">
+                                    <div class="p-2 rounded bg-light me-3">
+                                        <i class="@GetTypeIcon(resource.Type) fa-lg @GetTypeColor(resource.Type)"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title mb-1">@resource.Title</h5>
+                                        <div class="text-muted small">
+                                            <span>by @resource.Author</span>
+                                            <span class="mx-1">•</span>
+                                            <span>@resource.UploadDate.ToString("MMM dd, yyyy")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="badge bg-light text-dark text-capitalize">@resource.Type</span>
+                            </div>
+                            
+                            <p class="card-text text-muted mb-3">@resource.Description</p>
+                            
+                            <div class="mb-3">
+                                @foreach (var tag in resource.Tags)
+                                {
+                                    <span class="badge bg-secondary me-1">@tag</span>
+                                }
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex gap-3 text-muted small">
+                                    <span>@resource.Size</span>
+                                    <span><i class="fas fa-download me-1"></i>@resource.Downloads</span>
+                                </div>
+                                <span class="badge bg-light text-dark">@resource.Category</span>
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <a asp-action="Details" asp-route-id="@resource.Id" class="btn btn-outline-primary btn-sm flex-fill">
+                                    <i class="fas fa-eye me-1"></i>Preview
+                                </a>
+                                <form asp-action="Download" asp-route-id="@resource.Id" method="post" class="flex-fill">
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+            <h3>No resources found</h3>
+            <p class="text-muted">Try adjusting your search terms or browse different categories.</p>
+        </div>
+    }
+</div>
+
+@functions {
+    string GetTypeIcon(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "fas fa-file-pdf",
+            "video" => "fas fa-video",
+            "template" => "fas fa-file-alt",
+            "toolkit" => "fas fa-archive",
+            _ => "fas fa-file"
+        };
+    }
+    
+    string GetTypeColor(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "text-danger",
+            "video" => "text-primary",
+            "template" => "text-success",
+            "toolkit" => "text-purple",
+            _ => "text-muted"
+        };
+    }
+}

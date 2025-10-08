@@ -1,0 +1,259 @@
+@model EventViewModel
+@{
+    ViewData["Title"] = "Event Management";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-6">Event Management</h1>
+            <p class="text-muted">Discover workshops, webinars, and conferences to enhance your CSO's capabilities</p>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs mb-4" id="eventTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="browse-tab" data-bs-toggle="tab" data-bs-target="#browse" type="button" role="tab">Browse Events</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="my-events-tab" data-bs-toggle="tab" data-bs-target="#my-events" type="button" role="tab">My Events</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="eventTabContent">
+        <!-- Browse Events Tab -->
+        <div class="tab-pane fade show active" id="browse" role="tabpanel">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search events...">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="btn-group w-100" role="group">
+                        <button type="button" class="btn btn-outline-primary active">All (3)</button>
+                        <button type="button" class="btn btn-outline-primary">Workshops (2)</button>
+                        <button type="button" class="btn btn-outline-primary">Webinars (1)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    @foreach (var eventItem in Model.UpcomingEvents)
+                    {
+                        <div class="card mb-4 shadow-sm event-card" data-event-id="@eventItem.Id">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <div class="mb-2">
+                                            <span class="badge bg-secondary me-2">@eventItem.Type</span>
+                                            <span class="badge bg-outline-primary">
+                                                @if (eventItem.Format == "Virtual")
+                                                {
+                                                    <i class="fas fa-video me-1"></i>
+                                                }
+                                                else if (eventItem.Format == "Hybrid")
+                                                {
+                                                    <i class="fas fa-globe me-1"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                                }
+                                                @eventItem.Format
+                                            </span>
+                                        </div>
+                                        <h5 class="card-title">@eventItem.Title</h5>
+                                        <p class="text-muted mb-0">by @eventItem.Instructor</p>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="h5 text-primary mb-0">@eventItem.Price</div>
+                                        <small class="text-muted">@eventItem.Level</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between text-muted small">
+                                    <span><i class="fas fa-calendar me-1"></i>@eventItem.Date</span>
+                                    <span><i class="fas fa-clock me-1"></i>@eventItem.Duration</span>
+                                    <span><i class="fas fa-users me-1"></i>@eventItem.Participants/@eventItem.MaxParticipants</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card shadow-sm" id="event-details">
+                        <div class="card-body text-center">
+                            <i class="fas fa-calendar fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">Select an event to view details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Events Tab -->
+        <div class="tab-pane fade" id="my-events" role="tabpanel">
+            <div class="mb-4">
+                <h3>My Registered Events</h3>
+                <p class="text-muted">Track your event registrations and attendance</p>
+            </div>
+
+            @foreach (var myEvent in Model.MyEvents)
+            {
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1">@myEvent.Title</h5>
+                                <div class="d-flex align-items-center text-muted small">
+                                    <span class="me-3"><i class="fas fa-calendar me-1"></i>@myEvent.Date</span>
+                                    <span class="badge bg-secondary">@myEvent.Type</span>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center">
+                                @if (myEvent.Rating.HasValue)
+                                {
+                                    <div class="me-3">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span>@myEvent.Rating</span>
+                                    </div>
+                                }
+                                
+                                @{
+                                    var statusClass = myEvent.Status switch
+                                    {
+                                        "Registered" => "bg-primary",
+                                        "Completed" => "bg-success",
+                                        "Waitlisted" => "bg-warning",
+                                        _ => "bg-secondary"
+                                    };
+                                }
+                                <span class="badge @statusClass me-3">@myEvent.Status</span>
+                                
+                                <div class="btn-group">
+                                    @if (myEvent.Status == "Completed")
+                                    {
+                                        <button class="btn btn-outline-primary btn-sm">Download Certificate</button>
+                                    }
+                                    @if (myEvent.Status == "Registered")
+                                    {
+                                        <button class="btn btn-primary btn-sm">Join Event</button>
+                                    }
+                                    <button class="btn btn-outline-secondary btn-sm">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const eventCards = document.querySelectorAll('.event-card');
+    const eventDetails = document.getElementById('event-details');
+    const events = @Html.Raw(Json.Serialize(Model.UpcomingEvents));
+    
+    eventCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const eventId = parseInt(this.dataset.eventId);
+            const event = events.find(e => e.id === eventId);
+            
+            eventCards.forEach(c => c.classList.remove('border-primary'));
+            this.classList.add('border-primary');
+            
+            if (event) {
+                eventDetails.innerHTML = `
+                    <div class="card-header">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-secondary me-2">${event.type}</span>
+                            <span class="badge bg-outline-primary">${event.format}</span>
+                        </div>
+                        <h5 class="mb-0">${event.title}</h5>
+                        <small class="text-muted">by ${event.instructor}</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-bold">Date & Time</span>
+                                <span class="small text-muted">${event.date}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-bold">Duration</span>
+                                <span class="small text-muted">${event.duration}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-bold">Level</span>
+                                <span class="small text-muted">${event.level}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="small fw-bold">Price</span>
+                                <span class="small fw-bold text-primary">${event.price}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Description</h6>
+                            <p class="small text-muted">${event.description}</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">What You'll Learn</h6>
+                            <ul class="small text-muted">
+                                ${event.agenda.slice(0, 3).map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold">Tags</h6>
+                            <div>
+                                ${event.tags.map(tag => `<span class="badge bg-light text-dark me-1">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" onclick="registerForEvent(${event.id})">Register Now</button>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-secondary btn-sm w-100">
+                                        <i class="fas fa-share me-1"></i>Share
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-secondary btn-sm w-100">
+                                        <i class="fas fa-book-open me-1"></i>Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    });
+});
+
+function registerForEvent(eventId) {
+    fetch('@Url.Action("Register")', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'eventId=' + eventId
+    })
+    .then(response => {
+        if (response.ok) {
+            location.reload();
+        }
+    });
+}
+</script>
+}

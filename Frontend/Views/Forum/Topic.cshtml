@@ -1,0 +1,202 @@
+@model ForumTopicViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Forum</a></li>
+            <li class="breadcrumb-item"><a href="#">@Model.Category</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Main Topic -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        @if (Model.IsPinned)
+                        {
+                            <i class="fas fa-thumbtack text-warning me-2"></i>
+                        }
+                        <span class="badge bg-info me-2">@Model.Category</span>
+                        @if (Model.IsAnswered)
+                        {
+                            <span class="badge bg-success">Answered</span>
+                        }
+                    </div>
+                    
+                    <h1 class="h3 mb-3">@Model.Title</h1>
+                    
+                    <div class="mb-3">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <span class="badge bg-light text-dark me-1">#@tag</span>
+                        }
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p>@Model.Excerpt</p>
+                        <!-- Full content would go here -->
+                    </div>
+                    
+                    <div class="d-flex align-items-center justify-content-between border-top pt-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                @string.Join("", Model.Author.Split(' ').Select(n => n.FirstOrDefault()))
+                            </div>
+                            <div>
+                                <div class="fw-bold">@Model.Author</div>
+                                <small class="text-muted">@Model.AuthorRole • @Model.AuthorOrg</small>
+                                <div><small class="text-muted">Posted @Model.CreatedAt.ToString("MMM dd, yyyy 'at' HH:mm")</small></div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-success btn-sm">
+                                <i class="fas fa-thumbs-up me-1"></i>Like
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-thumbs-down me-1"></i>Dislike
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-reply me-1"></i>Reply
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-flag me-1"></i>Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Replies Section -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-comments me-2"></i>@Model.Replies Replies
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Reply Form -->
+                    <div class="mb-4">
+                        <h6>Add your reply</h6>
+                        <form>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="Share your thoughts or answer..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Post Reply
+                            </button>
+                        </form>
+                    </div>
+
+                    <hr>
+
+                    <!-- Sample Replies -->
+                    <div class="mb-4">
+                        <div class="d-flex align-items-start">
+                            <div class="bg-secondary text-white rounded-circle me-3" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 12px;">
+                                DK
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center mb-2">
+                                    <strong class="me-2">David Kiptoo</strong>
+                                    <small class="text-muted">30 minutes ago</small>
+                                </div>
+                                <p class="mb-2">Great question! In our experience, maintaining regular communication through newsletters and impact reports has been crucial...</p>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-thumbs-up me-1"></i>5
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-thumbs-down me-1"></i>0
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-reply me-1"></i>Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-start">
+                            <div class="bg-info text-white rounded-circle me-3" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 12px;">
+                                SM
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center mb-2">
+                                    <strong class="me-2">Sarah Mensah</strong>
+                                    <small class="text-muted">1 hour ago</small>
+                                </div>
+                                <p class="mb-2">I'd also recommend creating donor appreciation events and personalized thank you messages. We've seen great results with this approach.</p>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-thumbs-up me-1"></i>8
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-thumbs-down me-1"></i>0
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-reply me-1"></i>Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Topic Stats</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="h4 text-primary mb-0">@Model.Views</div>
+                            <small class="text-muted">Views</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h4 text-success mb-0">@Model.Replies</div>
+                            <small class="text-muted">Replies</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h4 text-info mb-0">@Model.Tags.Count</div>
+                            <small class="text-muted">Tags</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h6 class="mb-0">Related Topics</h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="fw-bold">Effective donor communication strategies</div>
+                            <small class="text-muted">12 replies • 2 days ago</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="fw-bold">Building long-term partnerships</div>
+                            <small class="text-muted">8 replies • 3 days ago</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="fw-bold">Grant reporting best practices</div>
+                            <small class="text-muted">15 replies • 1 week ago</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

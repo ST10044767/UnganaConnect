@@ -1,0 +1,65 @@
+@model CreateTopicViewModel
+@{
+    ViewData["Title"] = "Create New Topic";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Create New Topic</h4>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+                
+                <div class="card-body">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Success"]</div>
+                    }
+                    
+                    <form asp-action="CreateTopic" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label fw-bold">Title</label>
+                            <input asp-for="Title" class="form-control" placeholder="Enter your topic title...">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="CategoryId" class="form-label fw-bold">Category</label>
+                            <select asp-for="CategoryId" class="form-select">
+                                <option value="">Select a category...</option>
+                                @foreach (var category in ViewBag.Categories as List<ForumCategory>)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Content" class="form-label fw-bold">Content</label>
+                            <textarea asp-for="Content" class="form-control" rows="8" placeholder="Share your thoughts, questions, or experiences..."></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="Tags" class="form-label fw-bold">Tags</label>
+                            <input asp-for="Tags" class="form-control" placeholder="Add tags separated by commas...">
+                            <div class="form-text">Use tags to help others find your topic</div>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary flex-fill">Post Topic</button>
+                            <button type="button" class="btn btn-outline-secondary">Save Draft</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

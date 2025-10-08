@@ -1,0 +1,190 @@
+@model ResourceViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Resource Library</a></li>
+            <li class="breadcrumb-item"><a href="#">@Model.Category</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Resource Header -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="p-3 rounded bg-light me-4">
+                            <i class="@GetTypeIcon(Model.Type) fa-2x @GetTypeColor(Model.Type)"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h1 class="h3 mb-2">@Model.Title</h1>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <span class="badge bg-light text-dark text-capitalize">@Model.Type</span>
+                                <span class="badge bg-primary">@Model.Category</span>
+                                <span class="text-muted">by @Model.Author</span>
+                            </div>
+                            <p class="text-muted mb-0">@Model.Description</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <h6>File Size</h6>
+                            <p class="text-muted">@Model.Size</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Downloads</h6>
+                            <p class="text-muted">@Model.Downloads.ToString("N0")</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Upload Date</h6>
+                            <p class="text-muted">@Model.UploadDate.ToString("MMM dd, yyyy")</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>Category</h6>
+                            <p class="text-muted">@Model.Category</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6>Tags</h6>
+                        <div>
+                            @foreach (var tag in Model.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Content Preview -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Resource Preview</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Type == "video")
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-play-circle fa-4x text-primary mb-3"></i>
+                            <h5>Video Content</h5>
+                            <p class="text-muted">Click download to access the full video content.</p>
+                        </div>
+                    }
+                    else if (Model.Type == "pdf" || Model.Type == "guide")
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-file-pdf fa-4x text-danger mb-3"></i>
+                            <h5>PDF Document</h5>
+                            <p class="text-muted">Download to view the complete document.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-download fa-4x text-muted mb-3"></i>
+                            <h5>Downloadable Resource</h5>
+                            <p class="text-muted">Click download to access this resource.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <h5 class="mb-3">Download Resource</h5>
+                    <form asp-action="Download" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="fas fa-download me-2"></i>Download (@Model.Size)
+                        </button>
+                    </form>
+                    <small class="text-muted">@Model.Downloads.ToString("N0") downloads so far</small>
+                </div>
+            </div>
+
+            <!-- Resource Info -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Resource Information</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Author:</strong>
+                        <p class="text-muted mb-0">@Model.Author</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Type:</strong>
+                        <p class="text-muted mb-0 text-capitalize">@Model.Type</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Category:</strong>
+                        <p class="text-muted mb-0">@Model.Category</p>
+                    </div>
+                    <div>
+                        <strong>Upload Date:</strong>
+                        <p class="text-muted mb-0">@Model.UploadDate.ToString("MMMM dd, yyyy")</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Resources -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h6 class="mb-0">Related Resources</h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="fw-bold">Grant Writing Templates</div>
+                            <small class="text-muted">1,200 downloads</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="fw-bold">Fundraising Strategy Guide</div>
+                            <small class="text-muted">890 downloads</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <div class="fw-bold">Budget Planning Toolkit</div>
+                            <small class="text-muted">650 downloads</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetTypeIcon(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "fas fa-file-pdf",
+            "video" => "fas fa-video",
+            "template" => "fas fa-file-alt",
+            "toolkit" => "fas fa-archive",
+            _ => "fas fa-file"
+        };
+    }
+    
+    string GetTypeColor(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "text-danger",
+            "video" => "text-primary",
+            "template" => "text-success",
+            "toolkit" => "text-purple",
+            _ => "text-muted"
+        };
+    }
+}
