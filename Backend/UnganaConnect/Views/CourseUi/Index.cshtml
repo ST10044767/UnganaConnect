@@ -1,0 +1,23 @@
+@model IEnumerable<UnganaConnect.Models.Training___Learning.Course>
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">Courses</h2>
+    <div class="row">
+        @foreach (var course in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@course.Title</h5>
+                        <p class="card-text">@course.Description</p>
+                        <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

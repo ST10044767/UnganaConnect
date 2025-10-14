@@ -32,21 +32,24 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -72,10 +75,14 @@ namespace UnganaConnect.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("EventRegistrations");
                 });
 
-            modelBuilder.Entity("UnganaConnect.Models.Forum.ForumReply", b =>
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Reply", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,15 +92,13 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
-                    b.Property<DateTime>("RepliedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("ThreadId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Upvotes")
                         .HasColumnType("integer");
 
                     b.Property<int>("UserId")
@@ -101,10 +106,14 @@ namespace UnganaConnect.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ForumReplies");
+                    b.HasIndex("ThreadId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Replies");
                 });
 
-            modelBuilder.Entity("UnganaConnect.Models.Forum.ForumThread", b =>
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Thread", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,21 +123,59 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CreatedById")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ForumThreads");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Threads");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Upvote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ReplyId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ThreadId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReplyId");
+
+                    b.HasIndex("ThreadId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Upvotes");
                 });
 
             modelBuilder.Entity("UnganaConnect.Models.Resources_Repo.CResource", b =>
@@ -141,7 +188,28 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("Category")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("FileUrl")
                         .IsRequired()
@@ -149,12 +217,15 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Resources");
                 });
@@ -178,6 +249,10 @@ namespace UnganaConnect.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ResourceId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("ResourceEngagements");
                 });
 
@@ -192,13 +267,24 @@ namespace UnganaConnect.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("IssuedAt")
+                    b.Property<string>("FileUrl")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("IssuedOn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("UserId")
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UserId1")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Certificates");
                 });
@@ -213,19 +299,18 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("VideoUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -240,21 +325,117 @@ namespace UnganaConnect.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("EnrolledAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("isCompleted")
+                    b.Property<bool>("IsCompleted")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId1")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId1");
+
                     b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Module", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("FileUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("VideoUrl")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Modules");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Options");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CorrectOptionId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Quiz", b =>
@@ -265,20 +446,73 @@ namespace UnganaConnect.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CorrectAnswer")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("CourseId")
+                    b.Property<int>("ModuleId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Question")
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModuleId");
+
+                    b.ToTable("Quizzes");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.UserProgress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("ModuleId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quizzes");
+                    b.HasIndex("ModuleId");
+
+                    b.ToTable("UserProgress");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Users.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActionType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int>("AdminId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("AdminUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminUserId");
+
+                    b.ToTable("AdminActions");
                 });
 
             modelBuilder.Entity("UnganaConnect.Models.Users.User", b =>
@@ -298,11 +532,13 @@ namespace UnganaConnect.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -318,6 +554,242 @@ namespace UnganaConnect.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Event_Management.EventRegistration", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Event_Management.Event", "Events")
+                        .WithMany("EventRegistrations")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnganaConnect.Models.Users.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Events");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Reply", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Forum.CommunityForum+Thread", "Thread")
+                        .WithMany("Replies")
+                        .HasForeignKey("ThreadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnganaConnect.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Thread");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Thread", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Users.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Upvote", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Forum.CommunityForum+Reply", "Reply")
+                        .WithMany("Upvotes")
+                        .HasForeignKey("ReplyId");
+
+                    b.HasOne("UnganaConnect.Models.Forum.CommunityForum+Thread", "Thread")
+                        .WithMany("Upvotes")
+                        .HasForeignKey("ThreadId");
+
+                    b.HasOne("UnganaConnect.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reply");
+
+                    b.Navigation("Thread");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Resources_Repo.CResource", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Resources_Repo.ResourceEngagement", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Resources_Repo.CResource", "Resource")
+                        .WithMany()
+                        .HasForeignKey("ResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnganaConnect.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resource");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Certificate", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnganaConnect.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Enrollment", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Course", "Course")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnganaConnect.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Module", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Course", "Course")
+                        .WithMany("Modules")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Option", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Question", "Question")
+                        .WithMany("Options")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Question", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Quiz", "Quiz")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Quiz", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Module", "Module")
+                        .WithMany()
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Module");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.UserProgress", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Training___Learning.Module", "Module")
+                        .WithMany()
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Module");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Users.Admin", b =>
+                {
+                    b.HasOne("UnganaConnect.Models.Users.User", "AdminUser")
+                        .WithMany()
+                        .HasForeignKey("AdminUserId");
+
+                    b.Navigation("AdminUser");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Event_Management.Event", b =>
+                {
+                    b.Navigation("EventRegistrations");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Reply", b =>
+                {
+                    b.Navigation("Upvotes");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Forum.CommunityForum+Thread", b =>
+                {
+                    b.Navigation("Replies");
+
+                    b.Navigation("Upvotes");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Course", b =>
+                {
+                    b.Navigation("Enrollments");
+
+                    b.Navigation("Modules");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Question", b =>
+                {
+                    b.Navigation("Options");
+                });
+
+            modelBuilder.Entity("UnganaConnect.Models.Training___Learning.Quiz", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

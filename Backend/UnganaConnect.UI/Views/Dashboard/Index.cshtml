@@ -1,0 +1,384 @@
+@model UnganaConnect.UI.Controllers.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.IsAdmin = ViewBag.IsAdmin ?? false;
+    ViewBag.UserEmail = ViewBag.UserEmail ?? "";
+}
+
+<div class="container-fluid">
+    <!-- Welcome Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-gradient-primary text-white">
+                <div class="card-body">
+                    <h1 class="card-title mb-2">
+                        <i class="fas fa-graduation-cap me-3"></i>Welcome to UnganaConnect
+                    </h1>
+                    <p class="card-text mb-0">
+                        Empowering African CSOs through digital transformation and ICT training
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.IsAdmin && Model.AdminData != null)
+    {
+        <!-- Admin Dashboard -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-gradient mb-4">
+                    <i class="fas fa-chart-bar me-2"></i>System Overview
+                </h2>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">@Model.AdminData.Statistics.TotalUsers</div>
+                    <div class="stat-label">Total Users</div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-number">@Model.AdminData.Statistics.TotalCourses</div>
+                    <div class="stat-label">Total Courses</div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-number">@Model.AdminData.Statistics.TotalEnrollments</div>
+                    <div class="stat-label">Enrollments</div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-number">@Model.AdminData.Statistics.TotalEvents</div>
+                    <div class="stat-label">Events</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>System Analytics
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="analyticsChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-clock me-2"></i>Recent Activity
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            @foreach (var enrollment in Model.AdminData.RecentActivity.RecentEnrollments.Take(5))
+                            {
+                                <div class="list-group-item border-0 px-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-user-graduate text-primary"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1">New Enrollment</h6>
+                                            <p class="mb-0 text-muted small">@enrollment.Course?.Title</p>
+                                        </div>
+                                        <small class="text-muted">@enrollment.EnrolledAt.ToString("MMM dd")</small>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Member Dashboard -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-gradient mb-4">
+                    <i class="fas fa-tachometer-alt me-2"></i>My Learning Dashboard
+                </h2>
+            </div>
+        </div>
+
+        <!-- Learning Quick Actions -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-graduation-cap fa-3x mb-3"></i>
+                        <h5>My Learning</h5>
+                        <p class="mb-3">Continue your courses and track progress</p>
+                        <a asp-controller="Learning" asp-action="MyCourses" class="btn btn-light">
+                            <i class="fas fa-play me-2"></i>Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-certificate fa-3x mb-3"></i>
+                        <h5>Certificates</h5>
+                        <p class="mb-3">View your earned certificates</p>
+                        <a asp-controller="Learning" asp-action="Certificates" class="btn btn-light">
+                            <i class="fas fa-trophy me-2"></i>View Certificates
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book fa-3x mb-3"></i>
+                        <h5>Browse Courses</h5>
+                        <p class="mb-3">Discover new courses to enroll in</p>
+                        <a asp-controller="Course" asp-action="Index" class="btn btn-light">
+                            <i class="fas fa-search me-2"></i>Browse Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Progress -->
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-pie me-2"></i>Learning Progress
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="progressChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-trophy me-2"></i>My Achievements
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <i class="fas fa-certificate text-warning" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3">@Model.Enrollments.Count(e => e.IsCompleted)</h4>
+                        <p class="text-muted">Courses Completed</p>
+                        <a asp-controller="Learning" asp-action="Certificates" class="btn btn-outline-primary btn-sm">
+                            View Certificates
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Courses Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="text-gradient mb-0">
+                    <i class="fas fa-book me-2"></i>Featured Courses
+                </h2>
+                <a href="@Url.Action("Index", "Course")" class="btn btn-outline-primary">
+                    View All Courses <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var course in Model.Courses.Take(6))
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card course-card h-100">
+                    <div class="card-img-top bg-gradient-secondary d-flex align-items-center justify-content-center text-white">
+                        <i class="fas fa-book fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@course.Title</h5>
+                        <p class="card-text">@course.Description</p>
+                        <div class="mb-3">
+                            <span class="badge bg-primary">@course.Category</span>
+                            <span class="badge bg-secondary">@course.Modules.Count Modules</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="@Url.Action("Details", "Course", new { id = course.Id })" 
+                               class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye me-1"></i>View Details
+                            </a>
+                            @if (!ViewBag.IsAdmin)
+                            {
+                                <div class="btn-group" role="group">
+                                    <form asp-controller="Course" asp-action="Enroll" method="post" class="d-inline">
+                                        <input type="hidden" name="courseId" value="@course.Id" />
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-plus me-1"></i>Enroll
+                                        </button>
+                                    </form>
+                                    <a asp-controller="Learning" asp-action="Course" asp-route-courseId="@course.Id" 
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-play me-1"></i>Learn
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Events Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="text-gradient mb-0">
+                    <i class="fas fa-calendar me-2"></i>Upcoming Events
+                </h2>
+                <a href="@Url.Action("Index", "Event")" class="btn btn-outline-primary">
+                    View All Events <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var evt in Model.Events.Take(3))
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card event-card h-100">
+                    <div class="card-body">
+                        <div class="event-date">
+                            @evt.StartDate.ToString("MMM dd, yyyy")
+                        </div>
+                        <h5 class="card-title">@evt.Title</h5>
+                        <p class="card-text">@evt.Description</p>
+                        <div class="mb-3">
+                            <i class="fas fa-map-marker-alt me-1"></i>@evt.Location
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>
+                                @evt.StartDate.ToString("HH:mm") - @evt.EndDate.ToString("HH:mm")
+                            </small>
+                            <a href="@Url.Action("Details", "Event", new { id = evt.Id })" 
+                               class="btn btn-info btn-sm">
+                                <i class="fas fa-info-circle me-1"></i>Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (ViewBag.IsAdmin && Model.AdminData != null)
+            {
+                <text>
+                // Admin Analytics Chart
+                const analyticsCtx = document.getElementById('analyticsChart').getContext('2d');
+                new Chart(analyticsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Users', 'Courses', 'Enrollments', 'Events', 'Threads', 'Resources'],
+                        datasets: [{
+                            label: 'System Statistics',
+                            data: [
+                                @Model.AdminData.Statistics.TotalUsers,
+                                @Model.AdminData.Statistics.TotalCourses,
+                                @Model.AdminData.Statistics.TotalEnrollments,
+                                @Model.AdminData.Statistics.TotalEvents,
+                                @Model.AdminData.Statistics.TotalThreads,
+                                @Model.AdminData.Statistics.TotalResources
+                            ],
+                            borderColor: '#3498db',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+                </text>
+            }
+            else
+            {
+                <text>
+                // Member Progress Chart
+                const progressCtx = document.getElementById('progressChart').getContext('2d');
+                new Chart(progressCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Completed', 'In Progress', 'Not Started'],
+                        datasets: [{
+                            data: [
+                                @Model.Enrollments.Count(e => e.IsCompleted),
+                                @Model.Enrollments.Count(e => !e.IsCompleted),
+                                @(Model.Courses.Count - Model.Enrollments.Count)
+                            ],
+                            backgroundColor: ['#27ae60', '#f39c12', '#e74c3c']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+                </text>
+            }
+        });
+    </script>
+}

@@ -1,0 +1,111 @@
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-lg">
+                <div class="card-header text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                    </h3>
+                    <p class="text-white-50 mb-0">Welcome back to UnganaConnect</p>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Login" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                <i class="fas fa-envelope me-1"></i>Email Address
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email" required 
+                                   placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock me-1"></i>Password
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password" required 
+                                   placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                Remember me
+                            </label>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <p class="mb-0">Don't have an account? 
+                            <a asp-action="Register" class="text-decoration-none fw-bold">Register here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Demo Credentials -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Demo Credentials
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6 class="text-primary">Admin</h6>
+                            <small class="text-muted">
+                                Email: admin@ungana-afrika.org<br>
+                                Password: Admin123!
+                            </small>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-success">Member</h6>
+                            <small class="text-muted">
+                                Email: member@example.com<br>
+                                Password: Member123!
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-fill demo credentials on click
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminEmail = document.querySelector('input[name="email"]');
+            const adminPassword = document.querySelector('input[name="password"]');
+            
+            // Add click handlers for demo credentials
+            const demoCards = document.querySelectorAll('.card .card-body');
+            demoCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('h6')) {
+                        const isAdmin = e.target.textContent.includes('Admin');
+                        if (isAdmin) {
+                            adminEmail.value = 'admin@ungana-afrika.org';
+                            adminPassword.value = 'Admin123!';
+                        } else {
+                            adminEmail.value = 'member@example.com';
+                            adminPassword.value = 'Member123!';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

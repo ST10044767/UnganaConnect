@@ -1,0 +1,23 @@
+@model UnganaConnect.Models.Training___Learning.Course
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-4">
+    <h2>@Model.Title</h2>
+    <p>@Model.Description</p>
+
+    <form asp-action="Enroll" method="post" class="mb-3">
+        <input type="hidden" name="courseId" value="@Model.Id" />
+        <button class="btn btn-success" type="submit">Enroll</button>
+    </form>
+
+    <h4>Modules</h4>
+    <ul>
+        @foreach (var module in Model.Modules)
+        {
+            <li>@module.Title</li>
+        }
+    </ul>
+</div>
+

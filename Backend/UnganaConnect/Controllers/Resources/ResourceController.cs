@@ -1,87 +1,116 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Elfie.Serialization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
+using UnganaConnect.Data;
+using UnganaConnect.Models.Resources_Repo;
+using UnganaConnect.Models.Training___Learning;
 using UnganaConnect.Service;
 
 namespace UnganaConnect.Controllers.Resources
 {
-
     [ApiController]
     [Route("api/[controller]")]
-
-
-
-    public class ResourceController : Controller
+    public class ResourceController : ControllerBase
     {
+        private readonly FileServices _fileServices;
+        private readonly UnganaConnectDbcontext _context;
 
-        private readonly FileServices fileServices;
-        pr
-        // GET: ResourceController/Details/5
-        public ActionResult Details(int id)
+        public ResourceController(FileServices fileServices, UnganaConnectDbcontext context)
         {
-            return View();
+            _fileServices = fileServices;
+            _context = context;
         }
 
-        // GET: ResourceController/Create
-        public ActionResult Create()
+        // 🔹 Create a folder for a course (admin)
+        [HttpPost("create-folder/{courseName}")]
+        public async Task<IActionResult> CreateFolder(string courseName)
         {
-            return View();
+            var path = await _fileServices.CreateCourseFolderAsync(courseName);
+            return Ok(new { message = "Course folder created successfully.", path });
         }
 
-        // POST: ResourceController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        // 🔹 Upload a file to a specific course (admin)
+        [HttpPost("upload/{courseId}")]
+        public async Task<IActionResult> Upload(int courseId, IFormFile file)
         {
-            try
+            var course = await _context.Courses.FindAsync(courseId);
+            if (course == null)
+                return NotFound($"Course with ID {courseId} not found.");
+
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            var path = await _fileServices.UploadResourceAsync(course.Title, file);
+
+            var resource = new CResource
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                FileName = file.FileName,
+                FilePath = path,
+                FileType = file.ContentType,
+                FileSize = file.Length,
+                CourseId = course.Id,
+                UploadedAt = DateTime.UtcNow
+            };
+
+            _context.Resources.Add(resource);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "File uploaded successfully.", resource });
         }
 
-        // GET: ResourceController/Edit/5
-        public ActionResult Edit(int id)
+        // 🔹 List all resources for a course
+        [HttpGet("{courseId}")]
+        public async Task<IActionResult> GetCourseResources(int courseId)
         {
-            return View();
+            var course = await _context.Courses.Include(c => c.Modules)
+                                               .FirstOrDefaultAsync(c => c.Id == courseId);
+            if (course == null)
+                return NotFound($"Course with ID {courseId} not found.");
+
+            var resources = await _context.Resources
+                                          .Where(r => r.CourseId == courseId)
+                                          .ToListAsync();
+
+            return Ok(new { course = course.Title, resources });
         }
 
-        // POST: ResourceController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // 🔹 Download a file
+        [HttpGet("{courseId}/download/{fileName}")]
+        public async Task<IActionResult> DownloadFile(int courseId, string fileName)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var course = await _context.Courses.FindAsync(courseId);
+            if (course == null)
+                return NotFound($"Course with ID {courseId} not found.");
+
+            var fileBytes = await _fileServices.GetResourceFileAsync(course.Title, fileName);
+            if (fileBytes == null || fileBytes.Length == 0)
+                return NotFound("File not found.");
+
+            return File(fileBytes, "application/octet-stream", fileName);
         }
 
-        // GET: ResourceController/Delete/5
-        public ActionResult Delete(int id)
+        // 🔹 Delete a resource
+        [HttpDelete("{courseId}/delete/{fileName}")]
+        public async Task<IActionResult> DeleteFile(int courseId, string fileName)
         {
-            return View();
-        }
+            var course = await _context.Courses.FindAsync(courseId);
+            if (course == null)
+                return NotFound($"Course with ID {courseId} not found.");
 
-        // POST: ResourceController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            _fileServices.DeleteResource(course.Title, fileName);
+
+            var resource = await _context.Resources
+                                         .FirstOrDefaultAsync(r => r.FileName == fileName && r.CourseId == courseId);
+            if (resource != null)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Resources.Remove(resource);
+                await _context.SaveChangesAsync();
             }
-            catch
-            {
-                return View();
-            }
+
+            return Ok(new { message = "File deleted successfully." });
         }
     }
 }

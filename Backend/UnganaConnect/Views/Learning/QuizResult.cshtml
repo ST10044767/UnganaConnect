@@ -1,0 +1,12 @@
+@model UnganaConnect.Models.Training___Learning.QuizResultViewModel
+@{
+    ViewData["Title"] = "Quiz Result";
+}
+
+<div class="container py-4">
+    <h2>Quiz Result</h2>
+    <p>Score: @Model.Score</p>
+    <p>Passed: @(Model.IsPassed ? "Yes" : "No")</p>
+    <a asp-action="MyCourses" class="btn btn-link">Back to My Courses</a>
+</div>
+

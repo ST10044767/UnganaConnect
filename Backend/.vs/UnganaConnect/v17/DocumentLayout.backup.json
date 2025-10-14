@@ -3,6 +3,81 @@
   "WorkspaceRootPath": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\views\\learning\\certificates.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\views\\learning\\certificates.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\learninguicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\learninguicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\courseuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\courseuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\course\\certificatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\course\\certificatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\course\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\course\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\course\\enrollmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\course\\enrollmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\api_tests.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\api_tests.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\api_test_report.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\api_test_report.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\api_documentation.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\api_documentation.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\admin_credentials.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\admin_credentials.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\training \u0026 learning\\module.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\module.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\middleware\\globalexceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\middleware\\globalexceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\unganaconnect.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\unganaconnect.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\resources\\resourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\resources\\resourcecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,39 +86,88 @@
       "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\service\\blobservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\auth\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\course\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\course\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\migrations\\20251012195834_initalcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\migrations\\20251012195834_initalcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\service\\adminseederservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\service\\adminseederservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\resources repo\\resourceengagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\resources repo\\resourceengagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\users\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\users\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\resources repo\\cresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\resources repo\\cresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\users\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\users\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\event management\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\event management\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\training \u0026 learning\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\training \u0026 learning\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\enrollment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\training \u0026 learning\\certificate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\certificate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\service\\certificateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\service\\certificateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\data\\unganaconnectdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\data\\unganaconnectdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\course\\quizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\course\\quizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\training \u0026 learning\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\training \u0026 learning\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\service\\fileservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\service\\fileservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\unganaconnect.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\unganaconnect.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\events\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\events\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\forum\\forumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\controllers\\forum\\forumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\forum\\communityforum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\forum\\communityforum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\resources repo\\cresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\resources repo\\cresource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\models\\resources repo\\resourceengagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|solutionrelative:unganaconnect\\models\\resources repo\\resourceengagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6225E9FD-AD92-45EB-AB61-7E736C02B1C0}|UnganaConnect\\UnganaConnect.csproj|c:\\users\\takas\\onedrive\\desktop\\unganaconnect\u0027\\backend\\unganaconnect\\controllers\\course\\modulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,100 +181,124 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 20,
               "Title": "BlobServices.cs",
               "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\BlobServices.cs",
               "RelativeDocumentMoniker": "UnganaConnect\\Service\\BlobServices.cs",
               "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\BlobServices.cs",
               "RelativeToolTip": "UnganaConnect\\Service\\BlobServices.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-05T09:27:56.109Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ResourceController.cs",
-              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
-              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
-              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
-              "RelativeToolTip": "UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T23:33:24.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Auth\\AuthController.cs",
-              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Auth\\AuthController.cs",
-              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Auth\\AuthController.cs",
-              "RelativeToolTip": "UnganaConnect\\Controllers\\Auth\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T10:49:04.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AgIAAP4UAAAAAAAAAADwvxEVAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-10-05T10:46:27.896Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ResourceEngagement.cs",
-              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
-              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
-              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
-              "RelativeToolTip": "UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T09:46:10.19Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CResource.cs",
-              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\CResource.cs",
-              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Resources Repo\\CResource.cs",
-              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\CResource.cs",
-              "RelativeToolTip": "UnganaConnect\\Models\\Resources Repo\\CResource.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T09:27:05.941Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Certificates.cshtml",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Views\\Learning\\Certificates.cshtml",
+              "RelativeDocumentMoniker": "UnganaConnect\\Views\\Learning\\Certificates.cshtml",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Views\\Learning\\Certificates.cshtml",
+              "RelativeToolTip": "UnganaConnect\\Views\\Learning\\Certificates.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T16:50:02.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LearningUiController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\LearningUiController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\LearningUiController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\LearningUiController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\LearningUiController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAkwHcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T16:46:52.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CourseUiController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\CourseUiController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\CourseUiController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\CourseUiController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\CourseUiController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACAAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T16:36:36.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CertificateController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\CertificateController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Course\\CertificateController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\CertificateController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Course\\CertificateController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:18:35.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Auth\\AuthController.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAAALQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T10:49:04.849Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAP8UAAAAAAAAAAAqwBEVAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-10-05T10:46:27.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "CourseController.cs",
               "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\CourseController.cs",
               "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Course\\CourseController.cs",
               "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\CourseController.cs",
               "RelativeToolTip": "UnganaConnect\\Controllers\\Course\\CourseController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-25T09:06:32.268Z",
               "EditorCaption": ""
@@ -158,67 +306,429 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": ".env",
-              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\.env",
-              "RelativeDocumentMoniker": "UnganaConnect\\.env",
-              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\.env",
-              "RelativeToolTip": "UnganaConnect\\.env",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-05T09:27:38.755Z",
+              "Title": "EnrollmentController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\EnrollmentController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Course\\EnrollmentController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\EnrollmentController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Course\\EnrollmentController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAACUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T13:42:15.307Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "API_TESTS.http",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\API_TESTS.http",
+              "RelativeDocumentMoniker": "UnganaConnect\\API_TESTS.http",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\API_TESTS.http",
+              "RelativeToolTip": "UnganaConnect\\API_TESTS.http",
+              "ViewState": "AgIAACEBAAAAAAAAAAAAAKIBAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-10-12T22:58:19.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "API_TEST_REPORT.md",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\API_TEST_REPORT.md",
+              "RelativeDocumentMoniker": "UnganaConnect\\API_TEST_REPORT.md",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\API_TEST_REPORT.md",
+              "RelativeToolTip": "UnganaConnect\\API_TEST_REPORT.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-10-13T14:30:59.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "API_DOCUMENTATION.md",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\API_DOCUMENTATION.md",
+              "RelativeDocumentMoniker": "UnganaConnect\\API_DOCUMENTATION.md",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\API_DOCUMENTATION.md",
+              "RelativeToolTip": "UnganaConnect\\API_DOCUMENTATION.md",
+              "ViewState": "AgIAABUCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-10-13T14:30:13.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Program.cs",
               "RelativeDocumentMoniker": "UnganaConnect\\Program.cs",
               "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Program.cs",
               "RelativeToolTip": "UnganaConnect\\Program.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABUAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-05T09:27:43.796Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Course.cs",
-              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
-              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
-              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
-              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T09:26:52.779Z",
+              "DocumentIndex": 14,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\.env",
+              "RelativeDocumentMoniker": "UnganaConnect\\.env",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\.env",
+              "RelativeToolTip": "UnganaConnect\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-05T09:27:38.755Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ADMIN_CREDENTIALS.md",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\ADMIN_CREDENTIALS.md",
+              "RelativeDocumentMoniker": "UnganaConnect\\ADMIN_CREDENTIALS.md",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\ADMIN_CREDENTIALS.md",
+              "RelativeToolTip": "UnganaConnect\\ADMIN_CREDENTIALS.md",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAMYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-10-12T19:52:52.581Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\appsettings.json",
+              "RelativeDocumentMoniker": "UnganaConnect\\appsettings.json",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\appsettings.json",
+              "RelativeToolTip": "UnganaConnect\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-09T06:42:49.056Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "UnganaConnect\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Properties\\launchSettings.json",
+              "RelativeToolTip": "UnganaConnect\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-12T22:20:56.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Module.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Module.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Module.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Module.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Module.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T07:07:59.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UnganaConnect",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\UnganaConnect.csproj",
+              "RelativeDocumentMoniker": "UnganaConnect\\UnganaConnect.csproj",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\UnganaConnect.csproj",
+              "RelativeToolTip": "UnganaConnect\\UnganaConnect.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-12T22:20:48.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "GlobalExceptionMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Middleware\\GlobalExceptionMiddleware.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Middleware\\GlobalExceptionMiddleware.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Middleware\\GlobalExceptionMiddleware.cs",
+              "RelativeToolTip": "UnganaConnect\\Middleware\\GlobalExceptionMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:14:40.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ResourceController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Resources\\ResourceController.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAhwGYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T23:33:24.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "20251012195834_InitalCreate.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Migrations\\20251012195834_InitalCreate.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Migrations\\20251012195834_InitalCreate.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Migrations\\20251012195834_InitalCreate.cs",
+              "RelativeToolTip": "UnganaConnect\\Migrations\\20251012195834_InitalCreate.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:58:35.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIMAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:22:44.993Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Users\\Admin.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Users\\Admin.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Users\\Admin.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Users\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:42:46.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AdminSeederService.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\AdminSeederService.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Service\\AdminSeederService.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\AdminSeederService.cs",
+              "RelativeToolTip": "UnganaConnect\\Service\\AdminSeederService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:52:57.321Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Profile.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Users\\Profile.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Users\\Profile.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Users\\Profile.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Users\\Profile.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T19:43:02.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "CertificateService.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\CertificateService.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Service\\CertificateService.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\CertificateService.cs",
+              "RelativeToolTip": "UnganaConnect\\Service\\CertificateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T09:45:28.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "Certificate.cs",
               "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
               "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
               "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
               "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Certificate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T09:26:37.941Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T09:26:37.941Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 28,
+              "Title": "Enrollment.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Enrollment.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA0wBIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T06:45:22.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Course.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Course.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAEBUwBYAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T09:26:52.779Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Event Management\\Event.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Event Management\\Event.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Event Management\\Event.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Event Management\\Event.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBQwBYAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T10:06:37.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "UnganaConnectDBcontext.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "RelativeToolTip": "UnganaConnect\\Data\\UnganaConnectDBcontext.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAIBJwBsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T08:17:24.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "QuizController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\QuizController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Course\\QuizController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\QuizController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Course\\QuizController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T07:29:18.34Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "UnganaConnect.http",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\UnganaConnect.http",
+              "RelativeDocumentMoniker": "UnganaConnect\\UnganaConnect.http",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\UnganaConnect.http",
+              "RelativeToolTip": "UnganaConnect\\UnganaConnect.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-10-10T07:15:57.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "EventController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Events\\EventController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Events\\EventController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Events\\EventController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Events\\EventController.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAMBUwLgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T06:57:51.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Quiz.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Training \u0026 Learning\\Quiz.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T06:45:27.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "FileServices.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\FileServices.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Service\\FileServices.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Service\\FileServices.cs",
+              "RelativeToolTip": "UnganaConnect\\Service\\FileServices.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAIBQwBIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T09:45:31.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ForumController.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Forum\\ForumController.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Forum\\ForumController.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Forum\\ForumController.cs",
+              "RelativeToolTip": "UnganaConnect\\Controllers\\Forum\\ForumController.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAABRwFkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T08:38:10.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "CResource.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Resources Repo\\CResource.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T09:27:05.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "CommunityForum.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Forum\\CommunityForum.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Forum\\CommunityForum.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Forum\\CommunityForum.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Forum\\CommunityForum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T07:49:54.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Users\\User.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Users\\User.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Users\\User.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Users\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T08:32:35.578Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ResourceEngagement.cs",
+              "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "RelativeDocumentMoniker": "UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "RelativeToolTip": "UnganaConnect\\Models\\Resources Repo\\ResourceEngagement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T09:46:10.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
               "Title": "ModuleController.cs",
               "DocumentMoniker": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\ModuleController.cs",
               "RelativeDocumentMoniker": "UnganaConnect\\Controllers\\Course\\ModuleController.cs",
               "ToolTip": "C:\\Users\\takas\\OneDrive\\Desktop\\UnganaConnect\u0027\\Backend\\UnganaConnect\\Controllers\\Course\\ModuleController.cs",
               "RelativeToolTip": "UnganaConnect\\Controllers\\Course\\ModuleController.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAMBdwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T09:06:55.121Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-25T09:06:55.121Z"
             }
           ]
         }

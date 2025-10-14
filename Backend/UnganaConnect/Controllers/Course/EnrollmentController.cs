@@ -8,7 +8,7 @@ namespace UnganaConnect.Controllers.Course
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EnrollmentController : Controller
+    public class EnrollmentController : ControllerBase
     {
         private readonly UnganaConnectDbcontext _context;
 
@@ -18,57 +18,70 @@ namespace UnganaConnect.Controllers.Course
         }
 
         
-            // Enroll in a course
-            [Authorize]
-            [HttpPost("{courseId}/enroll/{userId}")]
-            public async Task<IActionResult> EnrollUser(int courseId, string userId)
+        // Enroll in a course
+        [Authorize]
+        [HttpPost("{courseId}/enroll")]
+        public async Task<IActionResult> EnrollUser(int courseId)
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized("User not authenticated.");
+
+            // check if already enrolled
+            var exists = await _context.Enrollments
+                .FirstOrDefaultAsync(e => e.CourseId == courseId && e.UserId == userId);
+
+            if (exists != null)
+                return BadRequest("User already enrolled in this course.");
+
+            var enrollment = new Enrollment
             {
-                // check if already enrolled
-                var exists = await _context.Enrollments
-                    .FirstOrDefaultAsync(e => e.CourseId == courseId && e.UserId == userId);
+                UserId = userId,
+                CourseId = courseId,
+                EnrolledAt = DateTime.UtcNow
+            };
+            _context.Enrollments.Add(enrollment);
+            await _context.SaveChangesAsync();
 
-                if (exists != null)
-                    return BadRequest("User already enrolled in this course.");
+            return Ok(enrollment);
+        }
 
-                var enrollment = new Enrollment
-                {
-                    UserId = userId,
-                    CourseId = courseId
-                };
+        // Get user's enrolled courses
+        [Authorize]
+        [HttpGet("my-enrollments")]
+        public async Task<IActionResult> GetUserEnrollments()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized("User not authenticated.");
 
-                _context.Enrollments.Add(enrollment);
-                await _context.SaveChangesAsync();
+            var enrollments = await _context.Enrollments
+                .Where(e => e.UserId == userId)
+                .Include(e => e.Course)
+                .ToListAsync();
 
-                return Ok(enrollment);
-            }
+            return Ok(enrollments);
+        }
 
-            // Get user’s enrolled courses
-            [Authorize]
-            [HttpGet("user/{userId}")]
-            public async Task<IActionResult> GetUserEnrollments(string userId)
-            {
-                var enrollments = await _context.Enrollments
-                    .Where(e => e.UserId == userId)
-                    .Include(e => e.Course)
-                    .ToListAsync();
+        // Drop/unenroll from course
+        [Authorize]
+        [HttpDelete("{courseId}/unenroll")]
+        public async Task<IActionResult> UnenrollUser(int courseId)
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized("User not authenticated.");
 
-                return Ok(enrollments);
-            }
+            var enrollment = await _context.Enrollments
+                .FirstOrDefaultAsync(e => e.CourseId == courseId && e.UserId == userId);
 
-            // Drop/unenroll from course
-            [HttpDelete("{courseId}/unenroll/{userId}")]
-            public async Task<IActionResult> UnenrollUser(int courseId, string userId)
-            {
-                var enrollment = await _context.Enrollments
-                    .FirstOrDefaultAsync(e => e.CourseId == courseId && e.UserId == userId);
+            if (enrollment == null)
+                return NotFound("Enrollment not found.");
 
-                if (enrollment == null)
-                    return NotFound("Enrollment not found.");
+            _context.Enrollments.Remove(enrollment);
+            await _context.SaveChangesAsync();
 
-                _context.Enrollments.Remove(enrollment);
-                await _context.SaveChangesAsync();
-
-                return Ok("User unenrolled successfully.");
-            }
+            return Ok("User unenrolled successfully.");
+        }
         }
     }

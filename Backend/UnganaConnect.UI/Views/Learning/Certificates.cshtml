@@ -1,0 +1,277 @@
+@model List<UnganaConnect.UI.Models.Certificate>
+@{
+    ViewData["Title"] = "My Certificates";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-certificate me-2"></i>My Certificates</h1>
+    <a asp-action="MyCourses" class="btn btn-outline-primary">
+        <i class="fas fa-graduation-cap me-2"></i>Back to My Courses
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var certificate in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm certificate-card">
+                    <div class="card-header bg-gradient-primary text-white text-center">
+                        <i class="fas fa-certificate fa-3x mb-2"></i>
+                        <h5 class="card-title mb-0">Certificate of Completion</h5>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center mb-3">
+                            <h6 class="text-primary">@certificate.Course?.Title</h6>
+                            <p class="text-muted small">@certificate.Course?.Category</p>
+                        </div>
+                        
+                        <div class="certificate-details mb-3">
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <small class="text-muted d-block">Issued On</small>
+                                    <strong>@certificate.IssuedOn.ToString("MMM dd, yyyy")</strong>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted d-block">Course ID</small>
+                                    <strong>#@certificate.CourseId</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <div class="d-grid gap-2">
+                                @if (!string.IsNullOrEmpty(certificate.FileUrl))
+                                {
+                                    <a href="@certificate.FileUrl" target="_blank" class="btn btn-success">
+                                        <i class="fas fa-download me-2"></i>Download Certificate
+                                    </a>
+                                }
+                                else
+                                {
+                                    <form asp-action="GenerateCertificate" asp-route-courseId="@certificate.CourseId" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-warning w-100">
+                                            <i class="fas fa-file-pdf me-2"></i>Generate Certificate
+                                        </button>
+                                    </form>
+                                }
+                                
+                                <button type="button" class="btn btn-outline-info btn-sm" 
+                                        onclick="shareCertificate('@certificate.Course?.Title', '@certificate.IssuedOn.ToString("MMM dd, yyyy")')">
+                                    <i class="fas fa-share me-1"></i>Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+    <!-- Certificate Statistics -->
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-trophy fa-2x text-warning mb-2"></i>
+                    <h4 class="text-primary">@Model.Count</h4>
+                    <p class="text-muted mb-0">Total Certificates</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-calendar fa-2x text-info mb-2"></i>
+                    <h4 class="text-primary">@Model.Count(c => c.IssuedOn.Year == DateTime.Now.Year)</h4>
+                    <p class="text-muted mb-0">This Year</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-star fa-2x text-success mb-2"></i>
+                    <h4 class="text-primary">@Model.Count(c => c.IssuedOn >= DateTime.Now.AddMonths(-1))</h4>
+                    <p class="text-muted mb-0">Last Month</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center py-5">
+        <i class="fas fa-certificate fa-5x text-muted mb-4"></i>
+        <h3 class="text-muted">No Certificates Yet</h3>
+        <p class="text-muted mb-4">Complete courses to earn your first certificate!</p>
+        <a asp-action="MyCourses" class="btn btn-primary btn-lg">
+            <i class="fas fa-graduation-cap me-2"></i>View My Courses
+        </a>
+    </div>
+}
+
+<!-- Certificate Preview Modal -->
+<div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="certificateModalLabel">Certificate Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="certificate-preview">
+                    <div class="certificate-border">
+                        <div class="certificate-header">
+                            <i class="fas fa-certificate fa-4x text-warning mb-3"></i>
+                            <h2 class="text-primary">Certificate of Completion</h2>
+                            <p class="text-muted">This is to certify that</p>
+                        </div>
+                        
+                        <div class="certificate-body">
+                            <h3 class="text-dark mb-3" id="previewCourseTitle">Course Title</h3>
+                            <p class="text-muted">has successfully completed the course</p>
+                            <p class="text-muted">on <span id="previewIssueDate">Issue Date</span></p>
+                        </div>
+                        
+                        <div class="certificate-footer">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="signature-line"></div>
+                                    <p class="text-muted small">Ungana-Afrika</p>
+                                </div>
+                                <div class="col-6">
+                                    <div class="signature-line"></div>
+                                    <p class="text-muted small">Date</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="downloadCertificate()">
+                    <i class="fas fa-download me-2"></i>Download
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to certificate cards
+            const cards = document.querySelectorAll('.certificate-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+        
+        function shareCertificate(courseTitle, issueDate) {
+            const shareText = `I just completed the course "${courseTitle}" and earned a certificate on ${issueDate}! #UnganaConnect #Learning`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Certificate Achievement',
+                    text: shareText,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback to copying to clipboard
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Certificate details copied to clipboard!');
+                });
+            }
+        }
+        
+        function previewCertificate(courseTitle, issueDate) {
+            document.getElementById('previewCourseTitle').textContent = courseTitle;
+            document.getElementById('previewIssueDate').textContent = issueDate;
+            
+            const modal = new bootstrap.Modal(document.getElementById('certificateModal'));
+            modal.show();
+        }
+        
+        function downloadCertificate() {
+            // This would trigger the actual certificate download
+            alert('Certificate download would start here');
+        }
+    </script>
+    
+    <style>
+        .certificate-card {
+            transition: all 0.3s ease;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+        }
+        
+        .certificate-preview {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+        }
+        
+        .certificate-border {
+            border: 3px solid #ffc107;
+            padding: 2rem;
+            background: white;
+            border-radius: 0.5rem;
+        }
+        
+        .certificate-header {
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .certificate-body {
+            margin: 2rem 0;
+        }
+        
+        .certificate-footer {
+            border-top: 2px solid #dee2e6;
+            padding-top: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #000;
+            width: 100%;
+            height: 1px;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+}

@@ -1,0 +1,454 @@
+### UnganaConnect API Test Suite
+### Base URL: https://localhost:7000/api
+
+### Variables
+@baseUrl = https://localhost:7000/api
+@adminToken = 
+@memberToken = 
+
+### ===========================================
+### 1. AUTHENTICATION ENDPOINTS
+### ===========================================
+
+### Test 1.1: Register a new user
+POST {{baseUrl}}/Auth/register
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "passwordHash": "TestUser123!",
+  "firstName": "Test",
+  "lastName": "User"
+}
+
+### Test 1.2: Login as Admin
+POST {{baseUrl}}/Auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@ungana-afrika.org",
+  "password": "Admin123!"
+}
+
+### Test 1.3: Login as Member
+POST {{baseUrl}}/Auth/login
+Content-Type: application/json
+
+{
+  "email": "member@example.com",
+  "password": "Member123!"
+}
+
+### Test 1.4: Get all users (Admin only)
+GET {{baseUrl}}/Auth/users
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 2. COURSE MANAGEMENT ENDPOINTS
+### ===========================================
+
+### Test 2.1: Get all courses
+GET {{baseUrl}}/Course/get_course
+
+### Test 2.2: Create a new course (Admin only)
+POST {{baseUrl}}/Course/create_course
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Introduction to Digital Literacy",
+  "description": "Learn the basics of digital literacy for CSOs",
+  "category": "Digital Skills"
+}
+
+### Test 2.3: Update course (Admin only)
+PUT {{baseUrl}}/Course/edit_course/1
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Updated Digital Literacy Course",
+  "description": "Updated description for digital literacy course",
+  "category": "Digital Skills"
+}
+
+### Test 2.4: Delete course (Admin only)
+DELETE {{baseUrl}}/Course/delete_course/1
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 3. MODULE MANAGEMENT ENDPOINTS
+### ===========================================
+
+### Test 3.1: Get modules by course
+GET {{baseUrl}}/Module/course/1
+
+### Test 3.2: Get single module
+GET {{baseUrl}}/Module/1
+
+### Test 3.3: Create module (Admin only)
+POST {{baseUrl}}/Module
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Module 1: Introduction to Digital Tools",
+  "content": "This module covers the basics of digital tools for CSOs",
+  "courseId": 1,
+  "videoUrl": "https://example.com/video1.mp4",
+  "fileUrl": "https://example.com/guide1.pdf"
+}
+
+### Test 3.4: Update module (Admin only)
+PUT {{baseUrl}}/Module/1
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Updated Module 1: Digital Tools",
+  "content": "Updated content for digital tools module",
+  "videoUrl": "https://example.com/updated-video1.mp4"
+}
+
+### Test 3.5: Delete module (Admin only)
+DELETE {{baseUrl}}/Module/1
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 4. ENROLLMENT ENDPOINTS
+### ===========================================
+
+### Test 4.1: Enroll in course
+POST {{baseUrl}}/Enrollment/1/enroll
+Authorization: Bearer {{memberToken}}
+
+### Test 4.2: Get user's enrollments
+GET {{baseUrl}}/Enrollment/my-enrollments
+Authorization: Bearer {{memberToken}}
+
+### Test 4.3: Unenroll from course
+DELETE {{baseUrl}}/Enrollment/1/unenroll
+Authorization: Bearer {{memberToken}}
+
+### ===========================================
+### 5. PROGRESS TRACKING ENDPOINTS
+### ===========================================
+
+### Test 5.1: Get course progress
+GET {{baseUrl}}/Progress/course/1
+Authorization: Bearer {{memberToken}}
+
+### Test 5.2: Get user progress overview
+GET {{baseUrl}}/Progress/overview
+Authorization: Bearer {{memberToken}}
+
+### Test 5.3: Mark module as completed
+POST {{baseUrl}}/Progress/complete/1
+Authorization: Bearer {{memberToken}}
+
+### Test 5.4: Mark module as incomplete
+POST {{baseUrl}}/Progress/uncomplete/1
+Authorization: Bearer {{memberToken}}
+
+### ===========================================
+### 6. QUIZ ENDPOINTS
+### ===========================================
+
+### Test 6.1: Get quiz by module
+GET {{baseUrl}}/Quiz/module/1
+
+### Test 6.2: Create quiz (Admin only)
+POST {{baseUrl}}/Quiz
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Digital Literacy Quiz",
+  "moduleId": 1,
+  "questions": [
+    {
+      "text": "What is digital literacy?",
+      "options": [
+        {"text": "Ability to read digital text"},
+        {"text": "Understanding and using digital tools effectively"},
+        {"text": "Writing digital content"},
+        {"text": "Managing digital files"}
+      ],
+      "correctOptionId": 2
+    }
+  ]
+}
+
+### Test 6.3: Submit quiz
+POST {{baseUrl}}/Quiz/submit
+Authorization: Bearer {{memberToken}}
+Content-Type: application/json
+
+{
+  "moduleId": 1,
+  "userId": "1",
+  "answers": {
+    "1": 2
+  }
+}
+
+### ===========================================
+### 7. EVENT MANAGEMENT ENDPOINTS
+### ===========================================
+
+### Test 7.1: Get all events
+GET {{baseUrl}}/Event
+
+### Test 7.2: Get events with filters
+GET {{baseUrl}}/Event?location=Nairobi&startDate=2024-01-01
+
+### Test 7.3: Get single event
+GET {{baseUrl}}/Event/1
+
+### Test 7.4: Create event (Admin only)
+POST {{baseUrl}}/Event
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Digital Skills Workshop",
+  "description": "Learn essential digital skills for CSOs",
+  "startDate": "2024-02-01T09:00:00Z",
+  "endDate": "2024-02-01T17:00:00Z",
+  "location": "Nairobi, Kenya"
+}
+
+### Test 7.5: Update event (Admin only)
+PUT {{baseUrl}}/Event/1
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "title": "Updated Digital Skills Workshop",
+  "description": "Updated workshop description",
+  "startDate": "2024-02-01T09:00:00Z",
+  "endDate": "2024-02-01T17:00:00Z",
+  "location": "Nairobi, Kenya"
+}
+
+### Test 7.6: Register for event
+POST {{baseUrl}}/Event/1/register
+Authorization: Bearer {{memberToken}}
+
+### Test 7.7: Get user's registered events
+GET {{baseUrl}}/Event/my-registrations
+Authorization: Bearer {{memberToken}}
+
+### Test 7.8: Unregister from event
+DELETE {{baseUrl}}/Event/1/unregister
+Authorization: Bearer {{memberToken}}
+
+### Test 7.9: Get event registrations (Admin only)
+GET {{baseUrl}}/Event/1/registrations
+Authorization: Bearer {{adminToken}}
+
+### Test 7.10: Delete event (Admin only)
+DELETE {{baseUrl}}/Event/1
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 8. FORUM ENDPOINTS
+### ===========================================
+
+### Test 8.1: Get all threads
+GET {{baseUrl}}/Forum/threads
+
+### Test 8.2: Get single thread
+GET {{baseUrl}}/Forum/threads/1
+
+### Test 8.3: Create thread
+POST {{baseUrl}}/Forum/threads
+Authorization: Bearer {{memberToken}}
+Content-Type: application/json
+
+{
+  "title": "Digital Tools Discussion",
+  "content": "Let's discuss the best digital tools for CSOs"
+}
+
+### Test 8.4: Update thread
+PUT {{baseUrl}}/Forum/threads/1
+Authorization: Bearer {{memberToken}}
+Content-Type: application/json
+
+{
+  "title": "Updated Digital Tools Discussion",
+  "content": "Updated discussion about digital tools for CSOs"
+}
+
+### Test 8.5: Add reply to thread
+POST {{baseUrl}}/Forum/threads/1/reply
+Authorization: Bearer {{memberToken}}
+Content-Type: application/json
+
+{
+  "content": "I think Google Workspace is great for collaboration"
+}
+
+### Test 8.6: Update reply
+PUT {{baseUrl}}/Forum/replies/1
+Authorization: Bearer {{memberToken}}
+Content-Type: application/json
+
+{
+  "content": "Updated reply about Google Workspace"
+}
+
+### Test 8.7: Upvote thread
+POST {{baseUrl}}/Forum/threads/1/upvote
+Authorization: Bearer {{memberToken}}
+
+### Test 8.8: Upvote reply
+POST {{baseUrl}}/Forum/replies/1/upvote
+Authorization: Bearer {{memberToken}}
+
+### Test 8.9: Get pending threads (Admin only)
+GET {{baseUrl}}/Forum/admin/pending
+Authorization: Bearer {{adminToken}}
+
+### Test 8.10: Approve thread (Admin only)
+PUT {{baseUrl}}/Forum/admin/approve/1
+Authorization: Bearer {{adminToken}}
+
+### Test 8.11: Lock thread (Admin only)
+PUT {{baseUrl}}/Forum/admin/lock/1
+Authorization: Bearer {{adminToken}}
+
+### Test 8.12: Delete thread (Admin only)
+DELETE {{baseUrl}}/Forum/threads/1
+Authorization: Bearer {{adminToken}}
+
+### Test 8.13: Delete reply (Admin only)
+DELETE {{baseUrl}}/Forum/replies/1
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 9. RESOURCE MANAGEMENT ENDPOINTS
+### ===========================================
+
+### Test 9.1: Create course folder (Admin only)
+POST {{baseUrl}}/Resource/create-folder/Digital%20Literacy
+Authorization: Bearer {{adminToken}}
+
+### Test 9.2: Get course resources
+GET {{baseUrl}}/Resource/1
+
+### Test 9.3: Upload resource (Admin only) - Note: This requires a file upload
+POST {{baseUrl}}/Resource/upload/1
+Authorization: Bearer {{adminToken}}
+Content-Type: multipart/form-data
+
+### Test 9.4: Download resource
+GET {{baseUrl}}/Resource/1/download/example.pdf
+
+### Test 9.5: Delete resource (Admin only)
+DELETE {{baseUrl}}/Resource/1/delete/example.pdf
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 10. CERTIFICATE ENDPOINTS
+### ===========================================
+
+### Test 10.1: Get user's certificates
+GET {{baseUrl}}/Certificate/my-certificates
+Authorization: Bearer {{memberToken}}
+
+### Test 10.2: Generate certificate
+POST {{baseUrl}}/Certificate/generate/1
+Authorization: Bearer {{memberToken}}
+
+### Test 10.3: Download certificate
+GET {{baseUrl}}/Certificate/download/1
+Authorization: Bearer {{memberToken}}
+
+### Test 10.4: Get all certificates (Admin only)
+GET {{baseUrl}}/Certificate/all
+Authorization: Bearer {{adminToken}}
+
+### Test 10.5: Get certificate statistics (Admin only)
+GET {{baseUrl}}/Certificate/statistics
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 11. ADMIN DASHBOARD ENDPOINTS
+### ===========================================
+
+### Test 11.1: Get dashboard statistics
+GET {{baseUrl}}/Admin/dashboard
+Authorization: Bearer {{adminToken}}
+
+### Test 11.2: Get all users (paginated)
+GET {{baseUrl}}/Admin/users?page=1&pageSize=10
+Authorization: Bearer {{adminToken}}
+
+### Test 11.3: Update user role
+PUT {{baseUrl}}/Admin/users/1/role
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "role": "Admin"
+}
+
+### Test 11.4: Get course analytics
+GET {{baseUrl}}/Admin/analytics/courses
+Authorization: Bearer {{adminToken}}
+
+### Test 11.5: Get event analytics
+GET {{baseUrl}}/Admin/analytics/events
+Authorization: Bearer {{adminToken}}
+
+### Test 11.6: Get forum analytics
+GET {{baseUrl}}/Admin/analytics/forum
+Authorization: Bearer {{adminToken}}
+
+### Test 11.7: Get pending forum threads
+GET {{baseUrl}}/Admin/forum/pending
+Authorization: Bearer {{adminToken}}
+
+### Test 11.8: Approve forum thread
+PUT {{baseUrl}}/Admin/forum/approve/1
+Authorization: Bearer {{adminToken}}
+
+### Test 11.9: Delete user (Admin only)
+DELETE {{baseUrl}}/Admin/users/1
+Authorization: Bearer {{adminToken}}
+
+### ===========================================
+### 12. ERROR HANDLING TESTS
+### ===========================================
+
+### Test 12.1: Test unauthorized access
+GET {{baseUrl}}/Admin/dashboard
+
+### Test 12.2: Test invalid endpoint
+GET {{baseUrl}}/InvalidEndpoint
+
+### Test 12.3: Test invalid data
+POST {{baseUrl}}/Auth/register
+Content-Type: application/json
+
+{
+  "email": "invalid-email",
+  "passwordHash": "",
+  "firstName": "",
+  "lastName": ""
+}
+
+### Test 12.4: Test non-existent resource
+GET {{baseUrl}}/Course/get_course/999
+
+### ===========================================
+### 13. CORS TESTS
+### ===========================================
+
+### Test 13.1: Test CORS preflight
+OPTIONS {{baseUrl}}/Course/get_course
+Access-Control-Request-Method: GET
+Access-Control-Request-Headers: Content-Type
+Origin: http://localhost:3000

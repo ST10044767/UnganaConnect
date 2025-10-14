@@ -1,0 +1,169 @@
+@model UnganaConnect.UI.Models.Module
+@{
+    ViewData["Title"] = Model.Title;
+    var moduleProgress = ViewBag.ModuleProgress as UnganaConnect.UI.Models.UserProgress;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1><i class="fas fa-play-circle me-2"></i>@Model.Title</h1>
+        <p class="text-muted mb-0">@Model.Course?.Title</p>
+    </div>
+    <a asp-action="Course" asp-route-courseId="@Model.CourseId" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Course
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Module Progress -->
+@if (moduleProgress != null && moduleProgress.IsCompleted)
+{
+    <div class="alert alert-success" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        <strong>Module Completed!</strong> You finished this module on @moduleProgress.CompletedAt?.ToString("MMM dd, yyyy 'at' h:mm tt").
+    </div>
+}
+
+<!-- Module Content -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Module Content</h5>
+        <div class="module-content">
+            @Html.Raw(Model.Content.Replace("\n", "<br>"))
+        </div>
+    </div>
+</div>
+
+<!-- Video Section -->
+@if (!string.IsNullOrEmpty(Model.VideoUrl))
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-video me-2"></i>Video Content
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="ratio ratio-16x9">
+                <iframe src="@Model.VideoUrl" 
+                        title="@Model.Title Video" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Resources Section -->
+@if (!string.IsNullOrEmpty(Model.FileUrl))
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-file me-2"></i>Resources
+            </h5>
+        </div>
+        <div class="card-body">
+            <a href="@Model.FileUrl" target="_blank" class="btn btn-outline-info">
+                <i class="fas fa-download me-2"></i>Download Resources
+            </a>
+        </div>
+    </div>
+}
+
+<!-- Quizzes Section -->
+@if (Model.Quizzes != null && Model.Quizzes.Any())
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-warning text-dark">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-question-circle me-2"></i>Module Quizzes
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var quiz in Model.Quizzes)
+                {
+                    <div class="col-md-6 mb-3">
+                        <div class="card border-warning">
+                            <div class="card-body">
+                                <h6 class="card-title">@quiz.Title</h6>
+                                <p class="card-text text-muted">@quiz.Description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>@quiz.TimeLimit min
+                                        <span class="ms-2">
+                                            <i class="fas fa-percentage me-1"></i>@quiz.PassingScore% to pass
+                                        </span>
+                                    </small>
+                                    <a asp-action="Quiz" asp-route-quizId="@quiz.Id" 
+                                       class="btn btn-warning btn-sm">
+                                        <i class="fas fa-play me-1"></i>Start Quiz
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Module Actions -->
+<div class="card shadow-sm">
+    <div class="card-body text-center">
+        @if (moduleProgress == null || !moduleProgress.IsCompleted)
+        {
+            <form asp-action="CompleteModule" asp-route-moduleId="@Model.Id" method="post" class="d-inline">
+                <button type="submit" class="btn btn-success btn-lg" 
+                        onclick="return confirm('Mark this module as complete?')">
+                    <i class="fas fa-check me-2"></i>Mark Module as Complete
+                </button>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-info d-inline-block">
+                <i class="fas fa-info-circle me-2"></i>
+                This module has been completed. Great job!
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling for better UX
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

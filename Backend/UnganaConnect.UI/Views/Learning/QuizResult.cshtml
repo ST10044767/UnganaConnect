@@ -1,0 +1,234 @@
+@model UnganaConnect.UI.Models.QuizResultViewModel
+@{
+    ViewData["Title"] = "Quiz Results";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-chart-line me-2"></i>Quiz Results</h1>
+    <a asp-action="MyCourses" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to My Courses
+    </a>
+</div>
+
+<!-- Results Summary Card -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="result-stat">
+                    <h2 class="text-primary">@Model.Score%</h2>
+                    <p class="text-muted mb-0">Final Score</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="result-stat">
+                    <h2 class="text-info">@Model.CorrectAnswers</h2>
+                    <p class="text-muted mb-0">Correct Answers</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="result-stat">
+                    <h2 class="text-warning">@Model.TotalQuestions</h2>
+                    <p class="text-muted mb-0">Total Questions</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="result-stat">
+                    <h2 class="text-success">@Model.TimeSpent min</h2>
+                    <p class="text-muted mb-0">Time Spent</p>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <div class="result-status">
+            @if (Model.IsPassed)
+            {
+                <div class="alert alert-success d-inline-block">
+                    <i class="fas fa-trophy me-2"></i>
+                    <strong>Congratulations!</strong> You passed the quiz!
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger d-inline-block">
+                    <i class="fas fa-times-circle me-2"></i>
+                    <strong>Not Passed</strong> - You need to score higher to pass this quiz.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Score Breakdown</h5>
+        <div class="progress mb-3" style="height: 30px;">
+            <div class="progress-bar @(Model.IsPassed ? "bg-success" : "bg-danger")" 
+                 role="progressbar" 
+                 style="width: @Model.Score%" 
+                 aria-valuenow="@Model.Score" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+                @Model.Score%
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <small class="text-muted">Your Score: @Model.Score%</small>
+            <small class="text-muted">Passing Score: 70%</small>
+        </div>
+    </div>
+</div>
+
+<!-- Answer Review -->
+@if (Model.AnswerResults != null && Model.AnswerResults.Any())
+{
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-list-check me-2"></i>Answer Review
+            </h5>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.AnswerResults.Count; i++)
+            {
+                var answer = Model.AnswerResults[i];
+                <div class="answer-review-item mb-4 p-3 border rounded @(answer.IsCorrect ? "border-success bg-light-success" : "border-danger bg-light-danger")">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Question @(i + 1)</h6>
+                        <span class="badge @(answer.IsCorrect ? "bg-success" : "bg-danger")">
+                            <i class="fas fa-@(answer.IsCorrect ? "check" : "times") me-1"></i>
+                            @(answer.IsCorrect ? "Correct" : "Incorrect")
+                        </span>
+                    </div>
+                    
+                    <p class="question-text mb-3">@answer.QuestionText</p>
+                    
+                    <div class="answer-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Your Answer:</h6>
+                                <p class="@(answer.IsCorrect ? "text-success" : "text-danger")">
+                                    @(answer.SelectedOptionId.HasValue ? "Option " + answer.SelectedOptionId : "No answer selected")
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-muted">Correct Answer:</h6>
+                                <p class="text-success">
+                                    @(answer.CorrectOptionId.HasValue ? "Option " + answer.CorrectOptionId : "N/A")
+                                </p>
+                            </div>
+                        </div>
+                        
+                        @if (!string.IsNullOrEmpty(answer.Explanation))
+                        {
+                            <div class="explanation mt-3">
+                                <h6 class="text-info">
+                                    <i class="fas fa-lightbulb me-1"></i>Explanation:
+                                </h6>
+                                <p class="text-muted">@answer.Explanation</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<!-- Action Buttons -->
+<div class="card shadow-sm mt-4">
+    <div class="card-body text-center">
+        <div class="btn-group" role="group">
+            <a asp-action="MyCourses" class="btn btn-primary">
+                <i class="fas fa-graduation-cap me-2"></i>Continue Learning
+            </a>
+            
+            @if (!Model.IsPassed)
+            {
+                <a asp-action="Quiz" asp-route-quizId="@Model.QuizId" class="btn btn-warning">
+                    <i class="fas fa-redo me-2"></i>Retake Quiz
+                </a>
+            }
+            
+            <a asp-action="Module" asp-route-moduleId="@ViewBag.ModuleId" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Module
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to result stats
+            const stats = document.querySelectorAll('.result-stat h2');
+            stats.forEach((stat, index) => {
+                stat.style.opacity = '0';
+                stat.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    stat.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    stat.style.opacity = '1';
+                    stat.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+            
+            // Add animation to answer review items
+            const answerItems = document.querySelectorAll('.answer-review-item');
+            answerItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 500 + (index * 100));
+            });
+        });
+    </script>
+    
+    <style>
+        .result-stat {
+            padding: 1rem;
+        }
+        
+        .result-stat h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bg-light-success {
+            background-color: #d4edda !important;
+        }
+        
+        .bg-light-danger {
+            background-color: #f8d7da !important;
+        }
+        
+        .answer-review-item {
+            transition: all 0.3s ease;
+        }
+        
+        .answer-review-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .question-text {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            border-left: 4px solid #17a2b8;
+        }
+    </style>
+}

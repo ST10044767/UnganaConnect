@@ -1,0 +1,311 @@
+@model UnganaConnect.UI.Models.Quiz
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1><i class="fas fa-question-circle me-2"></i>@Model.Title</h1>
+        <p class="text-muted mb-0">@Model.Description</p>
+    </div>
+    <a asp-action="Module" asp-route-moduleId="@Model.ModuleId" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Module
+    </a>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Quiz Info Card -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h6 class="text-muted">Time Limit</h6>
+                <h4 class="text-primary" id="timeLimit">@Model.TimeLimit minutes</h4>
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-muted">Questions</h6>
+                <h4 class="text-info">@Model.Questions?.Count</h4>
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-muted">Passing Score</h6>
+                <h4 class="text-success">@Model.PassingScore%</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Form -->
+@if (Model.Questions != null && Model.Questions.Any())
+{
+    <form asp-action="SubmitQuiz" method="post" id="quizForm">
+        <input type="hidden" name="QuizId" value="@Model.Id" />
+        
+        @for (int i = 0; i < Model.Questions.Count; i++)
+        {
+            var question = Model.Questions[i];
+            <div class="card shadow-sm mb-4 question-card" data-question="@i">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">
+                        Question @(i + 1) of @Model.Questions.Count
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="question-text mb-4">@question.QuestionText</h6>
+                    
+                    @if (question.Options != null && question.Options.Any())
+                    {
+                        <div class="options-container">
+                            @for (int j = 0; j < question.Options.Count; j++)
+                            {
+                                var option = question.Options[j];
+                                var optionId = $"option_{i}_{j}";
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="Answers[@i].SelectedOptionId"
+                                           value="@option.Id"
+                                           id="@optionId"
+                                           data-question="@i" />
+                                    <label class="form-check-label w-100" for="@optionId">
+                                        <div class="option-content p-3 border rounded">
+                                            @option.OptionText
+                                        </div>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+
+                    }
+                    
+                    <input type="hidden" name="Answers[@i].QuestionId" value="@question.Id" />
+                </div>
+            </div>
+        }
+        
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="text-muted">
+                        <i class="fas fa-clock me-1"></i>
+                        Time remaining: <span id="timeRemaining">@Model.TimeLimit:00</span>
+                    </div>
+                    <div class="text-muted">
+                        <i class="fas fa-question-circle me-1"></i>
+                        <span id="answeredCount">0</span> of @Model.Questions?.Count answered
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                    <i class="fas fa-paper-plane me-2"></i>Submit Quiz
+                </button>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Make sure to answer all questions before submitting.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <div class="text-center py-5">
+        <i class="fas fa-question-circle fa-5x text-muted mb-4"></i>
+        <h3 class="text-muted">No Questions Available</h3>
+        <p class="text-muted">This quiz doesn't have any questions yet.</p>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizForm = document.getElementById('quizForm');
+            const timeLimit = @Model.TimeLimit; // in minutes
+            const timeRemainingElement = document.getElementById('timeRemaining');
+            const answeredCountElement = document.getElementById('answeredCount');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            let timeRemaining = timeLimit * 60; // convert to seconds
+            let answeredCount = 0;
+            let timerInterval;
+            
+            // Initialize quiz
+            initializeQuiz();
+            
+            function initializeQuiz() {
+                updateAnsweredCount();
+                startTimer();
+                addQuestionNavigation();
+                addOptionClickHandlers();
+            }
+            
+            function startTimer() {
+                timerInterval = setInterval(function() {
+                    timeRemaining--;
+                    updateTimeDisplay();
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        autoSubmitQuiz();
+                    }
+                }, 1000);
+            }
+            
+            function updateTimeDisplay() {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timeRemainingElement.textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Change color when time is running low
+                if (timeRemaining <= 60) {
+                    timeRemainingElement.style.color = '#dc3545';
+                } else if (timeRemaining <= 300) {
+                    timeRemainingElement.style.color = '#ffc107';
+                }
+            }
+            
+            function updateAnsweredCount() {
+                const answeredQuestions = document.querySelectorAll('input[type="radio"]:checked');
+                answeredCount = answeredQuestions.length;
+                answeredCountElement.textContent = answeredCount;
+                
+                // Update submit button state
+                if (answeredCount === @Model.Questions?.Count) {
+                    submitBtn.classList.remove('btn-primary');
+                    submitBtn.classList.add('btn-success');
+                    submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Ready to Submit';
+                } else {
+                    submitBtn.classList.remove('btn-success');
+                    submitBtn.classList.add('btn-primary');
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Submit Quiz';
+                }
+            }
+            
+            function addOptionClickHandlers() {
+                const options = document.querySelectorAll('input[type="radio"]');
+                options.forEach(option => {
+                    option.addEventListener('change', function() {
+                        updateAnsweredCount();
+                        highlightAnsweredQuestion(this);
+                    });
+                });
+            }
+            
+            function highlightAnsweredQuestion(selectedOption) {
+                const questionCard = selectedOption.closest('.question-card');
+                const questionNumber = selectedOption.dataset.question;
+                
+                // Remove highlight from all questions
+                document.querySelectorAll('.question-card').forEach(card => {
+                    card.classList.remove('border-success');
+                });
+                
+                // Highlight current question
+                questionCard.classList.add('border-success');
+            }
+            
+            function addQuestionNavigation() {
+                // Add question navigation buttons
+                const questions = document.querySelectorAll('.question-card');
+                questions.forEach((question, index) => {
+                    const cardBody = question.querySelector('.card-body');
+                    const navDiv = document.createElement('div');
+                    navDiv.className = 'question-nav mt-3';
+                    navDiv.innerHTML = `
+                        <div class="btn-group" role="group">
+                            ${index > 0 ? `<button type="button" class="btn btn-outline-secondary btn-sm" onclick="scrollToQuestion(${index - 1})">
+                                <i class="fas fa-chevron-up me-1"></i>Previous
+                            </button>` : ''}
+                            ${index < questions.length - 1 ? `<button type="button" class="btn btn-outline-secondary btn-sm" onclick="scrollToQuestion(${index + 1})">
+                                Next <i class="fas fa-chevron-down ms-1"></i>
+                            </button>` : ''}
+                        </div>
+                    `;
+                    cardBody.appendChild(navDiv);
+                });
+            }
+            
+            function scrollToQuestion(questionIndex) {
+                const question = document.querySelector(`[data-question="${questionIndex}"]`);
+                if (question) {
+                    question.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            
+            function autoSubmitQuiz() {
+                if (confirm('Time is up! Do you want to submit your quiz now?')) {
+                    quizForm.submit();
+                } else {
+                    // Give user 10 more seconds
+                    timeRemaining = 10;
+                    startTimer();
+                }
+            }
+            
+            // Form submission
+            quizForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (answeredCount < @Model.Questions?.Count) {
+                    if (!confirm(`You have only answered ${answeredCount} out of @Model.Questions?.Count questions. Are you sure you want to submit?`)) {
+                        return;
+                    }
+                }
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...';
+                
+                // Submit form
+                this.submit();
+            });
+            
+            // Make functions globally available
+            window.scrollToQuestion = scrollToQuestion;
+        });
+    </script>
+    
+    <style>
+        .question-card {
+            transition: all 0.3s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .option-content {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .option-content:hover {
+            background-color: #f8f9fa;
+            border-color: #007bff !important;
+        }
+        
+        .form-check-input:checked + .form-check-label .option-content {
+            background-color: #e7f3ff;
+            border-color: #007bff !important;
+        }
+        
+        .question-nav {
+            border-top: 1px solid #dee2e6;
+            padding-top: 1rem;
+        }
+    </style>
+}

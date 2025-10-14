@@ -1,7 +1,131 @@
 [
   {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "GetCourseAnalytics",
+    "RelativePath": "api/Admin/analytics/courses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "GetEventAnalytics",
+    "RelativePath": "api/Admin/analytics/events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "GetForumAnalytics",
+    "RelativePath": "api/Admin/analytics/forum",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "GetDashboardStats",
+    "RelativePath": "api/Admin/dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "ApproveThread",
+    "RelativePath": "api/Admin/forum/approve/{threadId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "threadId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "GetPendingThreads",
+    "RelativePath": "api/Admin/forum/pending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Admin/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/Admin/users/{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.AdminController",
+    "Method": "UpdateUserRole",
+    "RelativePath": "api/Admin/users/{userId}/role",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "UnganaConnect.Controllers.UpdateRoleRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
-    "Method": "Login",
+    "Method": "ApiLogin",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
     "IsController": true,
@@ -17,7 +141,7 @@
   },
   {
     "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
-    "Method": "Register",
+    "Method": "ApiRegister",
     "RelativePath": "api/Auth/register",
     "HttpMethod": "POST",
     "IsController": true,
@@ -35,6 +159,68 @@
     "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
     "Method": "GetUsers",
     "RelativePath": "api/Auth/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.CertificateController",
+    "Method": "GetAllCertificates",
+    "RelativePath": "api/Certificate/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.CertificateController",
+    "Method": "DownloadCertificate",
+    "RelativePath": "api/Certificate/download/{certificateId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "certificateId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.CertificateController",
+    "Method": "GenerateCertificate",
+    "RelativePath": "api/Certificate/generate/{courseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.CertificateController",
+    "Method": "GetUserCertificates",
+    "RelativePath": "api/Certificate/my-certificates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.CertificateController",
+    "Method": "GetCertificateStatistics",
+    "RelativePath": "api/Certificate/statistics",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -107,7 +293,7 @@
   {
     "ContainingType": "UnganaConnect.Controllers.Course.EnrollmentController",
     "Method": "EnrollUser",
-    "RelativePath": "api/Enrollment/{courseId}/enroll/{userId}",
+    "RelativePath": "api/Enrollment/{courseId}/enroll",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -116,11 +302,6 @@
         "Name": "courseId",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -128,7 +309,7 @@
   {
     "ContainingType": "UnganaConnect.Controllers.Course.EnrollmentController",
     "Method": "UnenrollUser",
-    "RelativePath": "api/Enrollment/{courseId}/unenroll/{userId}",
+    "RelativePath": "api/Enrollment/{courseId}/unenroll",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -137,11 +318,6 @@
         "Name": "courseId",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -149,14 +325,367 @@
   {
     "ContainingType": "UnganaConnect.Controllers.Course.EnrollmentController",
     "Method": "GetUserEnrollments",
-    "RelativePath": "api/Enrollment/user/{userId}",
+    "RelativePath": "api/Enrollment/my-enrollments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "GetEvents",
+    "RelativePath": "api/Event",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
+        "Name": "location",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "startDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "CreateEvent",
+    "RelativePath": "api/Event",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "evt",
+        "Type": "UnganaConnect.Models.Event_Management.Event",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "RegisterForEvent",
+    "RelativePath": "api/Event/{eventId}/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "GetEventRegistrations",
+    "RelativePath": "api/Event/{eventId}/registrations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "UnregisterFromEvent",
+    "RelativePath": "api/Event/{eventId}/unregister",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "GetEvent",
+    "RelativePath": "api/Event/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "UpdateEvent",
+    "RelativePath": "api/Event/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updated",
+        "Type": "UnganaConnect.Models.Event_Management.Event",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "DeleteEvent",
+    "RelativePath": "api/Event/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.EventController",
+    "Method": "GetMyRegistrations",
+    "RelativePath": "api/Event/my-registrations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "ApproveThread",
+    "RelativePath": "api/Forum/admin/approve/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "LockThread",
+    "RelativePath": "api/Forum/admin/lock/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "GetPendingThreads",
+    "RelativePath": "api/Forum/admin/pending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "EditReply",
+    "RelativePath": "api/Forum/replies/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedReply",
+        "Type": "UnganaConnect.Models.Forum.CommunityForum\u002BReply",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "DeleteReply",
+    "RelativePath": "api/Forum/replies/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "UpvoteReply",
+    "RelativePath": "api/Forum/replies/{id}/upvote",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "GetThreads",
+    "RelativePath": "api/Forum/threads",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "CreateThread",
+    "RelativePath": "api/Forum/threads",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "thread",
+        "Type": "UnganaConnect.Models.Forum.CommunityForum\u002BThread",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "GetThread",
+    "RelativePath": "api/Forum/threads/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "UpdateThread",
+    "RelativePath": "api/Forum/threads/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updated",
+        "Type": "UnganaConnect.Models.Forum.CommunityForum\u002BThread",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "DeleteThread",
+    "RelativePath": "api/Forum/threads/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "UpvoteThread",
+    "RelativePath": "api/Forum/threads/{id}/upvote",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Forum.ForumController",
+    "Method": "AddReply",
+    "RelativePath": "api/Forum/threads/{threadId}/reply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "threadId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reply",
+        "Type": "UnganaConnect.Models.Forum.CommunityForum\u002BReply",
         "IsRequired": true
       }
     ],
@@ -233,27 +762,6 @@
   },
   {
     "ContainingType": "UnganaConnect.Controllers.Course.ModuleController",
-    "Method": "UploadFile",
-    "RelativePath": "api/Module/{id}/upload",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "file",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "UnganaConnect.Controllers.Course.ModuleController",
     "Method": "GetModulesByCourse",
     "RelativePath": "api/Module/course/{courseId}",
     "HttpMethod": "GET",
@@ -269,24 +777,600 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "UnganaConnect.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "ContainingType": "UnganaConnect.Controllers.Course.ProgressController",
+    "Method": "MarkModuleCompleted",
+    "RelativePath": "api/Progress/complete/{moduleId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.ProgressController",
+    "Method": "GetCourseProgress",
+    "RelativePath": "api/Progress/course/{courseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.ProgressController",
+    "Method": "GetUserProgressOverview",
+    "RelativePath": "api/Progress/overview",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.ProgressController",
+    "Method": "MarkModuleIncomplete",
+    "RelativePath": "api/Progress/uncomplete/{moduleId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[UnganaConnect.WeatherForecast, UnganaConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "moduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.QuizController",
+    "Method": "Create",
+    "RelativePath": "api/Quiz",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quiz",
+        "Type": "UnganaConnect.Models.Training___Learning.Quiz",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.QuizController",
+    "Method": "GetByModule",
+    "RelativePath": "api/Quiz/module/{moduleId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Course.QuizController",
+    "Method": "Submit",
+    "RelativePath": "api/Quiz/submit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "submission",
+        "Type": "UnganaConnect.Controllers.Course.QuizController\u002BQuizSubmission",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Resources.ResourceController",
+    "Method": "GetCourseResources",
+    "RelativePath": "api/Resource/{courseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Resources.ResourceController",
+    "Method": "DeleteFile",
+    "RelativePath": "api/Resource/{courseId}/delete/{fileName}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Resources.ResourceController",
+    "Method": "DownloadFile",
+    "RelativePath": "api/Resource/{courseId}/download/{fileName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Resources.ResourceController",
+    "Method": "CreateFolder",
+    "RelativePath": "api/Resource/create-folder/{courseName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Resources.ResourceController",
+    "Method": "Upload",
+    "RelativePath": "api/Resource/upload/{courseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Index",
+    "RelativePath": "course",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Create",
+    "RelativePath": "course/create",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Create",
+    "RelativePath": "course/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Modules",
+        "Type": "System.Collections.Generic.List\u00601[[UnganaConnect.Models.Training___Learning.Module, UnganaConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Enrollments",
+        "Type": "System.Collections.Generic.List\u00601[[UnganaConnect.Models.Training___Learning.Enrollment, UnganaConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Delete",
+    "RelativePath": "course/delete/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Details",
+    "RelativePath": "course/details/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Edit",
+    "RelativePath": "course/edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Edit",
+    "RelativePath": "course/edit/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Modules",
+        "Type": "System.Collections.Generic.List\u00601[[UnganaConnect.Models.Training___Learning.Module, UnganaConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Enrollments",
+        "Type": "System.Collections.Generic.List\u00601[[UnganaConnect.Models.Training___Learning.Enrollment, UnganaConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Enroll",
+    "RelativePath": "course/enroll",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.CourseController",
+    "Method": "Unenroll",
+    "RelativePath": "course/unenroll",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.DashboardController",
+    "Method": "Index",
+    "RelativePath": "dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "Certificates",
+    "RelativePath": "learning/certificates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "CompleteModule",
+    "RelativePath": "learning/complete/{moduleId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "Course",
+    "RelativePath": "learning/course/{courseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "GenerateCertificate",
+    "RelativePath": "learning/generate-certificate/{courseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "Module",
+    "RelativePath": "learning/module/{moduleId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "MyCourses",
+    "RelativePath": "learning/mycourses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "QuizResult",
+    "RelativePath": "learning/quiz-result/{quizId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quizId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "Quiz",
+    "RelativePath": "learning/quiz/{quizId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "quizId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Web.Controllers.LearningController",
+    "Method": "SubmitQuiz",
+    "RelativePath": "learning/submit-quiz",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "QuizId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Answers",
+        "Type": "System.Collections.Generic.List\u00601[[UnganaConnect.Models.Training___Learning.QuizAnswerViewModel, UnganaConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
+    "Method": "LoginView",
+    "RelativePath": "login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
+    "Method": "LoginViewPost",
+    "RelativePath": "login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
+    "Method": "RegisterView",
+    "RelativePath": "register",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "UnganaConnect.Controllers.Auth.AuthController",
+    "Method": "RegisterViewPost",
+    "RelativePath": "register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

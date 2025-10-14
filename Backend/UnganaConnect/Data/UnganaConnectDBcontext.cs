@@ -8,6 +8,7 @@ using UnganaConnect.Models.Forum;
 using UnganaConnect.Models.Resources_Repo;
 using UnganaConnect.Models.Training___Learning;
 using UnganaConnect.Models.Users;
+using static UnganaConnect.Models.Forum.CommunityForum;
 
 namespace UnganaConnect.Data
 {
@@ -25,10 +26,11 @@ namespace UnganaConnect.Data
 
         // Training & Learning
         public DbSet<Course> Courses { get; set; }
-
         public DbSet<Module> Modules { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Option> Options { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<UserProgress> UserProgress { get; set; }
 
@@ -42,8 +44,8 @@ namespace UnganaConnect.Data
         public DbSet<EventRegistration> EventRegistrations { get; set; }
 
         // Community Forum
-        public DbSet<ForumThread> ForumThreads { get; set; }
-        public DbSet<ForumReply> ForumReplies { get; set; }
-
+        public DbSet<CommunityForum.Thread> Threads { get; set; }
+        public DbSet<Reply> Replies { get; set; }
+        public DbSet<Upvote> Upvotes { get; set; }
     }
 }

@@ -1,0 +1,14 @@
+@model UnganaConnect.Models.Training___Learning.Module
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-4">
+    <h2>@Model.Title</h2>
+    <p>@Model.Content</p>
+
+    <form asp-action="CompleteModule" asp-route-moduleId="@Model.Id" method="post">
+        <button class="btn btn-success" type="submit">Mark as Complete</button>
+    </form>
+</div>
+

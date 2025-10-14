@@ -1,0 +1,15 @@
+@model IEnumerable<UnganaConnect.Models.Training___Learning.Enrollment>
+@{
+    ViewData["Title"] = "My Courses";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">My Courses</h2>
+    <ul>
+        @foreach (var e in Model)
+        {
+            <li>@e.Course.Title (Enrolled: @e.EnrolledAt.ToShortDateString())</li>
+        }
+    </ul>
+</div>
+

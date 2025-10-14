@@ -1,0 +1,26 @@
+@model UnganaConnect.Models.Training___Learning.Course
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<div class="container py-4">
+    <h2>Edit Course</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <input asp-for="Category" class="form-control" />
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+    <a asp-action="Index" class="btn btn-link mt-3">Back</a>
+    </div>
+
