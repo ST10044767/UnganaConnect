@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UnganaConnect.Frontend.Models
 {
     public class Event
@@ -29,6 +31,34 @@ namespace UnganaConnect.Frontend.Models
         public string Status { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;
         public double? Rating { get; set; }
+    }
+
+    public class EventRegistration
+    {
+        public int EventId { get; set; }
+        public string UserEmail { get; set; } = string.Empty;
+        public DateTime RegistrationDate { get; set; }
+        public string Status { get; set; } = string.Empty; // Registered, Completed, Cancelled
+    }
+
+    public class EventRegistrationViewModel
+    {
+        public int EventId { get; set; }
+        public string EventTitle { get; set; } = string.Empty;
+        public string EventDate { get; set; } = string.Empty;
+        public string EventTime { get; set; } = string.Empty;
+        public string EventLocation { get; set; } = string.Empty;
+        public string Price { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Full name is required.")]
+        public string FullName { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        public string Email { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string Organization { get; set; } = string.Empty;
+        public string SpecialRequirements { get; set; } = string.Empty;
+        [Required(ErrorMessage = "You must accept the terms and conditions.")]
+        public bool AcceptTerms { get; set; }
     }
 
     public class EventViewModel

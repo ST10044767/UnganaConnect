@@ -9,9 +9,12 @@
             <h1 class="display-4">Resource Library</h1>
             <p class="text-muted">Access toolkits, templates, and guides to support your organization.</p>
         </div>
-        <button class="btn btn-outline-secondary">
-            <i class="fas fa-filter me-2"></i>Advanced Filters
-        </button>
+        @if (Context.Session.GetString("Role") == "Admin" || Context.Session.GetString("Role") == "Instructor")
+        {
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Add Resource
+            </a>
+        }
     </div>
 
     <!-- Search -->

@@ -22,7 +22,7 @@ namespace UnganaConnect.Frontend.Models
         public string Author { get; set; } = string.Empty;
         public string AuthorRole { get; set; } = string.Empty;
         public string AuthorOrg { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = string.Empty;
         public int Replies { get; set; }
         public int Views { get; set; }
         public string LastActivity { get; set; } = string.Empty;

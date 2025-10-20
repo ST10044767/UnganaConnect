@@ -1,0 +1,96 @@
+@model CertificateViewModel
+@{
+    ViewData["Title"] = "Certificate of Completion";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Certificate -->
+            <div class="card shadow-lg border-0 certificate-card">
+                <div class="card-body p-5 text-center">
+                    <!-- Header -->
+                    <div class="mb-5">
+                        <h1 class="display-4 text-primary mb-3">Certificate of Completion</h1>
+                        <div class="border-bottom border-primary mx-auto" style="width: 200px;"></div>
+                    </div>
+
+                    <!-- Certificate Content -->
+                    <div class="mb-5">
+                        <p class="lead mb-4">This certifies that</p>
+                        <h2 class="display-5 text-primary mb-4">@Model.UserName</h2>
+                        <p class="lead mb-4">has successfully completed the course</p>
+                        <h3 class="display-6 text-success mb-4">@Model.CourseTitle</h3>
+                        <p class="text-muted mb-3">Instructor: @Model.Instructor</p>
+                        <p class="text-muted mb-2">Completion Date: @Model.CompletionDate</p>
+                        <p class="text-muted">Certificate ID: @Model.CertificateId</p>
+                    </div>
+
+                    <!-- Signature/Seal -->
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <div class="border-top border-dark pt-2">
+                                <p class="mb-0">Ungana Connect Learning Platform</p>
+                                <small class="text-muted">Digital Certificate</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border-top border-dark pt-2">
+                                <p class="mb-0">@Model.Instructor</p>
+                                <small class="text-muted">Course Instructor</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="text-center mt-4">
+                <div class="btn-group" role="group">
+                    <a asp-action="DownloadCertificate" asp-route-id="@ViewContext.RouteData.Values["id"]" class="btn btn-primary">
+                        <i class="fas fa-download me-2"></i>Download Certificate
+                    </a>
+                    <a asp-action="MyLearning" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to My Learning
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.certificate-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+}
+
+@@media print {
+    body * {
+        visibility: hidden;
+    }
+    .certificate-card, .certificate-card * {
+        visibility: visible;
+    }
+    .certificate-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+    }
+    .btn-group {
+        display: none;
+    }
+}
+</style>
+
+@section Scripts {
+    <script>
+        // Print functionality
+        function printCertificate() {
+            window.print();
+        }
+    </script>
+}

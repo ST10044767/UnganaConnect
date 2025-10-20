@@ -1,0 +1,143 @@
+@model ConsultantViewModel
+@{
+    ViewData["Title"] = $"{Model.Name} - Consultant Profile";
+}
+
+<div class="container-fluid">
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index")">Consultancy</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="mb-0">@Model.Name</h2>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-star text-warning me-1"></i>
+                            <span class="fw-bold">@Model.Rating</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>About</h5>
+                            <p class="text-muted">@Model.Experience experience in CSO consulting</p>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>@Model.Location</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Languages</h5>
+                            <p>@string.Join(", ", Model.Languages)</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Areas of Expertise</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var skill in Model.Expertise)
+                            {
+                                <span class="badge bg-primary">@skill</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Recent Projects</h5>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Grant Writing Support</h6>
+                                <p class="mb-1">Helped secure $500K for education initiative</p>
+                                <small class="text-muted">Completed 3 months ago</small>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Strategic Planning</h6>
+                                <p class="mb-1">Developed 5-year roadmap for NGO growth</p>
+                                <small class="text-muted">Completed 6 months ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Request Consultation</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="RequestConsultation" method="post">
+                        <input type="hidden" name="consultantId" value="@Model.Id" />
+
+                        <div class="mb-3">
+                            <label class="form-label">Project Title</label>
+                            <input name="title" class="form-control" placeholder="Brief title for your project" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Consultancy Area</label>
+                            <select name="area" class="form-select" required>
+                                <option value="">Select area</option>
+                                @foreach (var skill in Model.Expertise)
+                                {
+                                    <option value="@skill">@skill</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Priority Level</label>
+                            <select name="priority" class="form-select" required>
+                                <option value="High">High - Urgent</option>
+                                <option value="Medium">Medium - Standard</option>
+                                <option value="Low">Low - Flexible</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Preferred Deadline</label>
+                            <input name="deadline" type="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Project Description</label>
+                            <textarea name="description" class="form-control" rows="4" placeholder="Describe your project needs..." required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Budget Range (Optional)</label>
+                            <select name="budgetRange" class="form-select">
+                                <option value="">Select budget range</option>
+                                <option value="under-500">Under R500</option>
+                                <option value="500-1000">R500 - R1,000</option>
+                                <option value="1000-2500">R1,000 - R2,500</option>
+                                <option value="2500-5000">R2,500 - R5,000</option>
+                                <option value="over-5000">Over R5,000</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Send Consultation Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Contact Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><i class="fas fa-envelope me-2"></i>Available through platform messaging</p>
+                    <p><i class="fas fa-clock me-2"></i>Response time: 24-48 hours</p>
+                    <p><i class="fas fa-calendar me-2"></i>Available for consultations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+@model Event
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Event Header -->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <div class="mb-2">
+                                <span class="badge bg-secondary me-2">@Model.Type</span>
+                                <span class="badge bg-outline-primary">
+                                    @if (Model.Format == "Virtual")
+                                    {
+                                        <i class="fas fa-video me-1"></i>
+                                    }
+                                    else if (Model.Format == "Hybrid")
+                                    {
+                                        <i class="fas fa-globe me-1"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                    }
+                                    @Model.Format
+                                </span>
+                            </div>
+                            <h1 class="h2 mb-2">@Model.Title</h1>
+                            <p class="text-muted mb-0">by @Model.Instructor</p>
+                        </div>
+                        <div class="text-end">
+                            <div class="h4 text-primary mb-0">@Model.Price</div>
+                            <small class="text-muted">@Model.Level</small>
+                        </div>
+                    </div>
+
+                    <!-- Event Details -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-calendar text-primary me-2"></i>
+                                <span>@Model.Date</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-clock text-primary me-2"></i>
+                                <span>@Model.Time</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-hourglass-half text-primary me-2"></i>
+                                <span>@Model.Duration</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @if (!string.IsNullOrEmpty(Model.Location))
+                            {
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                    <span>@Model.Location</span>
+                                </div>
+                            }
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-users text-primary me-2"></i>
+                                <span>@Model.Participants/@Model.MaxParticipants participants</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-graduation-cap text-primary me-2"></i>
+                                <span>@Model.Level level</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2 mb-4">
+                        <a asp-action="Register" asp-route-eventId="@Model.Id" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-1"></i>Register Now
+                        </a>
+                        <a asp-action="Share" asp-route-id="@Model.Id" class="btn btn-outline-secondary">
+                            <i class="fas fa-share me-1"></i>Share
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Events
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Description</h5>
+                </div>
+                <div class="card-body">
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+
+            <!-- Agenda -->
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">What You'll Learn</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.Agenda)
+                        {
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                @item
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Materials -->
+            @if (Model.Materials.Any())
+            {
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Materials Included</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            @foreach (var material in Model.Materials)
+                            {
+                                <li class="mb-2">
+                                    <i class="fas fa-file-alt text-primary me-2"></i>
+                                    @material
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+
+            <!-- Tags -->
+            @if (Model.Tags.Any())
+            {
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="mb-0">Tags</h5>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <span class="badge bg-light text-dark me-2 mb-2">@tag</span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Quick Info -->
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Event Information</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <strong>Type:</strong> @Model.Type
+                    </div>
+                    <div class="mb-2">
+                        <strong>Format:</strong> @Model.Format
+                    </div>
+                    <div class="mb-2">
+                        <strong>Level:</strong> @Model.Level
+                    </div>
+                    <div class="mb-2">
+                        <strong>Price:</strong> @Model.Price
+                    </div>
+                    <div class="mb-0">
+                        <strong>Capacity:</strong> @Model.Participants/@Model.MaxParticipants
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructor Info -->
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="mb-0">Instructor</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">@Model.Instructor</h6>
+                            <small class="text-muted">Event Facilitator</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Copy share link to clipboard
+    const shareBtn = document.querySelector('a[href*="Share"]');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(function() {
+                alert('Event link copied to clipboard!');
+            });
+        });
+    }
+});
+</script>
+}

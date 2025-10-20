@@ -8,6 +8,7 @@
         <div class="card">
             <div class="card-header">
                 <h3>Login</h3>
+                <p class="text-muted small mt-2">Demo accounts: admin@ungana.com/admin123, student@ungana.com/student123, instructor@ungana.com/instructor123</p>
             </div>
             <div class="card-body">
                 <form asp-action="Login" method="post">
@@ -21,7 +22,7 @@
                     
                     <div class="form-group mb-3">
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
+                        <input asp-for="Password" type="password" class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     

@@ -26,16 +26,26 @@ namespace UnganaConnect.Frontend.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var response = await _apiService.PostAsync("auth/login", model);
-            
-            if (response.IsSuccessStatusCode)
+            // Simulate successful login without backend
+            if (model.Email == "admin@ungana.com" && model.Password == "admin123")
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(content);
-                
-                HttpContext.Session.SetString("Token", loginResponse.Token);
-                HttpContext.Session.SetString("Role", loginResponse.Role);
-                
+                HttpContext.Session.SetString("Token", "fake-admin-token");
+                HttpContext.Session.SetString("Role", "Admin");
+                HttpContext.Session.SetString("UserEmail", model.Email);
+                return RedirectToAction("Index", "Home");
+            }
+            else if (model.Email == "student@ungana.com" && model.Password == "student123")
+            {
+                HttpContext.Session.SetString("Token", "fake-student-token");
+                HttpContext.Session.SetString("Role", "Student");
+                HttpContext.Session.SetString("UserEmail", model.Email);
+                return RedirectToAction("Index", "Home");
+            }
+            else if (model.Email == "instructor@ungana.com" && model.Password == "instructor123")
+            {
+                HttpContext.Session.SetString("Token", "fake-instructor-token");
+                HttpContext.Session.SetString("Role", "Instructor");
+                HttpContext.Session.SetString("UserEmail", model.Email);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -55,25 +65,9 @@ namespace UnganaConnect.Frontend.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var userModel = new
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                PasswordHash = model.Password,
-                Role = model.Role
-            };
-
-            var response = await _apiService.PostAsync("auth/register", userModel);
-            
-            if (response.IsSuccessStatusCode)
-            {
-                TempData["Success"] = "Registration successful! Please login.";
-                return RedirectToAction("Login");
-            }
-
-            ModelState.AddModelError("", "Registration failed");
-            return View(model);
+            // Simulate successful registration without backend
+            TempData["Success"] = "Registration successful! Please login.";
+            return RedirectToAction("Login");
         }
 
         public IActionResult Logout()

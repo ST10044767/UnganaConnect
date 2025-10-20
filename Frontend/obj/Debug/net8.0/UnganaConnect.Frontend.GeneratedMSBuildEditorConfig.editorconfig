@@ -26,12 +26,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Consultancy/ConsultantProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFuY3lcQ29uc3VsdGFudFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Consultancy/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFuY3lcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Consultancy/RequestDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uc3VsdGFuY3lcUmVxdWVzdERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Course/Certificate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXENlcnRpZmljYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Course/Create.cshtml]
@@ -50,12 +58,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Course/MyLearning.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXE15TGVhcm5pbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Event/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Event/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Event/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Forum/CreateTopic.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ydW1cQ3JlYXRlVG9waWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Forum/DeleteTopic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ydW1cRGVsZXRlVG9waWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Forum/EditTopic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ydW1cRWRpdFRvcGljLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/USER/Desktop/UnganaConnect/Frontend/Views/Forum/Index.cshtml]

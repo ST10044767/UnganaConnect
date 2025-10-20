@@ -36,6 +36,7 @@ namespace UnganaConnect.Frontend.Models
 
     public class ConsultantViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public List<string> Expertise { get; set; } = new();
         public string Experience { get; set; } = string.Empty;
