@@ -1,6 +1,0 @@
-- [x] Add [Authorize] to CourseController actions: Enroll, DownloadCertificate, MyLearning, etc.
-- [x] Add [Authorize] to ResourceController actions: Download, Preview, Create, Edit, etc.
-- [x] Add [Authorize] to ConsultancyController actions: All actions except Index if needed.
-- [x] Add [Authorize] to EventController actions: Register, Details (if restricted), etc.
-- [x] Add [Authorize] to ForumController actions: CreateTopic, EditTopic, DeleteTopic, etc.
-- [ ] Test authentication by running the app and trying to access restricted actions without login.
