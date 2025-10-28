@@ -1,0 +1,101 @@
+@model ResourceViewModel
+@{
+    ViewData["Title"] = Model.Title + " - Preview";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">@Model.Title</h4>
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Library
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="mb-3">
+                        <span class="badge bg-primary me-2">@Model.Type</span>
+                        <span class="badge bg-secondary">@Model.Category</span>
+                    </div>
+                    
+                    <p class="lead">@Model.Description</p>
+                    
+                    <div class="mb-4">
+                        <small class="text-muted">
+                            <i class="fas fa-download me-1"></i>@Model.Downloads downloads
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Preview -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-play-circle me-2"></i>Resource Overview Video
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="@Model.Url" title="Resource Overview" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="mb-0 text-muted">
+                        <i class="fas fa-info-circle me-2"></i>
+                        This video provides an overview of how to use this resource effectively.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Resource Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-success btn-lg">
+                            <i class="fas fa-download me-2"></i>Download Resource
+                        </button>
+                        
+                        <button class="btn btn-outline-primary">
+                            <i class="fas fa-share me-2"></i>Share Resource
+                        </button>
+                        
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-bookmark me-2"></i>Save to Favorites
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Related Resources</h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <small class="text-muted">Similar Resource</small>
+                            <div class="fw-bold">Budget Planning Template</div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <small class="text-muted">Related Guide</small>
+                            <div class="fw-bold">Financial Reporting Guide</div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0 px-0">
+                            <small class="text-muted">Recommended</small>
+                            <div class="fw-bold">Compliance Checklist</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

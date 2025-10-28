@@ -39,9 +39,13 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Impact" asp-action="Index">Impact</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                        </li>
+
+                        @if (Context.Session.GetString("Token") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @if (Context.Session.GetString("Token") != null)
@@ -61,6 +65,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                             </li>
+
                         }
                     </ul>
                 </div>

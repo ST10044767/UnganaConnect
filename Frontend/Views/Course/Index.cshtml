@@ -1,166 +1,227 @@
-@model CourseCatalogViewModel
 @{
-    ViewData["Title"] = "Training Courses";
+    ViewData["Title"] = "Courses";
 }
 
-<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="display-4">Training Courses</h1>
-            <p class="text-muted">Enhance your skills with our comprehensive training programs.</p>
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-6">Available Courses</h1>
+            <p class="text-muted">Enhance your CSO's capabilities with our comprehensive IT training programs</p>
         </div>
-        @if (Context.Session.GetString("Role") == "Admin" || Context.Session.GetString("Role") == "Instructor")
-        {
-            <a href="@Url.Action("Create")" class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Add Course
-            </a>
-        }
-        else
-        {
-            <a href="@Url.Action("MyLearning")" class="btn btn-primary">
-                <i class="fas fa-award me-2"></i>My Learning
-            </a>
-        }
     </div>
 
-    <!-- Search and Filters -->
-    <form method="get" class="mb-4">
-        <div class="row">
-            <div class="col-md-10">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    <input type="text" name="search" class="form-control" placeholder="Search courses..." value="@Model.SearchTerm">
-                </div>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-outline-secondary w-100">
-                    <i class="fas fa-filter me-1"></i>Search
-                </button>
-            </div>
-        </div>
-    </form>
-
-    <!-- Category Tabs -->
-    <ul class="nav nav-tabs mb-4" id="categoryTabs">
-        @foreach (var category in Model.Categories)
-        {
-            <li class="nav-item">
-                <a class="nav-link @(Model.SelectedCategory == category ? "active" : "")" 
-                   href="@Url.Action("Index", new { search = Model.SearchTerm, category = category })">
-                    @(category == "all" ? "All" : category)
-                </a>
-            </li>
-        }
-    </ul>
-
-    <!-- Course Grid -->
-    @if (Model.Courses.Any())
-    {
-        <div class="row">
-            @foreach (var course in Model.Courses)
-            {
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100 shadow-sm course-card">
-                        <div class="position-relative">
-                            <img src="@course.Thumbnail" class="card-img-top" alt="@course.Title" style="height: 200px; object-fit: cover;">
-                            <div class="position-absolute top-0 start-0 m-2">
-                                <span class="badge bg-secondary">@course.Level</span>
-                            </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <span class="badge @GetStatusBadgeClass(course.Status)">@GetStatusText(course.Status)</span>
-                            </div>
-                        </div>
-                        
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">@course.Title</h5>
-                            <p class="card-text text-muted flex-grow-1">@course.Description</p>
-                            
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <small class="text-muted">by @course.Instructor</small>
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-star text-warning me-1"></i>
-                                    <span>@course.Rating</span>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div class="d-flex gap-3">
-                                    <small class="text-muted">
-                                        <i class="fas fa-clock me-1"></i>@course.Duration
-                                    </small>
-                                    <small class="text-muted">
-                                        <i class="fas fa-users me-1"></i>@course.Enrolled
-                                    </small>
-                                </div>
-                                <span class="badge bg-light text-dark">@course.Category</span>
-                            </div>
-                            
-                            @if (course.Status == "enrolled" && course.Progress > 0)
-                            {
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <small>Progress</small>
-                                        <small>@course.Progress%</small>
-                                    </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div class="progress-bar" style="width: @course.Progress%"></div>
-                                    </div>
-                                </div>
-                            }
-                            
-                            <a asp-action="Details" asp-route-id="@course.Id" class="btn @GetButtonClass(course.Status) w-100">
-                                @if (course.Status == "completed")
-                                {
-                                    <i class="fas fa-check-circle me-2"></i>@:View Certificate
-                                }
-                                else if (course.Status == "enrolled")
-                                {
-                                    <i class="fas fa-play me-2"></i>@:Continue Learning
-                                }
-                                else
-                                {
-                                    <i class="fas fa-book-open me-2"></i>@:Enroll Now
-                                }
-                            </a>
-                        </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Web Development Fundamentals</h5>
+                    <p class="card-text text-muted">Learn HTML, CSS, and JavaScript to build modern websites for your CSO.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-success me-2">Beginner</span>
+                        <span class="badge bg-secondary">8 weeks</span>
                     </div>
+                    <p class="text-muted small">by David Kiptoo</p>
                 </div>
-            }
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 1 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
         </div>
-    }
-    else
-    {
-        <div class="text-center py-5">
-            <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
-            <h3>No courses found</h3>
-            <p class="text-muted">Try adjusting your search terms or browse different categories.</p>
-        </div>
-    }
-</div>
 
-@functions {
-    string GetStatusBadgeClass(string status)
-    {
-        return status switch
-        {
-            "completed" => "bg-success",
-            "enrolled" => "bg-primary",
-            _ => "bg-light text-dark"
-        };
-    }
-    
-    string GetStatusText(string status)
-    {
-        return status switch
-        {
-            "completed" => "Completed",
-            "enrolled" => "Enrolled",
-            _ => "Available"
-        };
-    }
-    
-    string GetButtonClass(string status)
-    {
-        return status == "available" ? "btn-primary" : "btn-outline-primary";
-    }
-}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm border-success">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title">Database Management Systems</h5>
+                        <span class="badge bg-success">✓ Completed</span>
+                    </div>
+                    <p class="card-text text-muted">Master SQL and database design for effective data management in CSOs.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-primary me-2">Intermediate</span>
+                        <span class="badge bg-secondary">6 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Dr. Amara Okafor</p>
+                    <div class="progress mb-2" style="height: 8px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                    </div>
+                    <small class="text-success">100% Complete</small>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("DownloadCertificate", new { id = 2 })" class="btn btn-success w-100">
+                        <i class="fas fa-download me-2"></i>Download Certificate
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Cloud Computing Essentials</h5>
+                    <p class="card-text text-muted">Understand cloud services and how to leverage them for your organization.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-primary me-2">Intermediate</span>
+                        <span class="badge bg-secondary">5 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Sarah Mensah</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 3 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Cybersecurity for Organizations</h5>
+                    <p class="card-text text-muted">Protect your CSO's digital assets with essential cybersecurity practices.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-danger me-2">Advanced</span>
+                        <span class="badge bg-secondary">7 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Ahmed Ali</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 4 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Mobile App Development</h5>
+                    <p class="card-text text-muted">Build mobile applications to extend your CSO's reach and impact.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-warning me-2">Advanced</span>
+                        <span class="badge bg-secondary">10 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Rachel Mwangi</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 5 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Data Analytics & Visualization</h5>
+                    <p class="card-text text-muted">Transform data into insights using modern analytics tools and techniques.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-primary me-2">Intermediate</span>
+                        <span class="badge bg-secondary">6 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Dr. Fatima Ndour</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 6 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Digital Project Management</h5>
+                    <p class="card-text text-muted">Master digital tools and methodologies for effective project management.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-success me-2">Beginner</span>
+                        <span class="badge bg-secondary">4 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Moses Kiprotich</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 7 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">IT Infrastructure Management</h5>
+                    <p class="card-text text-muted">Learn to set up and maintain IT systems for your organization.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-danger me-2">Advanced</span>
+                        <span class="badge bg-secondary">8 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Kofi Asante</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 8 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Artificial Intelligence Fundamentals</h5>
+                    <p class="card-text text-muted">Introduction to AI concepts and applications for CSOs.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-danger me-2">Advanced</span>
+                        <span class="badge bg-secondary">12 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Dr. Kwame Nkrumah</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 9 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Blockchain Technology</h5>
+                    <p class="card-text text-muted">Understanding blockchain and its applications for transparency in CSOs.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-danger me-2">Advanced</span>
+                        <span class="badge bg-secondary">9 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Amina Hassan</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 10 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">IoT for Smart Organizations</h5>
+                    <p class="card-text text-muted">Implementing Internet of Things solutions for efficient CSO operations.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-primary me-2">Intermediate</span>
+                        <span class="badge bg-secondary">7 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Samuel Ochieng</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 11 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Digital Transformation Strategy</h5>
+                    <p class="card-text text-muted">Leading digital transformation initiatives in civil society organizations.</p>
+                    <div class="mb-3">
+                        <span class="badge bg-danger me-2">Advanced</span>
+                        <span class="badge bg-secondary">6 weeks</span>
+                    </div>
+                    <p class="text-muted small">by Grace Wanjiku</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Enroll", new { id = 12 })" class="btn btn-primary w-100">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

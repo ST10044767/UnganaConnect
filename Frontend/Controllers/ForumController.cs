@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnganaConnect.Frontend.Models;
 
@@ -57,6 +58,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult CreateTopic()
         {
@@ -64,6 +66,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateTopic(CreateTopicViewModel model)
         {
@@ -99,6 +102,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult EditTopic(int id)
         {
@@ -125,6 +129,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult EditTopic(int id, CreateTopicViewModel model)
         {
@@ -157,6 +162,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult DeleteTopic(int id)
         {
@@ -174,6 +180,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(topic);
         }
 
+        [Authorize]
         [HttpPost, ActionName("DeleteTopic")]
         public IActionResult DeleteTopicConfirmed(int id)
         {

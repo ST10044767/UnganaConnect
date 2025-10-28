@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnganaConnect.Frontend.Models;
 using System.Text;
@@ -29,6 +30,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public IActionResult Details(int id)
         {
             var eventItem = _events.FirstOrDefault(e => e.Id == id);
@@ -38,6 +40,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(eventItem);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Register(int eventId)
         {
@@ -85,6 +88,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Register(EventRegistrationViewModel model)
         {
@@ -146,6 +150,7 @@ namespace UnganaConnect.Frontend.Controllers
             return RedirectToAction("Index", "Event");
         }
 
+        [Authorize]
         public IActionResult Join(int id)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
@@ -167,6 +172,7 @@ namespace UnganaConnect.Frontend.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult DownloadCertificate(int id)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");

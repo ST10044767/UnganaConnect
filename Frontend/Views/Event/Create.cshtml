@@ -1,0 +1,109 @@
+@model Event
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4 class="mb-0">Create New Event</h4>
+                </div>
+                
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label asp-for="Title" class="form-label">Event Title</label>
+                                <input asp-for="Title" class="form-control" placeholder="Enter event title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Type" class="form-label">Event Type</label>
+                                <select asp-for="Type" class="form-select">
+                                    <option value="">Select type...</option>
+                                    <option value="Workshop">Workshop</option>
+                                    <option value="Webinar">Webinar</option>
+                                    <option value="Conference">Conference</option>
+                                    <option value="Training">Training</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Event description"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Date" class="form-label">Date</label>
+                                <input asp-for="Date" type="date" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Time" class="form-label">Time</label>
+                                <input asp-for="Time" class="form-control" placeholder="e.g., 14:00 - 17:00 GMT">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Duration" class="form-label">Duration</label>
+                                <input asp-for="Duration" class="form-control" placeholder="e.g., 3 hours">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Instructor" class="form-label">Instructor</label>
+                                <input asp-for="Instructor" class="form-control" placeholder="Instructor name">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="MaxParticipants" class="form-label">Max Participants</label>
+                                <input asp-for="MaxParticipants" type="number" class="form-control" placeholder="50">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="Price" class="form-label">Price</label>
+                                <input asp-for="Price" class="form-control" placeholder="Free or R75">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Format" class="form-label">Format</label>
+                                <select asp-for="Format" class="form-select">
+                                    <option value="">Select format...</option>
+                                    <option value="Virtual">Virtual</option>
+                                    <option value="In-Person">In-Person</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Level" class="form-label">Level</label>
+                                <select asp-for="Level" class="form-select">
+                                    <option value="">Select level...</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="All Levels">All Levels</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label">Location</label>
+                            <input asp-for="Location" class="form-control" placeholder="Virtual or physical location">
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="@Url.Action("Index")" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Create Event</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

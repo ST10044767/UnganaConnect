@@ -1,269 +1,322 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnganaConnect.Frontend.Models;
-using UnganaConnect.Frontend.Services;
 
 namespace UnganaConnect.Frontend.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly ApiService _apiService;
-        private static List<CourseViewModel> _courses = new();
-
-        public CourseController(ApiService apiService)
+        public IActionResult Index()
         {
-            _apiService = apiService;
-            if (_courses.Count == 0)
-            {
-                _courses = GetSampleCourses();
-            }
-        }
-
-        public async Task<IActionResult> Index(string search = "", string category = "all")
-        {
-            var role = HttpContext.Session.GetString("Role");
-            var courses = role == "Admin" ? _courses : _courses.Where(c => c.Status != "draft").ToList();
-            var categories = new List<string> { "all", "Fundraising", "Finance", "Marketing", "Management", "Community", "Analytics" };
-
-            var filteredCourses = courses.Where(c =>
-                (string.IsNullOrEmpty(search) || c.Title.Contains(search, StringComparison.OrdinalIgnoreCase) || c.Description.Contains(search, StringComparison.OrdinalIgnoreCase)) &&
-                (category == "all" || c.Category == category)
-            ).ToList();
-
-            var model = new CourseCatalogViewModel
-            {
-                Courses = filteredCourses,
-                Categories = categories,
-                SearchTerm = search,
-                SelectedCategory = category
-            };
-
-            return View(model);
-        }
-
-        public IActionResult Details(int id)
-        {
-            var course = GetSampleCourses().FirstOrDefault(c => c.Id == id);
-            if (course == null)
-                return NotFound();
-
-            return View(course);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Enroll(int id)
-        {
-            var token = HttpContext.Session.GetString("Token");
-            var response = await _apiService.PostAsync($"course/enroll/{id}", new { }, token);
-            
-            if (response.IsSuccessStatusCode)
-            {
-                TempData["Success"] = "Successfully enrolled in course!";
-            }
-            else
-            {
-                TempData["Error"] = "Failed to enroll in course.";
-            }
-
-            return RedirectToAction("Details", new { id });
-        }
-
-        private List<CourseViewModel> GetSampleCourses()
-        {
-            return new List<CourseViewModel>
-            {
-                new() { Id = 1, Title = "Grant Writing Fundamentals", Description = "Learn the essentials of writing compelling grant proposals that secure funding for your organization.", Instructor = "Dr. Sarah Williams", Duration = "6 hours", Level = "Beginner", Rating = 4.8, Enrolled = 245, Progress = 85, Status = "enrolled", Category = "Fundraising", Thumbnail = "https://images.unsplash.com/photo-1726831662518-c48d983f9b86?w=400" },
-                new() { Id = 2, Title = "Financial Management for NGOs", Description = "Master financial planning, budgeting, and reporting for non-profit organizations.", Instructor = "Michael Chen", Duration = "8 hours", Level = "Intermediate", Rating = 4.9, Enrolled = 189, Progress = 100, Status = "completed", Category = "Finance", Thumbnail = "https://images.unsplash.com/photo-1675242314995-034d11bac319?w=400" },
-                new() { Id = 3, Title = "Digital Marketing for Social Impact", Description = "Leverage digital platforms to amplify your mission and reach more supporters.", Instructor = "Emma Rodriguez", Duration = "5 hours", Level = "Beginner", Rating = 4.7, Enrolled = 312, Progress = 45, Status = "enrolled", Category = "Marketing", Thumbnail = "https://images.unsplash.com/photo-1675119715594-30fde4bd3dbc?w=400" },
-                new() { Id = 4, Title = "Project Management Essentials", Description = "Learn project management methodologies tailored for civil society organizations.", Instructor = "James Thompson", Duration = "7 hours", Level = "Intermediate", Rating = 4.6, Enrolled = 156, Status = "available", Category = "Management", Thumbnail = "https://images.unsplash.com/photo-1646579886741-12b59840c63f?w=400" },
-                new() { Id = 5, Title = "Community Engagement Strategies", Description = "Build stronger relationships with your community through effective engagement techniques.", Instructor = "Dr. Priya Patel", Duration = "4 hours", Level = "Beginner", Rating = 4.8, Enrolled = 203, Status = "available", Category = "Community", Thumbnail = "https://images.unsplash.com/photo-1555069855-e580a9adbf43?w=400" },
-                new() { Id = 6, Title = "Data Analysis for Social Impact", Description = "Use data to measure and improve the effectiveness of your programs.", Instructor = "Alex Kim", Duration = "9 hours", Level = "Advanced", Rating = 4.5, Enrolled = 87, Status = "available", Category = "Analytics", Thumbnail = "https://images.unsplash.com/photo-1745847768367-893e989d3a98?w=400" },
-                new() { Id = 7, Title = "Monitoring and Evaluation Basics", Description = "Learn fundamental concepts of M&E for development projects.", Instructor = "Dr. Lisa Johnson", Duration = "6 hours", Level = "Beginner", Rating = 4.6, Enrolled = 134, Status = "available", Category = "Analytics", Thumbnail = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400" }
-            };
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            var role = HttpContext.Session.GetString("Role");
-            if (role != "Admin" && role != "Instructor")
-                return RedirectToAction("Index");
-
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CourseViewModel model)
+        [Authorize]
+        public IActionResult Enroll(int? id)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            // Simulate course creation without backend
-            model.Id = _courses.Max(c => c.Id) + 1;
-            model.CreatedAt = DateTime.Now;
-            model.Status = "draft"; // Admin can publish later
-            _courses.Add(model);
-
-            TempData["Success"] = "Course created successfully!";
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var role = HttpContext.Session.GetString("Role");
-            if (role != "Admin" && role != "Instructor")
-                return RedirectToAction("Index");
-
-            var course = _courses.FirstOrDefault(c => c.Id == id);
-            if (course == null)
-                return NotFound();
-
+            var course = GetCourseById(id ?? 1);
             return View(course);
         }
 
+        [Authorize]
+        public IActionResult Exam(int id)
+        {
+            var exam = GetExamById(id);
+            return View(exam);
+        }
+
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, CourseViewModel model)
+        public IActionResult SubmitExam(int id, Dictionary<int, string> answers)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var course = _courses.FirstOrDefault(c => c.Id == id);
-            if (course == null)
-                return NotFound();
-
-            // Update course properties
-            course.Title = model.Title;
-            course.Description = model.Description;
-            course.Category = model.Category;
-            course.Instructor = model.Instructor;
-            course.Duration = model.Duration;
-            course.Level = model.Level;
-            course.Thumbnail = model.Thumbnail;
-
-            TempData["Success"] = "Course updated successfully!";
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var role = HttpContext.Session.GetString("Role");
-            if (role != "Admin" && role != "Instructor")
-                return RedirectToAction("Index");
-
-            var course = _courses.FirstOrDefault(c => c.Id == id);
-            if (course == null)
-                return NotFound();
-
-            _courses.Remove(course);
-            TempData["Success"] = "Course deleted successfully!";
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Publish(int id)
-        {
-            var role = HttpContext.Session.GetString("Role");
-            if (role != "Admin")
-                return RedirectToAction("Index");
-
-            var course = _courses.FirstOrDefault(c => c.Id == id);
-            if (course == null)
-                return NotFound();
-
-            course.Status = "available";
-            TempData["Success"] = "Course published successfully!";
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public IActionResult MyLearning()
-        {
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            if (string.IsNullOrEmpty(userEmail))
+            var score = CalculateScore(id, answers);
+            if (score >= 70)
             {
-                return RedirectToAction("Login", "Auth");
+                return RedirectToAction("Certificate", new { id, score });
             }
-
-            var enrolledCourses = _courses.Where(c => c.Status == "enrolled" || c.Status == "completed").ToList();
-            var model = new CourseCatalogViewModel
-            {
-                Courses = enrolledCourses,
-                Categories = new List<string> { "all", "Fundraising", "Finance", "Marketing", "Management", "Community", "Analytics" },
-                SearchTerm = "",
-                SelectedCategory = "all"
-            };
-
-            return View(model);
+            TempData["Error"] = "Score too low. Minimum 70% required.";
+            return RedirectToAction("Exam", new { id });
         }
 
-        [HttpGet]
-        public IActionResult Certificate(int id)
+        [Authorize]
+        public IActionResult Certificate(int id, int score)
         {
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            if (string.IsNullOrEmpty(userEmail))
+            var certificate = new CertificateViewModel
             {
-                return RedirectToAction("Login", "Auth");
-            }
-
-            var course = _courses.FirstOrDefault(c => c.Id == id && c.Status == "completed");
-            if (course == null)
-            {
-                TempData["Error"] = "Certificate not available for this course.";
-                return RedirectToAction("MyLearning");
-            }
-
-            var certificateModel = new CertificateViewModel
-            {
-                CourseTitle = course.Title,
-                Instructor = course.Instructor,
+                CourseTitle = "Web Development Fundamentals",
+                StudentName = "John Doe",
                 CompletionDate = DateTime.Now.ToString("MMMM dd, yyyy"),
-                UserName = HttpContext.Session.GetString("UserName") ?? "Learner",
-                CertificateId = $"CERT-{id}-{DateTime.Now.Year}"
+                Score = score
             };
-
-            return View(certificateModel);
+            return View(certificate);
         }
 
-        [HttpGet]
+        [Authorize]
         public IActionResult DownloadCertificate(int id)
         {
-            var userEmail = HttpContext.Session.GetString("UserEmail");
-            if (string.IsNullOrEmpty(userEmail))
+            var html = GenerateCertificateHtml(id);
+            return File(System.Text.Encoding.UTF8.GetBytes(html), "text/html", "certificate.html");
+        }
+
+        [Authorize]
+        public IActionResult Completed()
+        {
+            return View();
+        }
+
+        private ExamViewModel GetExamById(int id)
+        {
+            var exams = new Dictionary<int, ExamViewModel>
             {
-                return RedirectToAction("Login", "Auth");
-            }
+                [1] = new() {
+                    CourseId = 1, Title = "Web Development Fundamentals - Final Exam",
+                    Questions = new List<ExamQuestion> {
+                        new() { Id = 1, Question = "What does HTML stand for?", Options = new[] { "Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks Text Markup Language" }, CorrectAnswer = "Hyper Text Markup Language" },
+                        new() { Id = 2, Question = "Which CSS property is used to change text color?", Options = new[] { "color", "text-color", "font-color" }, CorrectAnswer = "color" },
+                        new() { Id = 3, Question = "What is the correct way to declare a JavaScript variable?", Options = new[] { "var myVar;", "variable myVar;", "v myVar;" }, CorrectAnswer = "var myVar;" }
+                    }
+                },
+                [2] = new() {
+                    CourseId = 2, Title = "Database Management Systems - Final Exam",
+                    Questions = new List<ExamQuestion> {
+                        new() { Id = 1, Question = "What is the primary purpose of a database?", Options = new[] { "Store data", "Display data", "Delete data" }, CorrectAnswer = "Store data" },
+                        new() { Id = 2, Question = "Which SQL command is used to retrieve data?", Options = new[] { "SELECT", "INSERT", "UPDATE" }, CorrectAnswer = "SELECT" },
+                        new() { Id = 3, Question = "What does ACID stand for in database transactions?", Options = new[] { "Atomicity, Consistency, Isolation, Durability", "Access, Control, Integration, Data", "Automatic, Consistent, Independent, Durable" }, CorrectAnswer = "Atomicity, Consistency, Isolation, Durability" }
+                    }
+                },
+                [3] = new() {
+                    CourseId = 3, Title = "Cloud Computing Essentials - Final Exam",
+                    Questions = new List<ExamQuestion> {
+                        new() { Id = 1, Question = "What is cloud computing?", Options = new[] { "Internet-based computing services", "Local server computing", "Desktop computing" }, CorrectAnswer = "Internet-based computing services" },
+                        new() { Id = 2, Question = "Which is a major cloud service provider?", Options = new[] { "Amazon Web Services", "Microsoft Office", "Adobe Photoshop" }, CorrectAnswer = "Amazon Web Services" },
+                        new() { Id = 3, Question = "What does SaaS stand for?", Options = new[] { "Software as a Service", "System as a Service", "Security as a Service" }, CorrectAnswer = "Software as a Service" }
+                    }
+                },
+                [4] = new() {
+                    CourseId = 4, Title = "Cybersecurity for Organizations - Final Exam",
+                    Questions = new List<ExamQuestion> {
+                        new() { Id = 1, Question = "What is the first line of defense in cybersecurity?", Options = new[] { "Firewalls", "User awareness training", "Antivirus software" }, CorrectAnswer = "User awareness training" },
+                        new() { Id = 2, Question = "What does VPN stand for?", Options = new[] { "Virtual Private Network", "Very Private Network", "Verified Public Network" }, CorrectAnswer = "Virtual Private Network" },
+                        new() { Id = 3, Question = "Which is a common type of malware?", Options = new[] { "Ransomware", "Shareware", "Freeware" }, CorrectAnswer = "Ransomware" }
+                    }
+                },
+                [5] = new() {
+                    CourseId = 5, Title = "Mobile App Development - Final Exam",
+                    Questions = new List<ExamQuestion> {
+                        new() { Id = 1, Question = "What is React Native?", Options = new[] { "A framework for building mobile apps", "A database system", "A web browser" }, CorrectAnswer = "A framework for building mobile apps" },
+                        new() { Id = 2, Question = "Which language is primarily used for iOS development?", Options = new[] { "Swift", "Java", "Python" }, CorrectAnswer = "Swift" },
+                        new() { Id = 3, Question = "What does API stand for?", Options = new[] { "Application Programming Interface", "Advanced Programming Interface", "Automated Programming Interface" }, CorrectAnswer = "Application Programming Interface" }
+                    }
+                }
+            };
+            
+            return exams.ContainsKey(id) ? exams[id] : exams[1];
+        }
 
-            var course = _courses.FirstOrDefault(c => c.Id == id && c.Status == "completed");
-            if (course == null)
+        private int CalculateScore(int courseId, Dictionary<int, string> answers)
+        {
+            if (!answers.Any()) return 0;
+            
+            var exam = GetExamById(courseId);
+            var correctAnswers = exam.Questions.ToDictionary(q => q.Id, q => q.CorrectAnswer);
+            
+            int correct = answers.Count(a => correctAnswers.ContainsKey(a.Key) && correctAnswers[a.Key] == a.Value);
+            return correctAnswers.Count > 0 ? (correct * 100) / correctAnswers.Count : 0;
+        }
+
+        private string GenerateCertificateHtml(int id)
+        {
+            return $@"
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Certificate of Completion</title>
+                <style>
+                    body {{ font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f8f9fa; }}
+                    .certificate {{ 
+                        border: 8px solid #2c3e50; 
+                        padding: 60px; 
+                        margin: 20px auto; 
+                        background: white;
+                        max-width: 800px;
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                    }}
+                    .title {{ color: #2c3e50; font-size: 42px; margin-bottom: 30px; font-weight: bold; }}
+                    .name {{ color: #3498db; font-size: 32px; margin: 30px 0; font-weight: bold; }}
+                    .course {{ color: #2c3e50; font-size: 28px; margin: 30px 0; font-style: italic; }}
+                    .details {{ font-size: 18px; margin: 15px 0; }}
+                    .signature {{ margin-top: 50px; font-size: 16px; color: #7f8c8d; }}
+                    @media print {{
+                        body {{ background: white; }}
+                        .certificate {{ box-shadow: none; }}
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class='certificate'>
+                    <h1 class='title'>🏆 Certificate of Completion 🏆</h1>
+                    <p class='details'>This is to certify that</p>
+                    <h2 class='name'>John Doe</h2>
+                    <p class='details'>has successfully completed the course</p>
+                    <h3 class='course'>Database Management Systems</h3>
+                    <p class='details'>Completion Date: {DateTime.Now:MMMM dd, yyyy}</p>
+                    <p class='details'>Final Score: 95%</p>
+                    <div class='signature'>
+                        <p>UnganaConnect Platform</p>
+                        <p>Digitizing ICT Training for African CSOs</p>
+                    </div>
+                </div>
+                <script>
+                    window.onload = function() {{
+                        setTimeout(function() {{
+                            window.print();
+                        }}, 1000);
+                    }};
+                </script>
+            </body>
+            </html>";
+        }
+
+        private CourseContentViewModel GetCourseById(int id)
+        {
+            var courses = new Dictionary<int, CourseContentViewModel>
             {
-                TempData["Error"] = "Certificate not available for this course.";
-                return RedirectToAction("MyLearning");
-            }
-
-            // Generate PDF content (simplified - in real app, use a PDF library)
-            var certificateContent = $@"
-CERTIFICATE OF COMPLETION
-
-This certifies that
-
-{HttpContext.Session.GetString("UserName") ?? "Learner"}
-
-has successfully completed the course
-
-{course.Title}
-
-Instructor: {course.Instructor}
-Completion Date: {DateTime.Now.ToString("MMMM dd, yyyy")}
-Certificate ID: CERT-{id}-{DateTime.Now.Year}
-
-Ungana Connect Learning Platform
-";
-
-            var fileName = $"Certificate_{course.Title.Replace(" ", "_")}_{DateTime.Now.Year}.txt";
-            var contentType = "text/plain";
-
-            return File(System.Text.Encoding.UTF8.GetBytes(certificateContent), contentType, fileName);
+                [1] = new() {
+                    Id = 1, Title = "Web Development Fundamentals", Description = "Learn HTML, CSS, and JavaScript to build modern websites.", Instructor = "David Kiptoo", Duration = "8 weeks", Level = "Beginner", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "HTML Basics", Duration = "45 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/UB1O30fR-EE" },
+                        new() { Id = 2, Title = "CSS Styling", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/yfoY53QXEnI" },
+                        new() { Id = 3, Title = "JavaScript Fundamentals", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/PkZNo7MFNFg" },
+                        new() { Id = 4, Title = "Responsive Design", Duration = "50 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/srvUrASNdxk" },
+                        new() { Id = 5, Title = "Course Exam", Duration = "30 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [2] = new() {
+                    Id = 2, Title = "Database Management Systems", Description = "Master SQL and database design for effective data management.", Instructor = "Dr. Amara Okafor", Duration = "6 weeks", Level = "Intermediate", Progress = 100,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Database Fundamentals", Duration = "50 minutes", IsCompleted = true, VideoUrl = "https://www.youtube.com/embed/HXV3zeQKqGY" },
+                        new() { Id = 2, Title = "SQL Queries", Duration = "65 minutes", IsCompleted = true, VideoUrl = "https://www.youtube.com/embed/7S_tz1z_5bA" },
+                        new() { Id = 3, Title = "Database Design", Duration = "70 minutes", IsCompleted = true, VideoUrl = "https://www.youtube.com/embed/ztHopE5Wnpc" },
+                        new() { Id = 4, Title = "Advanced SQL", Duration = "80 minutes", IsCompleted = true, VideoUrl = "https://www.youtube.com/embed/XqIk2PwP0To" },
+                        new() { Id = 5, Title = "Course Exam", Duration = "30 minutes", IsCompleted = true, VideoUrl = "" }
+                    }
+                },
+                [3] = new() {
+                    Id = 3, Title = "Cloud Computing Essentials", Description = "Understand cloud services and how to leverage them.", Instructor = "Sarah Mensah", Duration = "5 weeks", Level = "Intermediate", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Cloud Fundamentals", Duration = "40 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/M988_fsOSWo" },
+                        new() { Id = 2, Title = "AWS Services", Duration = "55 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/ulprqHHWlng" },
+                        new() { Id = 3, Title = "Cloud Security", Duration = "45 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/hiKPPy584Mg" },
+                        new() { Id = 4, Title = "Course Exam", Duration = "30 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [4] = new() {
+                    Id = 4, Title = "Cybersecurity for Organizations", Description = "Protect your CSO's digital assets with essential cybersecurity practices.", Instructor = "Ahmed Ali", Duration = "7 weeks", Level = "Advanced", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Security Fundamentals", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/inWWhr5tnEA" },
+                        new() { Id = 2, Title = "Network Security", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/9GZlVOafYTg" },
+                        new() { Id = 3, Title = "Threat Detection", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/rcDO8km6R6c" },
+                        new() { Id = 4, Title = "Incident Response", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/nvTQInQyNI4" },
+                        new() { Id = 5, Title = "Security Policies", Duration = "55 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/WnN6dbos5u8" },
+                        new() { Id = 6, Title = "Course Exam", Duration = "45 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [5] = new() {
+                    Id = 5, Title = "Mobile App Development", Description = "Build mobile applications to extend your CSO's reach and impact.", Instructor = "Rachel Mwangi", Duration = "10 weeks", Level = "Advanced", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Mobile Development Intro", Duration = "50 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/fis26HvvDII" },
+                        new() { Id = 2, Title = "React Native Basics", Duration = "90 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/0-S5a0eXPoc" },
+                        new() { Id = 3, Title = "UI/UX Design", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/c9Wg6Cb_YlU" },
+                        new() { Id = 4, Title = "Navigation & Routing", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/nQVCkqvU1uE" },
+                        new() { Id = 5, Title = "API Integration", Duration = "80 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/VozPNrt-LfE" },
+                        new() { Id = 6, Title = "Database Integration", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/BosZ3KCDtuQ" },
+                        new() { Id = 7, Title = "Testing & Deployment", Duration = "85 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/u-b-Akalj0Q" },
+                        new() { Id = 8, Title = "Course Exam", Duration = "45 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [6] = new() {
+                    Id = 6, Title = "Data Analytics & Visualization", Description = "Transform data into insights using modern analytics tools.", Instructor = "Dr. Fatima Ndour", Duration = "6 weeks", Level = "Intermediate", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Data Analytics Fundamentals", Duration = "55 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/yZvFH7B6gKI" },
+                        new() { Id = 2, Title = "Excel for Data Analysis", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/Vl0H-qTclOg" },
+                        new() { Id = 3, Title = "Python for Data Science", Duration = "95 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/LHBE6Q9XlzI" },
+                        new() { Id = 4, Title = "Data Visualization", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/a9UrKTVEeZA" },
+                        new() { Id = 5, Title = "Dashboard Creation", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/SPuDz1hrVE8" },
+                        new() { Id = 6, Title = "Course Exam", Duration = "40 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [7] = new() {
+                    Id = 7, Title = "Digital Project Management", Description = "Master digital tools and methodologies for effective project management.", Instructor = "Moses Kiprotich", Duration = "4 weeks", Level = "Beginner", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Project Management Basics", Duration = "45 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/3qYbVd7DILs" },
+                        new() { Id = 2, Title = "Agile Methodology", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/Z9QbYZh1YXY" },
+                        new() { Id = 3, Title = "Digital PM Tools", Duration = "50 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/MfJjMbABbes" },
+                        new() { Id = 4, Title = "Course Exam", Duration = "25 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [8] = new() {
+                    Id = 8, Title = "IT Infrastructure Management", Description = "Learn to set up and maintain IT systems for your organization.", Instructor = "Kofi Asante", Duration = "8 weeks", Level = "Advanced", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Infrastructure Fundamentals", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/3QhU9jd03a0" },
+                        new() { Id = 2, Title = "Server Management", Duration = "80 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/YS5Zh7KExvE" },
+                        new() { Id = 3, Title = "Network Configuration", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/qiQR5rTSshw" },
+                        new() { Id = 4, Title = "Virtualization", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/FZR0rG3HKIk" },
+                        new() { Id = 5, Title = "Backup & Recovery", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/1uUWqQ_jgBs" },
+                        new() { Id = 6, Title = "Monitoring & Maintenance", Duration = "55 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/Lb4IcGF5iTQ" },
+                        new() { Id = 7, Title = "Course Exam", Duration = "40 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [9] = new() {
+                    Id = 9, Title = "Artificial Intelligence Fundamentals", Description = "Introduction to AI concepts and applications for CSOs.", Instructor = "Dr. Kwame Nkrumah", Duration = "12 weeks", Level = "Advanced", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "AI Introduction", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/ad79nYk2keg" },
+                        new() { Id = 2, Title = "Machine Learning Basics", Duration = "90 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/ukzFI9rgwfU" },
+                        new() { Id = 3, Title = "Neural Networks", Duration = "85 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/aircAruvnKk" },
+                        new() { Id = 4, Title = "Natural Language Processing", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/CMrHM8a3hqw" },
+                        new() { Id = 5, Title = "Computer Vision", Duration = "80 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/01sAkU_NvOY" },
+                        new() { Id = 6, Title = "AI Ethics", Duration = "50 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/AaAELh2xzMc" },
+                        new() { Id = 7, Title = "AI for Social Good", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/tJVhujWBILs" },
+                        new() { Id = 8, Title = "Practical AI Applications", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/mJeNghZXtMo" },
+                        new() { Id = 9, Title = "Course Exam", Duration = "60 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [10] = new() {
+                    Id = 10, Title = "Blockchain Technology", Description = "Understanding blockchain and its applications for transparency in CSOs.", Instructor = "Amina Hassan", Duration = "9 weeks", Level = "Advanced", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Blockchain Fundamentals", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/SSo_EIwHSd4" },
+                        new() { Id = 2, Title = "Cryptocurrency Basics", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/1YyAzVmP9xQ" },
+                        new() { Id = 3, Title = "Smart Contracts", Duration = "85 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/ZE2HxTmxfrI" },
+                        new() { Id = 4, Title = "Decentralized Applications", Duration = "90 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/F50OrwV6Uk8" },
+                        new() { Id = 5, Title = "Blockchain for NGOs", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/hYip_Vuv8J0" },
+                        new() { Id = 6, Title = "Implementation Strategies", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/kHybf1aC-jE" },
+                        new() { Id = 7, Title = "Course Exam", Duration = "45 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [11] = new() {
+                    Id = 11, Title = "IoT for Smart Organizations", Description = "Implementing Internet of Things solutions for efficient CSO operations.", Instructor = "Samuel Ochieng", Duration = "7 weeks", Level = "Intermediate", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "IoT Introduction", Duration = "50 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/LlhmzVL5bm8" },
+                        new() { Id = 2, Title = "Sensors and Devices", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/6mBO2vqLv38" },
+                        new() { Id = 3, Title = "IoT Connectivity", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/h0gWfVCSGQQ" },
+                        new() { Id = 4, Title = "Data Collection & Analysis", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/EmSrQCDsMv4" },
+                        new() { Id = 5, Title = "IoT Security", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/15VjzMLzWzE" },
+                        new() { Id = 6, Title = "Course Exam", Duration = "35 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                },
+                [12] = new() {
+                    Id = 12, Title = "Digital Transformation Strategy", Description = "Leading digital transformation initiatives in civil society organizations.", Instructor = "Grace Wanjiku", Duration = "6 weeks", Level = "Advanced", Progress = 0,
+                    Modules = new List<CourseModule> {
+                        new() { Id = 1, Title = "Digital Transformation Overview", Duration = "55 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/BzC9I3Rg1x4" },
+                        new() { Id = 2, Title = "Change Management", Duration = "70 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/NP9AIUT9nos" },
+                        new() { Id = 3, Title = "Technology Assessment", Duration = "65 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/jQKJ1qgx915" },
+                        new() { Id = 4, Title = "Implementation Planning", Duration = "75 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/02EZPxPcFqs" },
+                        new() { Id = 5, Title = "Measuring Success", Duration = "60 minutes", IsCompleted = false, VideoUrl = "https://www.youtube.com/embed/7s_NInhk9jM" },
+                        new() { Id = 6, Title = "Course Exam", Duration = "40 minutes", IsCompleted = false, VideoUrl = "" }
+                    }
+                }
+            };
+            
+            return courses.ContainsKey(id) ? courses[id] : courses[1];
         }
     }
 }

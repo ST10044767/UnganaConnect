@@ -1,0 +1,154 @@
+@model CourseContentViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <!-- Course Sidebar -->
+        <div class="col-lg-3">
+            <div class="card shadow-sm sticky-top" style="top: 20px;">
+                <div class="card-header">
+                    <h5 class="mb-0">Course Content</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @for (int i = 0; i < Model.Modules.Count; i++)
+                        {
+                            var module = Model.Modules[i];
+                            @if (module.Title == "Course Exam")
+                            {
+                                <a href="@Url.Action("Exam", new { id = Model.Id })" class="list-group-item list-group-item-action">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1 text-danger">@module.Title</h6>
+                                            <small class="text-muted">@module.Duration</small>
+                                        </div>
+                                        <i class="fas fa-clipboard-check text-danger"></i>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="list-group-item list-group-item-action module-item @(i == 0 ? "active" : "")" data-module-id="@module.Id" data-video-url="@module.VideoUrl">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">@module.Title</h6>
+                                            <small class="text-muted">@module.Duration</small>
+                                        </div>
+                                        @if (module.IsCompleted)
+                                        {
+                                            <i class="fas fa-check-circle text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-play-circle text-primary"></i>
+                                        }
+                                    </div>
+                                </a>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h2 class="mb-1">@Model.Title</h2>
+                            <p class="text-muted mb-2">by @Model.Instructor</p>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary me-2">@Model.Level</span>
+                                <span class="badge bg-secondary me-2">@Model.Duration</span>
+                                <span class="text-muted small">@Model.Progress% Complete</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-success">
+                            <i class="fas fa-bookmark me-2"></i>Enrolled
+                        </button>
+                    </div>
+                    <p class="text-muted">@Model.Description</p>
+                </div>
+            </div>
+
+            <!-- Video Player -->
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="video-player" src="@Model.Modules.FirstOrDefault()?.VideoUrl" title="Course Video" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0" id="current-module-title">@Model.Modules.FirstOrDefault()?.Title</h5>
+                        <div>
+                            <button class="btn btn-outline-secondary me-2" id="prev-btn" disabled>
+                                <i class="fas fa-chevron-left me-1"></i>Previous
+                            </button>
+                            <button class="btn btn-primary" id="next-btn">
+                                Next<i class="fas fa-chevron-right ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const moduleItems = document.querySelectorAll('.module-item');
+    const videoPlayer = document.getElementById('video-player');
+    const currentModuleTitle = document.getElementById('current-module-title');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    let currentModuleIndex = 0;
+    const modules = @Html.Raw(Json.Serialize(Model.Modules));
+    
+    function updateVideo(index) {
+        if (index >= 0 && index < modules.length) {
+            currentModuleIndex = index;
+            videoPlayer.src = modules[index].videoUrl;
+            currentModuleTitle.textContent = modules[index].title;
+            
+            // Update active module
+            moduleItems.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === modules.length - 1;
+        }
+    }
+    
+    // Module click handlers
+    moduleItems.forEach((item, index) => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            updateVideo(index);
+        });
+    });
+    
+    // Navigation button handlers
+    prevBtn.addEventListener('click', function() {
+        if (currentModuleIndex > 0) {
+            updateVideo(currentModuleIndex - 1);
+        }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+        if (currentModuleIndex < modules.length - 1) {
+            updateVideo(currentModuleIndex + 1);
+        }
+    });
+});
+</script>
+}

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnganaConnect.Frontend.Models;
 using UnganaConnect.Frontend.Services;
@@ -31,6 +32,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateRequest(CreateConsultancyRequestViewModel model)
         {
@@ -64,6 +66,7 @@ namespace UnganaConnect.Frontend.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult RequestDetails(int id)
         {
             var request = GetMyRequests().FirstOrDefault(r => r.Id == id);
@@ -73,6 +76,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(request);
         }
 
+        [Authorize]
         public IActionResult ConsultantProfile(int id)
         {
             var consultant = GetAvailableConsultants().FirstOrDefault(c => c.Id == id);
@@ -82,6 +86,7 @@ namespace UnganaConnect.Frontend.Controllers
             return View(consultant);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> RequestConsultation(int consultantId, string title, string area, string priority, DateTime deadline, string description, string budgetRange)
         {
