@@ -62,7 +62,15 @@ namespace UnganaConnect.Frontend.Controllers
         [HttpGet]
         public IActionResult CreateTopic()
         {
-            ViewBag.Categories = GetForumCategories();
+            ViewBag.Categories = GetForumCategories().Select(c => new ForumCategory
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Topics = c.Topics,
+                Posts = c.Posts,
+                Color = c.Color
+            }).ToList();
             return View();
         }
 
@@ -98,7 +106,15 @@ namespace UnganaConnect.Frontend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Categories = GetForumCategories();
+            ViewBag.Categories = GetForumCategories().Select(c => new ForumCategory
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Topics = c.Topics,
+                Posts = c.Posts,
+                Color = c.Color
+            }).ToList();
             return View(model);
         }
 
@@ -125,7 +141,15 @@ namespace UnganaConnect.Frontend.Controllers
                 Tags = string.Join(",", topic.Tags)
             };
 
-            ViewBag.Categories = GetForumCategories();
+            ViewBag.Categories = GetForumCategories().Select(c => new ForumCategory
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Topics = c.Topics,
+                Posts = c.Posts,
+                Color = c.Color
+            }).ToList();
             return View(model);
         }
 
@@ -158,7 +182,15 @@ namespace UnganaConnect.Frontend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Categories = GetForumCategories();
+            ViewBag.Categories = GetForumCategories().Select(c => new ForumCategory
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Topics = c.Topics,
+                Posts = c.Posts,
+                Color = c.Color
+            }).ToList();
             return View(model);
         }
 

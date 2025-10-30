@@ -41,10 +41,13 @@ namespace UnganaConnect.Frontend.Controllers
         [Authorize]
         public IActionResult Certificate(int id, int score)
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var studentName = string.IsNullOrEmpty(userEmail) ? "Student" : userEmail.Split('@')[0]; // Extract name from email
+
             var certificate = new CertificateViewModel
             {
                 CourseTitle = "Web Development Fundamentals",
-                StudentName = "John Doe",
+                StudentName = studentName,
                 CompletionDate = DateTime.Now.ToString("MMMM dd, yyyy"),
                 Score = score
             };
@@ -54,7 +57,10 @@ namespace UnganaConnect.Frontend.Controllers
         [Authorize]
         public IActionResult DownloadCertificate(int id)
         {
-            var html = GenerateCertificateHtml(id);
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var studentName = string.IsNullOrEmpty(userEmail) ? "Student" : userEmail.Split('@')[0]; // Extract name from email
+
+            var html = GenerateCertificateHtml(id, studentName);
             return File(System.Text.Encoding.UTF8.GetBytes(html), "text/html", "certificate.html");
         }
 
@@ -124,7 +130,7 @@ namespace UnganaConnect.Frontend.Controllers
             return correctAnswers.Count > 0 ? (correct * 100) / correctAnswers.Count : 0;
         }
 
-        private string GenerateCertificateHtml(int id)
+        private string GenerateCertificateHtml(int id, string studentName)
         {
             return $@"
             <!DOCTYPE html>
@@ -133,10 +139,10 @@ namespace UnganaConnect.Frontend.Controllers
                 <title>Certificate of Completion</title>
                 <style>
                     body {{ font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f8f9fa; }}
-                    .certificate {{ 
-                        border: 8px solid #2c3e50; 
-                        padding: 60px; 
-                        margin: 20px auto; 
+                    .certificate {{
+                        border: 8px solid #2c3e50;
+                        padding: 60px;
+                        margin: 20px auto;
                         background: white;
                         max-width: 800px;
                         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -156,7 +162,7 @@ namespace UnganaConnect.Frontend.Controllers
                 <div class='certificate'>
                     <h1 class='title'>🏆 Certificate of Completion 🏆</h1>
                     <p class='details'>This is to certify that</p>
-                    <h2 class='name'>John Doe</h2>
+                    <h2 class='name'>{studentName}</h2>
                     <p class='details'>has successfully completed the course</p>
                     <h3 class='course'>Database Management Systems</h3>
                     <p class='details'>Completion Date: {DateTime.Now:MMMM dd, yyyy}</p>

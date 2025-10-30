@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 using UnganaConnect.Frontend.Models;
 using UnganaConnect.Frontend.Services;
 using Newtonsoft.Json;
@@ -14,6 +17,11 @@ namespace UnganaConnect.Frontend.Controllers
             _apiService = apiService;
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToAction("Login");
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -27,30 +35,47 @@ namespace UnganaConnect.Frontend.Controllers
                 return View(model);
 
             // Simulate successful login without backend
+            string role = "";
             if (model.Email == "admin@ungana.com" && model.Password == "admin123")
             {
-                HttpContext.Session.SetString("Token", "fake-admin-token");
-                HttpContext.Session.SetString("Role", "Admin");
-                HttpContext.Session.SetString("UserEmail", model.Email);
-                return RedirectToAction("Index", "Home");
+                role = "Admin";
             }
             else if (model.Email == "student@ungana.com" && model.Password == "student123")
             {
-                HttpContext.Session.SetString("Token", "fake-student-token");
-                HttpContext.Session.SetString("Role", "Student");
-                HttpContext.Session.SetString("UserEmail", model.Email);
-                return RedirectToAction("Index", "Home");
+                role = "Student";
             }
             else if (model.Email == "instructor@ungana.com" && model.Password == "instructor123")
             {
-                HttpContext.Session.SetString("Token", "fake-instructor-token");
-                HttpContext.Session.SetString("Role", "Instructor");
-                HttpContext.Session.SetString("UserEmail", model.Email);
-                return RedirectToAction("Index", "Home");
+                role = "Instructor";
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid login credentials");
+                return View(model);
             }
 
-            ModelState.AddModelError("", "Invalid login credentials");
-            return View(model);
+            // Create claims
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, model.Email),
+                new Claim(ClaimTypes.Email, model.Email),
+                new Claim(ClaimTypes.Role, role)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+            };
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+            HttpContext.Session.SetString("Token", $"fake-{role.ToLower()}-token");
+            HttpContext.Session.SetString("Role", role);
+            HttpContext.Session.SetString("UserEmail", model.Email);
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -70,8 +95,9 @@ namespace UnganaConnect.Frontend.Controllers
             return RedirectToAction("Login");
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }

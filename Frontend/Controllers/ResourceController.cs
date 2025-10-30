@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnganaConnect.Frontend.Models;
+using UnganaConnect.Frontend.Services;
 
 namespace UnganaConnect.Frontend.Controllers
 {
     public class ResourceController : Controller
     {
+        private readonly ApiService _apiService;
+
+        public ResourceController(ApiService apiService)
+        {
+            _apiService = apiService;
+        }
+
         public IActionResult Index()
         {
             var viewModel = new ResourceLibraryViewModel
@@ -20,6 +28,81 @@ namespace UnganaConnect.Frontend.Controllers
         {
             var resource = GetResourceById(id);
             return View(resource);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Download(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            try
+            {
+                var response = await _apiService.PostAsync($"resources/{id}/download", new { }, token);
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["Success"] = "Resource downloaded successfully!";
+                }
+                else
+                {
+                    TempData["Error"] = "Failed to download resource.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Unable to connect to backend service. Please try again later.";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Share(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            try
+            {
+                var response = await _apiService.PostAsync($"resources/{id}/share", new { }, token);
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["Success"] = "Resource shared successfully!";
+                }
+                else
+                {
+                    TempData["Error"] = "Failed to share resource.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Unable to connect to backend service. Please try again later.";
+            }
+
+            return RedirectToAction("Preview", new { id });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorites(int id)
+        {
+            var token = HttpContext.Session.GetString("Token");
+            try
+            {
+                var response = await _apiService.PostAsync($"resources/{id}/favorite", new { }, token);
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["Success"] = "Resource added to favorites!";
+                }
+                else
+                {
+                    TempData["Error"] = "Failed to add resource to favorites.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Unable to connect to backend service. Please try again later.";
+            }
+
+            return RedirectToAction("Preview", new { id });
         }
 
         private List<ResourceViewModel> GetResources()

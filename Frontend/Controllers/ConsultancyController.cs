@@ -20,6 +20,7 @@ namespace UnganaConnect.Frontend.Controllers
             }
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var role = HttpContext.Session.GetString("Role");
@@ -36,6 +37,13 @@ namespace UnganaConnect.Frontend.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRequest(CreateConsultancyRequestViewModel model)
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                TempData["Error"] = "Please log in to create consultancy requests.";
+                return RedirectToAction("Index", "Auth");
+            }
+
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Please fill in all required fields.";
@@ -79,6 +87,13 @@ namespace UnganaConnect.Frontend.Controllers
         [Authorize]
         public IActionResult ConsultantProfile(int id)
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                TempData["Error"] = "Please log in to view consultant profiles.";
+                return RedirectToAction("Index", "Auth");
+            }
+
             var consultant = GetAvailableConsultants().FirstOrDefault(c => c.Id == id);
             if (consultant == null)
                 return NotFound();
@@ -90,6 +105,13 @@ namespace UnganaConnect.Frontend.Controllers
         [HttpPost]
         public async Task<IActionResult> RequestConsultation(int consultantId, string title, string area, string priority, DateTime deadline, string description, string budgetRange)
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                TempData["Error"] = "Please log in to request consultations.";
+                return RedirectToAction("Index", "Auth");
+            }
+
             // Simulate successful consultation request
             TempData["Success"] = "Consultation request sent successfully!";
 

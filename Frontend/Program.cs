@@ -1,6 +1,7 @@
 using UnganaConnect.Frontend.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,14 @@ builder.Logging.AddFilter("Microsoft.Extensions.Logging.EventLog", LogLevel.None
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ApiService>();
+
+// Add authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.AccessDeniedPath = "/Auth/Login";
+    });
 
 // Set default culture to South Africa
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -40,6 +49,7 @@ if (!app.Environment.IsDevelopment())
 // app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 app.UseRequestLocalization();
 app.UseSession();
 app.UseAuthorization();

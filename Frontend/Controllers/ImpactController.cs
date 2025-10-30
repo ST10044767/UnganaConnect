@@ -31,15 +31,22 @@ namespace UnganaConnect.Frontend.Controllers
         public async Task<IActionResult> ExportReport()
         {
             var token = HttpContext.Session.GetString("Token");
-            var response = await _apiService.PostAsync("impact/export", new { }, token);
-            
-            if (response.IsSuccessStatusCode)
+            try
             {
-                TempData["Success"] = "Report exported successfully!";
+                var response = await _apiService.PostAsync("impact/export", new { }, token);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["Success"] = "Report exported successfully!";
+                }
+                else
+                {
+                    TempData["Error"] = "Failed to export report.";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                TempData["Error"] = "Failed to export report.";
+                TempData["Error"] = "Unable to connect to backend service. Please try again later.";
             }
 
             return RedirectToAction("Index");

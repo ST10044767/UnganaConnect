@@ -41,6 +41,7 @@
                     </div>
 
                     <form asp-action="Register" method="post">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" asp-for="EventId" />
                         <input type="hidden" asp-for="EventTitle" />
                         <input type="hidden" asp-for="EventDate" />

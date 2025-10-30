@@ -1,46 +1,35 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UnganaConnect.Service;
 
 namespace UnganaConnect.Controllers.Resources
 {
-
     [ApiController]
-    [Route("api/[controller]")]
-
-
-
-    public class ResourceController : Controller
+    [Route("api/resources")]
+    [Authorize]
+    public class ResourceController : ControllerBase
     {
-
-        private readonly FileServices fileServices;
-
-        // GET: api/Resource/5
-        [HttpGet("{id}")]
-        public ActionResult Details(int id)
+        [HttpPost("{id}/download")]
+        public IActionResult Download(int id)
         {
-            return Ok(new { id });
+            // For now, return a success response
+            // In a real implementation, this would handle the download logic
+            return Ok(new { message = "Resource downloaded successfully" });
         }
 
-        // POST: api/Resource
-        [HttpPost]
-        public ActionResult Create([FromBody] object data)
+        [HttpPost("{id}/share")]
+        public IActionResult Share(int id)
         {
-            return CreatedAtAction(nameof(Details), new { id = 1 }, data);
+            // For now, return a success response
+            // In a real implementation, this would handle sharing logic
+            return Ok(new { message = "Resource shared successfully" });
         }
 
-        // PUT: api/Resource/5
-        [HttpPut("{id}")]
-        public ActionResult Edit(int id, [FromBody] object data)
+        [HttpPost("{id}/favorite")]
+        public IActionResult AddToFavorites(int id)
         {
-            return NoContent();
-        }
-
-        // DELETE: api/Resource/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            return NoContent();
+            // For now, return a success response
+            // In a real implementation, this would add to favorites
+            return Ok(new { message = "Resource added to favorites successfully" });
         }
     }
 }
