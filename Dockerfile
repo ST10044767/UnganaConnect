@@ -1,29 +1,22 @@
-# Stage 1: Build
+# Use the official .NET 8 SDK image for building
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-
-# Copy csproj and restore dependencies
-COPY *.sln ./
-COPY UnganaConnect/*.csproj ./UnganaConnect/
-RUN dotnet restore
-
-# Copy everything else and build
-COPY . .
-WORKDIR /src/UnganaConnect
-RUN dotnet publish -c Release -o /app/out
-
-# Stage 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-# Copy published output
-COPY --from=build /app/out .
+# Copy everything
+COPY . .
 
-# Optional environment variables
-ENV DOTNET_RUNNING_IN_CONTAINER=true
-ENV DOTNET_ENVIRONMENT=Production
+# Restore and build inside the subfolder
+WORKDIR /app/UnganaConnect
+RUN dotnet restore
+RUN dotnet publish -c Release -o /out
 
-# Expose port Render expects
+# Use a lightweight runtime image for production
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+COPY --from=build /out .
+
+# Expose the port Render uses
+ENV ASPNETCORE_URLS=http://+:10000
 EXPOSE 10000
 
 # Run the app
