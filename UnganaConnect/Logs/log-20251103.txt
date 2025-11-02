@@ -1979,3 +1979,55 @@ WHERE b."Status" = 'Published'
 2025-11-03 00:24:02.292 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
 2025-11-03 00:24:02.293 +02:00 [INF] HTTP GET / responded 302 in 162.2317 ms
 2025-11-03 00:24:02.295 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 499 null null 183.9149ms
+2025-11-03 00:54:35.046 +02:00 [INF] User profile is available. Using 'C:\Users\takas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-03 00:54:35.513 +02:00 [INF] Now listening on: https://localhost:60579
+2025-11-03 00:54:35.514 +02:00 [INF] Now listening on: http://localhost:60580
+2025-11-03 00:54:35.518 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-03 00:54:35.519 +02:00 [INF] Hosting environment: Development
+2025-11-03 00:54:35.520 +02:00 [INF] Content root path: C:\Users\takas\OneDrive\Documents\project\UnganaConnect\UnganaConnect
+2025-11-03 00:55:08.796 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-03 00:55:08.973 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-03 00:55:09.053 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-03 00:55:09.512 +02:00 [INF] Accessing expired session, Key:72151d7f-f31d-a650-a48f-27abf4377f0a
+2025-11-03 00:55:09.601 +02:00 [INF] Executing ViewResult, running view Login.
+2025-11-03 00:55:09.931 +02:00 [INF] Executed ViewResult - view Login executed in 353.4893ms.
+2025-11-03 00:55:09.991 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/site.js?v=kK1uZRXsgKYIejxJ3fYMpViqpIMrRnpihbQS7sqIa1M - null null
+2025-11-03 00:55:11.382 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 2323.4442ms
+2025-11-03 00:55:11.430 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-03 00:55:11.439 +02:00 [INF] The file /js/site.js was not modified
+2025-11-03 00:55:11.896 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/site.js?v=kK1uZRXsgKYIejxJ3fYMpViqpIMrRnpihbQS7sqIa1M - 304 null text/javascript 1904.5887ms
+2025-11-03 00:55:11.897 +02:00 [INF] HTTP GET / responded 200 in 2950.7077 ms
+2025-11-03 00:55:12.025 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 200 null text/html; charset=utf-8 3222.7574ms
+2025-11-03 00:55:12.102 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/service-worker.js - null null
+2025-11-03 00:55:12.123 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/manifest.json - null null
+2025-11-03 00:55:12.131 +02:00 [INF] The file /js/service-worker.js was not modified
+2025-11-03 00:55:12.134 +02:00 [INF] The file /manifest.json was not modified
+2025-11-03 00:55:12.136 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/service-worker.js - 304 null text/javascript 33.4979ms
+2025-11-03 00:55:12.138 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/manifest.json - 304 null application/json 15.4867ms
+2025-11-03 00:55:12.181 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/images/icon-192.png - null null
+2025-11-03 00:55:12.213 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-03 00:55:12.242 +02:00 [INF] HTTP GET /images/icon-192.png responded 404 in 3.0223 ms
+2025-11-03 00:55:12.246 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-03 00:55:12.248 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/images/icon-192.png - 404 0 null 67.0414ms
+2025-11-03 00:55:12.249 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-03 00:55:12.254 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/images/icon-192.png, Response status code: 404
+2025-11-03 00:55:12.281 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course - null null
+2025-11-03 00:55:12.285 +02:00 [INF] Accessing expired session, Key:72151d7f-f31d-a650-a48f-27abf4377f0a
+2025-11-03 00:55:12.307 +02:00 [INF] Executing ViewResult, running view Login.
+2025-11-03 00:55:12.301 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Event - null null
+2025-11-03 00:55:12.306 +02:00 [INF] HTTP GET /Course responded 404 in 0.3965 ms
+2025-11-03 00:55:12.336 +02:00 [INF] Executed ViewResult - view Login executed in 28.8516ms.
+2025-11-03 00:55:12.350 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 95.6439ms
+2025-11-03 00:55:12.349 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course - 404 0 null 68.2459ms
+2025-11-03 00:55:12.344 +02:00 [INF] HTTP GET /Event responded 404 in 0.5210 ms
+2025-11-03 00:55:12.354 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-03 00:55:12.363 +02:00 [INF] HTTP GET / responded 200 in 118.5653 ms
+2025-11-03 00:55:12.361 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Event - 404 0 null 60.2735ms
+2025-11-03 00:55:12.357 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Course, Response status code: 404
+2025-11-03 00:55:12.365 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 200 null text/html; charset=utf-8 152.17ms
+2025-11-03 00:55:12.369 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Event, Response status code: 404
+2025-11-03 00:55:12.386 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Forum - null null
+2025-11-03 00:55:12.419 +02:00 [INF] HTTP GET /Forum responded 404 in 0.3589 ms
+2025-11-03 00:55:12.422 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Forum - 499 null null 36.3537ms
+2025-11-03 00:55:12.429 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Forum, Response status code: 499
+2025-11-03 00:55:18.839 +02:00 [INF] Application is shutting down...
