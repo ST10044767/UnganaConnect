@@ -1,0 +1,134 @@
+@model UnganaConnect.Models.Course.Quiz
+@{
+    ViewData["Title"] = "Take Quiz";
+    var module = Model.Module;
+}
+
+<div class="max-w-4xl mx-auto">
+    <!-- Quiz Header -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
+                    <i class="fas fa-clipboard-check text-primary-600 text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">@Model.Title</h1>
+                    <p class="text-sm text-gray-600 mt-1">Module: @(module?.Title ?? "N/A")</p>
+                </div>
+            </div>
+            <a asp-action="Learn" asp-route-id="@(module?.Id ?? 0)" 
+               class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Module
+            </a>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.Instructions))
+        {
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <i class="fas fa-info-circle text-blue-600 mt-0.5 mr-3"></i>
+                    <div>
+                        <h3 class="font-semibold text-blue-900 mb-1">Instructions</h3>
+                        <p class="text-sm text-blue-800">@Model.Instructions</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.Questions != null && Model.Questions.Any())
+        {
+            <div class="mt-4 flex items-center text-sm text-gray-600">
+                <i class="fas fa-list-ul mr-2"></i>
+                <span>@Model.Questions.Count question@(Model.Questions.Count != 1 ? "s" : "")</span>
+            </div>
+        }
+    </div>
+
+    <!-- Quiz Form -->
+    <form asp-action="SubmitQuiz" method="post" class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <input type="hidden" name="quizId" value="@Model.Id" />
+        
+        @if (Model.Questions != null && Model.Questions.Any())
+        {
+            <div class="space-y-8">
+                @for (int i = 0; i < Model.Questions.Count; i++)
+                {
+                    var q = Model.Questions.ElementAt(i);
+                    <div class="pb-8 border-b border-gray-200 last:border-b-0 last:pb-0">
+                        <div class="mb-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                    <span class="text-primary-700 font-semibold text-sm">@(i + 1)</span>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-4">@q.QuestionText</h3>
+                                    
+                                    @if (q.Options != null && q.Options.Any())
+                                    {
+                                        <div class="space-y-3">
+                                            @foreach (var opt in q.Options)
+                                            {
+                                                <label class="flex items-start p-4 border-2 border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 cursor-pointer transition-all group">
+                                                    <input class="mt-1 mr-4 w-5 h-5 text-primary-600 border-gray-300 focus:ring-primary-500 focus:ring-2" 
+                                                           type="radio" 
+                                                           name="SelectedAnswers[@q.Id]" 
+                                                           value="@opt.Id" 
+                                                           id="opt_@opt.Id">
+                                                    <div class="flex-1">
+                                                        <span class="text-gray-900 group-hover:text-primary-700 font-medium">@opt.Text</span>
+                                                    </div>
+                                                    <div class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <i class="fas fa-check-circle text-primary-600"></i>
+                                                    </div>
+                                                </label>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-gray-500 italic">No options available for this question.</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Submit Section -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-600">
+                        <i class="fas fa-clock mr-1"></i>
+                        <span>Please review all answers before submitting</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <a asp-action="Learn" asp-route-id="@(module?.Id ?? 0)" 
+                           class="inline-flex items-center px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-times mr-2"></i>Cancel
+                        </a>
+                        <button type="submit" 
+                                class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors shadow-sm hover:shadow-md">
+                            <i class="fas fa-paper-plane mr-2"></i>Submit Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-12">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-clipboard-question text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">No Questions Available</h3>
+                <p class="text-gray-600 mb-6">This quiz doesn't have any questions yet.</p>
+                <a asp-action="Learn" asp-route-id="@(module?.Id ?? 0)" 
+                   class="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Module
+                </a>
+            </div>
+        }
+    </form>
+</div>

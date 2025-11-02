@@ -1,0 +1,248 @@
+﻿@model UnganaConnect.Frontend.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Member Dashboard";
+}
+
+<div class="max-w-7xl mx-auto">
+    <!-- Welcome Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome back!</h1>
+        <p class="text-gray-600">Track your learning progress and stay updated with the latest resources</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Courses Completed Card -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Courses Completed</p>
+                    <p class="text-3xl font-bold text-gray-900">@Model.Stats.CoursesCompleted</p>
+                    <p class="text-xs text-blue-600 mt-1">
+                        <i class="fas fa-check-circle mr-1"></i>Total completed
+                    </p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-book text-blue-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificates Earned Card -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Certificates Earned</p>
+                    <p class="text-3xl font-bold text-gray-900">@Model.Stats.CertificatesEarned</p>
+                    <p class="text-xs text-green-600 mt-1">
+                        <i class="fas fa-certificate mr-1"></i>Available
+                    </p>
+                </div>
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-certificate text-green-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Downloaded Card -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Resources Downloaded</p>
+                    <p class="text-3xl font-bold text-gray-900">@Model.Stats.ResourcesDownloaded</p>
+                    <p class="text-xs text-purple-600 mt-1">
+                        <i class="fas fa-download mr-1"></i>Total downloads
+                    </p>
+                </div>
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-download text-purple-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Attended Card -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600 mb-1">Events Attended</p>
+                    <p class="text-3xl font-bold text-gray-900">@Model.Stats.EventsAttended</p>
+                    <p class="text-xs text-orange-600 mt-1">
+                        <i class="fas fa-calendar mr-1"></i>@Model.UpcomingEvents.Count upcoming
+                    </p>
+                </div>
+                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-calendar-alt text-orange-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Continue Learning & Upcoming Events -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Continue Learning Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Continue Learning</h3>
+                    <p class="text-sm text-gray-600">Pick up where you left off</p>
+                </div>
+            </div>
+
+            @if (Model.RecentCourses != null && Model.RecentCourses.Any())
+            {
+                <div class="space-y-4">
+                    @foreach (var course in Model.RecentCourses)
+                    {
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition-colors">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-semibold text-gray-900">@course.Title</h4>
+                                @if (course.Status == "Completed")
+                                {
+                                    <span class="px-3 py-1 text-xs font-semibold text-white bg-primary-600 rounded-full">Completed</span>
+                                }
+                                else
+                                {
+                                    <span class="px-3 py-1 text-xs font-semibold text-gray-700 bg-gray-200 rounded-full">In Progress</span>
+                                }
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="bg-primary-600 h-2 rounded-full transition-all" style="width: @course.Progress%"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Progress @course.Progress%</span>
+                                @if (course.Status != "Completed")
+                                {
+                                    <a href="@Url.Action("Details", "Course", new { id = course.Id })" 
+                                       class="text-primary-600 hover:text-primary-700 font-medium">
+                                        Continue <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Certificate", "Course", new { id = course.Id })" 
+                                       class="text-primary-600 hover:text-primary-700 font-medium">
+                                        View Certificate <i class="fas fa-certificate ml-1"></i>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <a href="@Url.Action("Index", "Course")" 
+                   class="mt-6 w-full px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-center font-medium block">
+                    <i class="fas fa-book mr-2"></i>Browse All Courses
+                </a>
+            }
+            else
+            {
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-book-open text-gray-400 text-2xl"></i>
+                    </div>
+                    <p class="text-gray-600 mb-4">You haven't enrolled in any courses yet.</p>
+                    <a href="@Url.Action("Index", "Course")" 
+                       class="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                        <i class="fas fa-book mr-2"></i>Browse Courses
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- Upcoming Events Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Upcoming Events</h3>
+                    <p class="text-sm text-gray-600">Don't miss these opportunities</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                @if (Model.UpcomingEvents != null && Model.UpcomingEvents.Any())
+                {
+                    @foreach (var evt in Model.UpcomingEvents)
+                    {
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition-colors">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-calendar text-primary-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-900 mb-1">@evt.Title</h4>
+                                    <div class="flex items-center text-sm text-gray-600 mb-2">
+                                        <i class="fas fa-calendar-alt mr-2"></i>
+                                        <span>@evt.Date.ToString("MMMM dd, yyyy")</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full">@evt.Type</span>
+                                        <span class="px-2 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full">@evt.Format</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center py-8">
+                        <i class="fas fa-calendar-alt text-gray-300 text-4xl mb-3"></i>
+                        <p class="text-gray-600">No upcoming events</p>
+                    </div>
+                }
+            </div>
+
+            <a href="@Url.Action("Index", "Event")" 
+               class="mt-6 w-full px-4 py-3 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors text-center font-medium block">
+                <i class="fas fa-calendar-alt mr-2"></i>View All Events
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Access Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Browse Courses Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Browse Courses</h3>
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-book text-blue-600"></i>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Discover courses and start learning</p>
+            <a href="@Url.Action("Index", "Course")" 
+               class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                <i class="fas fa-book mr-2"></i>View Courses
+            </a>
+        </div>
+
+        <!-- Community Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Community</h3>
+                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-comments text-green-600"></i>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Join discussions and connect</p>
+            <a href="@Url.Action("Index", "Forum")" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                <i class="fas fa-comments mr-2"></i>Join Community
+            </a>
+        </div>
+
+        <!-- Resources Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Resources</h3>
+                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-folder-open text-purple-600"></i>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Download materials and guides</p>
+            <a href="@Url.Action("Index", "Resource")" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                <i class="fas fa-folder-open mr-2"></i>Browse Resources
+            </a>
+        </div>
+    </div>
+</div>

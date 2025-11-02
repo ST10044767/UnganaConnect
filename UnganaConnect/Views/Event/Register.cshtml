@@ -1,0 +1,158 @@
+@model UnganaConnect.Frontend.Models.EventRegistrationViewModel
+@{
+    ViewData["Title"] = "Register for Event";
+}
+
+<div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Register for Event</h1>
+        <p class="text-gray-600">Complete your registration below</p>
+    </div>
+
+    <!-- Event Summary Card -->
+    <div class="bg-primary-50 border border-primary-200 rounded-xl p-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">@Model.EventTitle</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+            <div class="flex items-center">
+                <i class="fas fa-calendar text-primary-600 mr-2 w-5"></i>
+                <span>@Model.EventDateTime.ToString("MMMM dd, yyyy")</span>
+            </div>
+            <div class="flex items-center">
+                <i class="fas fa-clock text-primary-600 mr-2 w-5"></i>
+                <span>@Model.EventDateTime.ToString("HH:mm")</span>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.EventLocation))
+            {
+                <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt text-primary-600 mr-2 w-5"></i>
+                    <span>@Model.EventLocation</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Registration Form Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-6 bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg">
+                @TempData["Error"]
+            </div>
+        }
+
+        <form asp-action="Register" method="post" class="space-y-6">
+            <input type="hidden" asp-for="EventId" />
+            <input type="hidden" asp-for="EventTitle" />
+            <input type="hidden" asp-for="EventDateTime" />
+            <input type="hidden" asp-for="EventLocation" />
+
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm mb-4"></div>
+
+            <h3 class="text-lg font-semibold text-gray-900 mb-6">Personal Information</h3>
+
+            <!-- Full Name and Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="FullName" class="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="FullName" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="FullName" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Email" class="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Email" 
+                           type="email" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="Email" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Phone and Organization -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Phone" class="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                    </label>
+                    <input asp-for="Phone" 
+                           type="tel" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                    <span asp-validation-for="Phone" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Organization" class="block text-sm font-medium text-gray-700 mb-2">
+                        Organization
+                    </label>
+                    <input asp-for="Organization" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                    <span asp-validation-for="Organization" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Special Requirements -->
+            <div>
+                <label asp-for="SpecialRequirements" class="block text-sm font-medium text-gray-700 mb-2">
+                    Special Requirements or Dietary Restrictions
+                </label>
+                <textarea asp-for="SpecialRequirements" 
+                          rows="3"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Please let us know if you have any special requirements..."></textarea>
+                <span asp-validation-for="SpecialRequirements" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <input asp-for="AcceptTerms" 
+                           type="checkbox" 
+                           class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded" 
+                           required />
+                    <label asp-for="AcceptTerms" class="ml-3 text-sm text-gray-700">
+                        I agree to the terms and conditions and understand the cancellation policy <span class="text-red-500">*</span>
+                    </label>
+                </div>
+                <span asp-validation-for="AcceptTerms" class="text-red-600 text-xs mt-1 block ml-7"></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a asp-action="Details" asp-route-id="@Model.EventId" 
+                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Event Details
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-check mr-2"></i>Complete Registration
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                const acceptTerms = document.querySelector('input[name="AcceptTerms"]');
+                if (!acceptTerms.checked) {
+                    e.preventDefault();
+                    alert('Please accept the terms and conditions to continue.');
+                    return false;
+                }
+            });
+        });
+    </script>
+}

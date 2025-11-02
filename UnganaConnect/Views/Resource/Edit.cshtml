@@ -1,0 +1,124 @@
+@model UnganaConnect.Frontend.Models.Resource
+@{
+    ViewData["Title"] = "Edit Resource";
+}
+
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Edit Resource</h1>
+        <p class="text-gray-600">Update resource information</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <form asp-action="Edit" method="post" class="space-y-6">
+            <input asp-for="Id" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm mb-4"></div>
+
+            <!-- Title -->
+            <div>
+                <label asp-for="Title" class="block text-sm font-medium text-gray-700 mb-2">
+                    Title <span class="text-red-500">*</span>
+                </label>
+                <input asp-for="Title" 
+                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                       required />
+                <span asp-validation-for="Title" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label asp-for="Description" class="block text-sm font-medium text-gray-700 mb-2">
+                    Description <span class="text-red-500">*</span>
+                </label>
+                <textarea asp-for="Description" 
+                          rows="5"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          required></textarea>
+                <span asp-validation-for="Description" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Type and Category -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Type" class="block text-sm font-medium text-gray-700 mb-2">
+                        Type <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Type" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="">Select Type</option>
+                        <option value="pdf">PDF Document</option>
+                        <option value="video">Video</option>
+                        <option value="template">Template</option>
+                        <option value="toolkit">Toolkit</option>
+                        <option value="guide">Guide</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Category" class="block text-sm font-medium text-gray-700 mb-2">
+                        Category <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Category" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="">Select Category</option>
+                        <option value="Fundraising">Fundraising</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Management">Management</option>
+                        <option value="Community">Community</option>
+                        <option value="Analytics">Analytics</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- URL and Tags -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Url" class="block text-sm font-medium text-gray-700 mb-2">
+                        Resource URL
+                    </label>
+                    <input asp-for="Url" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="Resource URL" />
+                    <span asp-validation-for="Url" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Tags (comma-separated)
+                    </label>
+                    <input type="text" 
+                           id="tagsInput" 
+                           name="tagsInput" 
+                           value="@Model.Tags"
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="e.g., grants, templates, fundraising" />
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a asp-action="Index" 
+                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                    <i class="fas fa-save mr-2"></i>Update Resource
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

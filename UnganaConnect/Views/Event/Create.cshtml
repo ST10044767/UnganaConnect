@@ -1,0 +1,238 @@
+@model UnganaConnect.Frontend.Models.Event
+@{
+    ViewData["Title"] = "Create New Event";
+}
+
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Create New Event</h1>
+        <p class="text-gray-600">Add a new event to the platform</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-6 bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg">
+                @TempData["Error"]
+            </div>
+        }
+
+        <form asp-action="Create" method="post" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm mb-4"></div>
+
+            <!-- Title, Type, Format -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1">
+                    <label asp-for="Title" class="block text-sm font-medium text-gray-700 mb-2">
+                        Title <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Title" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="Title" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Type" class="block text-sm font-medium text-gray-700 mb-2">
+                        Type <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Type" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="">Select Type</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Webinar">Webinar</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Training">Training</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Format" class="block text-sm font-medium text-gray-700 mb-2">
+                        Format <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Format" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="">Select Format</option>
+                        <option value="Virtual">Virtual</option>
+                        <option value="In-Person">In-Person</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                    <span asp-validation-for="Format" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Date, Time, Duration -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label asp-for="Date" class="block text-sm font-medium text-gray-700 mb-2">
+                        Date <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Date" 
+                           type="datetime-local" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="Date" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Start Time <span class="text-red-500">*</span>
+                    </label>
+                    <input type="time" 
+                           name="TimeInput" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           step="3600" />
+                    <p class="text-xs text-gray-500 mt-1">Start time (24-hour format)</p>
+                </div>
+
+                <div>
+                    <label asp-for="Duration" class="block text-sm font-medium text-gray-700 mb-2">
+                        Duration <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Duration" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="e.g., 3 hours"
+                           required />
+                    <span asp-validation-for="Duration" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Instructor, Max Participants, Price -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label asp-for="Instructor" class="block text-sm font-medium text-gray-700 mb-2">
+                        Instructor <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Instructor" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="Instructor" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="MaxParticipants" class="block text-sm font-medium text-gray-700 mb-2">
+                        Max Participants <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="MaxParticipants" 
+                           type="number" 
+                           min="1"
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="MaxParticipants" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Price" class="block text-sm font-medium text-gray-700 mb-2">
+                        Price <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Price" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="e.g., Free, R50"
+                           required />
+                    <span asp-validation-for="Price" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Level and Location -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Level" class="block text-sm font-medium text-gray-700 mb-2">
+                        Level <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Level" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="">Select Level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="All Levels">All Levels</option>
+                    </select>
+                    <span asp-validation-for="Level" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Location" class="block text-sm font-medium text-gray-700 mb-2">
+                        Location
+                    </label>
+                    <input asp-for="Location" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="Leave empty for virtual events" />
+                    <span asp-validation-for="Location" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label asp-for="Description" class="block text-sm font-medium text-gray-700 mb-2">
+                    Description <span class="text-red-500">*</span>
+                </label>
+                <textarea asp-for="Description" 
+                          rows="5"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          required></textarea>
+                <span asp-validation-for="Description" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Agenda -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Agenda Items (one per line) <span class="text-red-500">*</span>
+                </label>
+                <textarea name="AgendaText" 
+                          rows="6"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Enter each agenda item on a new line..."
+                          required></textarea>
+                <p class="text-xs text-gray-500 mt-1">Enter each agenda item on a separate line</p>
+            </div>
+
+            <!-- Materials -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Materials (one per line)
+                </label>
+                <textarea name="MaterialsText" 
+                          rows="4"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Enter each material on a new line..."></textarea>
+                <p class="text-xs text-gray-500 mt-1">Enter each material on a separate line</p>
+            </div>
+
+            <!-- Tags -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Tags (comma-separated)
+                </label>
+                <input name="TagsText" 
+                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                       placeholder="e.g., Grant Writing, Fundraising, Capacity Building" />
+                <p class="text-xs text-gray-500 mt-1">Separate tags with commas</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a asp-action="Index" 
+                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                    <i class="fas fa-arrow-left mr-2"></i>Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                    <i class="fas fa-save mr-2"></i>Create Event
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

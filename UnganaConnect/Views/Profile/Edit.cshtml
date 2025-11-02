@@ -1,0 +1,233 @@
+@model UnganaConnect.Models.User.ProfileViewModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Edit Profile</h1>
+        <p class="text-gray-600">Update your profile information</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-6 bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg">
+                @TempData["Error"]
+            </div>
+        }
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="space-y-6">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedAt" />
+            <input type="hidden" asp-for="Role" />
+            
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm mb-4"></div>
+
+            <!-- Profile Picture -->
+            <div class="text-center mb-8">
+                @if (!string.IsNullOrEmpty(Model.ProfilePictureUrl))
+                {
+                    <img id="profile-preview" src="@Model.ProfilePictureUrl" alt="Current Profile Picture" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-gray-200" />
+                }
+                else
+                {
+                    <div id="profile-placeholder" class="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-semibold text-4xl mx-auto mb-4 border-4 border-gray-200">
+                        @(Model.FirstName?.FirstOrDefault() ?? 'U')@(Model.LastName?.FirstOrDefault() ?? 'U')
+                    </div>
+                }
+                <div class="flex items-center justify-center space-x-3">
+                    <label for="profilePicture" 
+                           class="px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors font-medium inline-flex items-center cursor-pointer">
+                        <i class="fas fa-upload mr-2"></i>Upload New Picture
+                    </label>
+                    <input type="file" 
+                           id="profilePicture" 
+                           name="profilePicture" 
+                           accept="image/*" 
+                           class="hidden" 
+                           onchange="previewImage(this)" />
+                    @if (!string.IsNullOrEmpty(Model.ProfilePictureUrl))
+                    {
+                        <button type="button" 
+                                onclick="removePicture()" 
+                                class="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors font-medium inline-flex items-center">
+                            <i class="fas fa-trash mr-2"></i>Remove Picture
+                        </button>
+                    }
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Max file size: 5MB. Supported formats: JPEG, PNG, GIF</p>
+            </div>
+
+            <!-- Name Fields -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="FirstName" class="block text-sm font-medium text-gray-700 mb-2">
+                        First Name <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="FirstName" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="FirstName" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="LastName" class="block text-sm font-medium text-gray-700 mb-2">
+                        Last Name <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="LastName" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="LastName" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label asp-for="Email" class="block text-sm font-medium text-gray-700 mb-2">
+                    Email <span class="text-red-500">*</span>
+                </label>
+                <input asp-for="Email" 
+                       type="email" 
+                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                       required />
+                <span asp-validation-for="Email" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Phone and Organization -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Phone" class="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                    </label>
+                    <input asp-for="Phone" 
+                           type="tel" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                    <span asp-validation-for="Phone" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Organization" class="block text-sm font-medium text-gray-700 mb-2">
+                        Organization
+                    </label>
+                    <input asp-for="Organization" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                    <span asp-validation-for="Organization" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Location and Website -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Location" class="block text-sm font-medium text-gray-700 mb-2">
+                        Location
+                    </label>
+                    <input asp-for="Location" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                    <span asp-validation-for="Location" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Website" class="block text-sm font-medium text-gray-700 mb-2">
+                        Website
+                    </label>
+                    <input asp-for="Website" 
+                           type="url" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="https://example.com" />
+                    <span asp-validation-for="Website" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Bio -->
+            <div>
+                <label asp-for="Bio" class="block text-sm font-medium text-gray-700 mb-2">
+                    Bio
+                </label>
+                <textarea asp-for="Bio" 
+                          rows="5"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Tell us about yourself..."></textarea>
+                <p class="text-xs text-gray-500 mt-1">Maximum 1000 characters</p>
+                <span asp-validation-for="Bio" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a asp-action="Index" 
+                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i>Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-save mr-2"></i>Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var placeholder = document.getElementById('profile-placeholder');
+                    var preview = document.getElementById('profile-preview');
+                    
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
+                    }
+                    
+                    if (preview) {
+                        preview.src = e.target.result;
+                    } else {
+                        var img = document.createElement('img');
+                        img.id = 'profile-preview';
+                        img.src = e.target.result;
+                        img.className = 'w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-gray-200';
+                        img.alt = 'Current Profile Picture';
+                        var container = input.closest('.text-center');
+                        if (placeholder) {
+                            placeholder.parentNode.replaceChild(img, placeholder);
+                        } else {
+                            container.insertBefore(img, container.querySelector('div'));
+                        }
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removePicture() {
+            var preview = document.getElementById('profile-preview');
+            var placeholder = document.getElementById('profile-placeholder');
+            var input = document.getElementById('profilePicture');
+            
+            if (preview) {
+                preview.remove();
+            }
+            
+            if (!placeholder) {
+                var div = document.createElement('div');
+                div.id = 'profile-placeholder';
+                div.className = 'w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white font-semibold text-4xl mx-auto mb-4 border-4 border-gray-200';
+                div.textContent = '@(Model.FirstName?.FirstOrDefault() ?? 'U')@(Model.LastName?.FirstOrDefault() ?? 'U')';
+                var container = input.closest('.text-center');
+                container.insertBefore(div, container.querySelector('div'));
+            } else {
+                placeholder.style.display = 'flex';
+            }
+            
+            if (input) {
+                input.value = '';
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

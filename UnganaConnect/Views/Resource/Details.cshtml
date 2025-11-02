@@ -1,0 +1,178 @@
+@model UnganaConnect.Frontend.Models.Resource
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="max-w-7xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav class="mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2 text-sm text-gray-600">
+            <li><a asp-action="Index" class="hover:text-primary-600 transition-colors">Resources</a></li>
+            <li><i class="fas fa-chevron-right text-gray-400"></i></li>
+            <li><a href="#" class="hover:text-primary-600 transition-colors">@Model.Category</a></li>
+            <li><i class="fas fa-chevron-right text-gray-400"></i></li>
+            <li class="text-gray-900">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Resource Header Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-start space-x-4 mb-6">
+                    <div class="w-16 h-16 @GetTypeBgColor(Model.Type) rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="@GetTypeIcon(Model.Type) @GetTypeTextColor(Model.Type) text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h1 class="text-2xl font-bold text-gray-900 mb-3">@Model.Title</h1>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold text-gray-700 bg-gray-100 rounded-full">
+                                @Model.Type
+                            </span>
+                            <span class="px-3 py-1 text-xs font-semibold text-primary-700 bg-primary-100 rounded-full">
+                                @Model.Category
+                            </span>
+                        </div>
+                        <p class="text-gray-600">@Model.Description</p>
+                    </div>
+                </div>
+
+                <!-- Resource Meta -->
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600 mb-1">Downloads</p>
+                        <p class="text-lg font-bold text-gray-900">@Model.Downloads.ToString("N0")</p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-600 mb-1">Upload Date</p>
+                        <p class="text-lg font-bold text-gray-900">@Model.UploadDate.ToString("MMM dd, yyyy")</p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-600 mb-1">Category</p>
+                        <p class="text-lg font-bold text-gray-900">@Model.Category</p>
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Tags))
+                {
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <p class="text-sm font-medium text-gray-700 mb-3">Tags</p>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach (var tag in Model.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                <span class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full">
+                                    @tag.Trim()
+                                </span>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Resource Preview Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Resource Preview</h3>
+                <div class="text-center py-12">
+                    @if (Model.Type == "video")
+                    {
+                        <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-play-circle text-blue-600 text-4xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Video Content</h4>
+                        <p class="text-gray-600">Click download to access the full video content.</p>
+                    }
+                    else if (Model.Type == "pdf" || Model.Type == "guide")
+                    {
+                        <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-file-pdf text-red-600 text-4xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">PDF Document</h4>
+                        <p class="text-gray-600">Download to view the complete document.</p>
+                    }
+                    else
+                    {
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-download text-gray-600 text-4xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Downloadable Resource</h4>
+                        <p class="text-gray-600">Click download to access this resource.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1 space-y-6">
+            <!-- Download Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 text-center">Download Resource</h3>
+                <form asp-action="Download" method="post" class="mb-4">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" 
+                            class="w-full px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                        <i class="fas fa-download mr-2"></i>Download Now
+                    </button>
+                </form>
+                <p class="text-xs text-gray-500 text-center">@Model.Downloads.ToString("N0") downloads so far</p>
+            </div>
+
+            <!-- Resource Info Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Resource Information</h3>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Type</p>
+                        <p class="text-gray-900 capitalize">@Model.Type</p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Category</p>
+                        <p class="text-gray-900">@Model.Category</p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Upload Date</p>
+                        <p class="text-gray-900">@Model.UploadDate.ToString("MMMM dd, yyyy")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetTypeIcon(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "fas fa-file-pdf",
+            "video" => "fas fa-video",
+            "template" => "fas fa-file-alt",
+            "toolkit" => "fas fa-archive",
+            _ => "fas fa-file"
+        };
+    }
+    
+    string GetTypeTextColor(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "text-red-600",
+            "video" => "text-blue-600",
+            "template" => "text-green-600",
+            "toolkit" => "text-purple-600",
+            _ => "text-gray-600"
+        };
+    }
+
+    string GetTypeBgColor(string type)
+    {
+        return type switch
+        {
+            "pdf" or "guide" => "bg-red-100",
+            "video" => "bg-blue-100",
+            "template" => "bg-green-100",
+            "toolkit" => "bg-purple-100",
+            _ => "bg-gray-100"
+        };
+    }
+}

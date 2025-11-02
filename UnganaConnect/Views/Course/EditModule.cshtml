@@ -1,0 +1,41 @@
+@model UnganaConnect.Models.Course.Module
+@{
+    ViewData["Title"] = "Edit Module";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">Edit Module</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="EditModule" method="post" enctype="multipart/form-data" class="row g-3">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+                <div class="col-md-6">
+                    <label class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Order</label>
+                    <input asp-for="Order" class="form-control" type="number" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Content</label>
+                    <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Replace Video</label>
+                    <input type="file" name="newVideo" class="form-control" accept="video/*" />
+                </div>
+                <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i>Save</button>
+                    <a asp-action="Details" asp-route-id="@Model.CourseId" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Views/Shared/_ValidationScriptsPartial.cshtml")
+
+

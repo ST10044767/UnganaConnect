@@ -1,0 +1,135 @@
+﻿@model UnganaConnect.Models.Course.Module
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Sidebar - Modules List -->
+        <div class="lg:col-span-3">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-6">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Course Modules</h3>
+                    <p class="text-sm text-gray-600">@Model.Course.Title</p>
+                </div>
+                <nav class="space-y-1">
+                    @foreach (var module in Model.Course.Modules.OrderBy(x => x.Order))
+                    {
+                        <a asp-action="Learn" asp-route-id="@module.Id"
+                           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors @(module.Id == Model.Id ? "bg-primary-100 text-primary-700 border border-primary-200" : "text-gray-700 hover:bg-gray-50")">
+                            <div class="flex items-center justify-center w-6 h-6 rounded-full bg-primary-100 text-primary-700 text-xs font-semibold mr-3 flex-shrink-0">
+                                @module.Order
+                            </div>
+                            <span class="truncate">@module.Title</span>
+                        </a>
+                    }
+                </nav>
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <a asp-action="Details" asp-route-id="@Model.CourseId" 
+                       class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Course
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="lg:col-span-9">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+                <!-- Module Header -->
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <span class="text-primary-700 font-bold text-sm">@Model.Order</span>
+                        </div>
+                        <h1 class="text-3xl font-bold text-gray-900">@Model.Title</h1>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(Model.Content))
+                    {
+                        <p class="text-gray-600">Complete this module to progress in the course</p>
+                    }
+                </div>
+
+                <!-- Video Section -->
+                @if (!string.IsNullOrWhiteSpace(Model.VideoUrl))
+                {
+                    <div class="mb-8">
+                        <div class="aspect-video rounded-xl overflow-hidden bg-gray-900 shadow-lg">
+                            <iframe src="@Model.VideoUrl" 
+                                    class="w-full h-full" 
+                                    title="@Model.Title" 
+                                    allowfullscreen 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                            </iframe>
+                        </div>
+                    </div>
+                }
+
+                <!-- Lesson Notes Section -->
+                @if (!string.IsNullOrWhiteSpace(Model.Content))
+                {
+                    <div class="mb-8">
+                        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-book text-primary-600"></i>
+                                </div>
+                                <h2 class="text-xl font-semibold text-gray-900">Lesson Notes</h2>
+                            </div>
+                            <div class="prose max-w-none text-gray-700">
+                                @Html.Raw(Model.Content)
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Quizzes Section -->
+                @if (Model.Quizzes != null && Model.Quizzes.Any())
+                {
+                    <div class="bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-6 border border-primary-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-clipboard-check text-white"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-semibold text-gray-900">Module Quizzes</h2>
+                                    <p class="text-sm text-gray-600">Test your understanding</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            @foreach (var quiz in Model.Quizzes)
+                            {
+                                <a asp-action="TakeQuiz" asp-route-quizId="@quiz.Id"
+                                   class="bg-white rounded-lg p-4 border border-primary-200 hover:border-primary-400 hover:shadow-md transition-all group">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mr-3 group-hover:bg-primary-200 transition-colors">
+                                                <i class="fas fa-question-circle text-primary-600 text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900 group-hover:text-primary-700 transition-colors">@quiz.Title</h3>
+                                                @if (!string.IsNullOrWhiteSpace(quiz.Instructions))
+                                                {
+                                                    <p class="text-xs text-gray-500 mt-1 line-clamp-1">@quiz.Instructions</p>
+                                                }
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-arrow-right text-gray-400 group-hover:text-primary-600 transition-colors"></i>
+                                    </div>
+                                    @if (quiz.Questions != null && quiz.Questions.Any())
+                                    {
+                                        <div class="mt-3 text-xs text-gray-500">
+                                            <i class="fas fa-list-ul mr-1"></i>@quiz.Questions.Count question@(quiz.Questions.Count != 1 ? "s" : "")
+                                        </div>
+                                    }
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,171 @@
+@model UnganaConnect.Models.Blog.CreateBlogPostViewModel
+@{
+    ViewData["Title"] = "Edit Blog Post";
+}
+
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Edit Blog Post</h1>
+        <p class="text-gray-600">Update your blog post</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-6 bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg">
+                @TempData["Error"]
+            </div>
+        }
+
+        @if (ViewBag.CurrentFeaturedImage != null)
+        {
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Current Featured Image:</label>
+                <img src="@ViewBag.CurrentFeaturedImage" class="w-48 h-32 object-cover rounded-lg border border-gray-200" alt="Current Featured Image" />
+            </div>
+        }
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="space-y-6">
+            <input type="hidden" name="id" value="@ViewBag.PostId" />
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm mb-4"></div>
+
+            <!-- Title and Category -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <label asp-for="Title" class="block text-sm font-medium text-gray-700 mb-2">
+                        Title <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Title" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           required />
+                    <span asp-validation-for="Title" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div>
+                    <label asp-for="Category" class="block text-sm font-medium text-gray-700 mb-2">
+                        Category <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Category" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="General">General</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Education">Education</option>
+                        <option value="Community">Community</option>
+                        <option value="Resources">Resources</option>
+                        <option value="Events">Events</option>
+                        <option value="Success Stories">Success Stories</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Excerpt -->
+            <div>
+                <label asp-for="Excerpt" class="block text-sm font-medium text-gray-700 mb-2">
+                    Excerpt
+                </label>
+                <textarea asp-for="Excerpt" 
+                          rows="3"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Brief summary of the post (optional)"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Leave empty to auto-generate from content</p>
+                <span asp-validation-for="Excerpt" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Content -->
+            <div>
+                <label asp-for="Content" class="block text-sm font-medium text-gray-700 mb-2">
+                    Content <span class="text-red-500">*</span>
+                </label>
+                <textarea asp-for="Content" 
+                          rows="15"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Write your blog post content here..."
+                          required></textarea>
+                <span asp-validation-for="Content" class="text-red-600 text-xs mt-1"></span>
+            </div>
+
+            <!-- Featured Image and Tags -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="featuredImage" class="block text-sm font-medium text-gray-700 mb-2">
+                        Change Featured Image
+                    </label>
+                    <input type="file" 
+                           id="featuredImage" 
+                           name="featuredImage" 
+                           accept="image/*" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                    <p class="text-xs text-gray-500 mt-1">Leave empty to keep current image. Max file size: 10MB</p>
+                </div>
+
+                <div>
+                    <label asp-for="Tags" class="block text-sm font-medium text-gray-700 mb-2">
+                        Tags
+                    </label>
+                    <input asp-for="Tags" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="e.g., technology, education, community" />
+                    <p class="text-xs text-gray-500 mt-1">Separate tags with commas</p>
+                    <span asp-validation-for="Tags" class="text-red-600 text-xs mt-1"></span>
+                </div>
+            </div>
+
+            <!-- Status, Featured, Allow Comments -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label asp-for="Status" class="block text-sm font-medium text-gray-700 mb-2">
+                        Status <span class="text-red-500">*</span>
+                    </label>
+                    <select asp-for="Status" 
+                            class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required>
+                        <option value="Draft">Draft</option>
+                        <option value="Published">Published</option>
+                        <option value="Archived">Archived</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-red-600 text-xs mt-1"></span>
+                </div>
+
+                <div class="flex items-center pt-8">
+                    <input asp-for="IsFeatured" 
+                           type="checkbox" 
+                           class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded" />
+                    <label asp-for="IsFeatured" class="ml-2 block text-sm font-medium text-gray-700">
+                        Featured Post
+                    </label>
+                </div>
+
+                <div class="flex items-center pt-8">
+                    <input asp-for="AllowComments" 
+                           type="checkbox" 
+                           class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded" />
+                    <label asp-for="AllowComments" class="ml-2 block text-sm font-medium text-gray-700">
+                        Allow Comments
+                    </label>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a asp-action="Index" 
+                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i>Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-save mr-2"></i>Update Post
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

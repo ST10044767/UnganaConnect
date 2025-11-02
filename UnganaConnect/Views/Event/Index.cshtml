@@ -1,0 +1,205 @@
+@model EventViewModel
+@{
+    ViewData["Title"] = "Events";
+    var role = Context.Session.GetString("Role");
+}
+
+<div class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div class="mb-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Events</h1>
+                <p class="text-gray-600">Discover workshops, webinars, and conferences to enhance your CSO's capabilities</p>
+            </div>
+            @if (role == "Admin" || role == "Instructor")
+            {
+                <a asp-action="Create" 
+                   class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium inline-flex items-center">
+                    <i class="fas fa-plus mr-2"></i>Create New Event
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex space-x-1 mb-6 border-b border-gray-200">
+        <button class="event-tab active px-4 py-2 text-sm font-medium text-primary-600 border-b-2 border-primary-600">
+            Browse Events
+        </button>
+        <button class="event-tab px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300">
+            My Events
+        </button>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="flex flex-col md:flex-row gap-4 mb-8">
+        <div class="flex-1 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+            </div>
+            <input type="text" 
+                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                   placeholder="Search events...">
+        </div>
+        <div class="flex gap-2">
+            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                All
+            </button>
+            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                Workshops
+            </button>
+            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                Webinars
+            </button>
+        </div>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Events List -->
+        <div class="lg:col-span-2 space-y-4">
+            @foreach (var eventItem in Model.UpcomingEvents)
+            {
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-200 event-card" data-event-id="@eventItem.Id">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-3 py-1 text-xs font-semibold text-gray-700 bg-gray-100 rounded-full">
+                                    @eventItem.Type
+                                </span>
+                                <span class="px-3 py-1 text-xs font-semibold text-primary-700 bg-primary-50 rounded-full">
+                                    @eventItem.Format
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">@eventItem.Title</h3>
+                            <p class="text-sm text-gray-600 mb-1">by @eventItem.Instructor</p>
+                            <div class="flex items-center gap-4 text-sm text-gray-500 mt-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar mr-2"></i>
+                                    <span>@eventItem.Date.ToString("MMM dd, yyyy")</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>@eventItem.Duration</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span>@eventItem.Participants/@eventItem.MaxParticipants</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-primary-600 mb-1">@eventItem.Price</div>
+                            <span class="px-2 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full">
+                                @eventItem.Level
+                            </span>
+                            @if (role == "Admin" || role == "Instructor")
+                            {
+                                <div class="flex gap-2 mt-3">
+                                    <a asp-action="Edit" asp-route-id="@eventItem.Id" 
+                                       class="p-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors"
+                                       title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@eventItem.Id" 
+                                       class="p-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                                       title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <a asp-action="Details" asp-route-id="@eventItem.Id" 
+                           class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                            <i class="fas fa-info-circle mr-2"></i>View Details
+                        </a>
+                        <a asp-action="Register" asp-route-eventId="@eventItem.Id" 
+                           class="ml-3 inline-flex items-center px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors font-medium">
+                            <i class="fas fa-calendar-check mr-2"></i>Register
+                        </a>
+                    </div>
+                </div>
+            }
+
+            @if (!Model.UpcomingEvents.Any())
+            {
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-calendar-alt text-gray-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">No events found</h3>
+                    <p class="text-gray-600 mb-4">Check back later for upcoming events.</p>
+                    @if (role == "Admin" || role == "Instructor")
+                    {
+                        <a asp-action="Create" 
+                           class="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                            <i class="fas fa-plus mr-2"></i>Create Event
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- My Events Sidebar -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sticky top-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">My Registered Events</h3>
+                @if (Model.MyEvents != null && Model.MyEvents.Any())
+                {
+                    <div class="space-y-3">
+                        @foreach (var myEvent in Model.MyEvents)
+                        {
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition-colors">
+                                <h4 class="font-semibold text-gray-900 mb-2">@myEvent.Title</h4>
+                                <div class="flex items-center justify-between text-sm mb-2">
+                                    <span class="text-gray-600">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        @myEvent.StartDateTime.ToString("MMM dd, yyyy")
+                                    </span>
+                                    @{
+                                        var statusClass = myEvent.Status switch
+                                        {
+                                            "Registered" => "bg-primary-100 text-primary-700",
+                                            "Completed" => "bg-green-100 text-green-700",
+                                            "Waitlisted" => "bg-yellow-100 text-yellow-700",
+                                            _ => "bg-gray-100 text-gray-700"
+                                        };
+                                    }
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full @statusClass">
+                                        @myEvent.Status
+                                    </span>
+                                </div>
+                                <a asp-action="Details" asp-route-id="@myEvent.EventId" 
+                                   class="text-sm text-primary-600 hover:text-primary-700 font-medium">
+                                    View Details <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-sm text-gray-600 text-center py-4">No registered events</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.event-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.event-tab').forEach(t => {
+                    t.classList.remove('active', 'text-primary-600', 'border-primary-600');
+                    t.classList.add('text-gray-600', 'border-transparent');
+                });
+                this.classList.add('active', 'text-primary-600', 'border-primary-600');
+                this.classList.remove('text-gray-600', 'border-transparent');
+            });
+        });
+    </script>
+}

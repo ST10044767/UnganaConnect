@@ -1,0 +1,170 @@
+@model UnganaConnect.Models.User.ProfileViewModel
+@{
+    ViewData["Title"] = "Profile Settings";
+}
+
+<div class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Profile Settings</h1>
+        <p class="text-gray-600">Manage your account, organization details, and preferences</p>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="flex space-x-1 mb-8 pb-4 border-b border-gray-200">
+        <button class="px-4 py-2 bg-gray-100 text-gray-900 rounded-lg font-medium text-sm">
+            Profile
+        </button>
+        <button class="px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 font-medium text-sm transition-colors">
+            Organization
+        </button>
+        <button class="px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 font-medium text-sm transition-colors">
+            Notifications
+        </button>
+        <button class="px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 font-medium text-sm transition-colors">
+            Security
+        </button>
+        <button class="px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 font-medium text-sm transition-colors">
+            Activity
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+            <!-- Personal Information Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-gray-900">Personal Information</h2>
+                    <a asp-action="Edit" 
+                       class="px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-edit mr-2"></i>Edit
+                    </a>
+                </div>
+
+                <!-- Avatar -->
+                <div class="flex items-center mb-6">
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-white text-3xl font-bold">
+                        @(Model.FirstName?.FirstOrDefault() ?? 'U')@(Model.LastName?.FirstOrDefault() ?? 'U')
+                    </div>
+                </div>
+
+                <!-- Information Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <p class="text-gray-900">@Model.FirstName @Model.LastName</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <p class="text-gray-900">@Model.Email</p>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.Phone))
+                    {
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                            <p class="text-gray-900">@Model.Phone</p>
+                        </div>
+                    }
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                        <span class="inline-block px-3 py-1 text-xs font-semibold text-primary-700 bg-primary-100 rounded-full">
+                            @Model.Role
+                        </span>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.Location))
+                    {
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                            <p class="text-gray-900">@Model.Location</p>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Website))
+                    {
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Website</label>
+                            <a href="@Model.Website" target="_blank" class="text-primary-600 hover:text-primary-700">
+                                @Model.Website
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <!-- Bio Section -->
+                @if (!string.IsNullOrEmpty(Model.Bio))
+                {
+                    <div class="mb-6 pt-6 border-t border-gray-200">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+                        <p class="text-gray-600">@Model.Bio</p>
+                    </div>
+                }
+
+                
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- Profile Stats Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Profile Stats</h3>
+                <div class="text-center mb-6">
+                    <div class="text-5xl font-bold text-primary-600 mb-2">85%</div>
+                    <p class="text-sm text-gray-600">Profile Completion</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Member since</span>
+                        <span class="font-medium text-gray-900">@Model.CreatedAt.ToString("yyyy-MM-dd")</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Courses completed</span>
+                        <span class="font-medium text-gray-900">12</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Forum posts</span>
+                        <span class="font-medium text-gray-900">34</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Resources downloaded</span>
+                        <span class="font-medium text-gray-900">67</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Achievements</h3>
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-graduation-cap text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-900">Learning Champion</h4>
+                            <p class="text-xs text-gray-600">Completed 10+ courses</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-handshake text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-900">Community Contributor</h4>
+                            <p class="text-xs text-gray-600">Active forum participant</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-file-download text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-900">Resource Explorer</h4>
+                            <p class="text-xs text-gray-600">Downloaded 50+ resources</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

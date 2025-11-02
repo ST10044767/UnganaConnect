@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="UnganaConnect Training Portal - Courses, Events, Forums, and Resources" />
+    <meta name="theme-color" content="#7c3aed" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" />
+    
+    <title>@ViewData["Title"] - UnganaConnect</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    @if (Context.Session.GetString("Token") != null)
+    {
+        <!-- Sidebar Navigation (Authenticated Users) -->
+        <aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-64 transition-transform bg-white border-r border-gray-200 shadow-sm lg:translate-x-0 -translate-x-full">
+            <div class="h-full flex flex-col">
+                <!-- Logo -->
+                <div class="px-6 py-6 border-b border-gray-200">
+                    <a asp-controller="Home" asp-action="Index" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">UnganaConnect</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+                    <a asp-controller="Home" asp-action="@(Context.Session.GetString("Role") == "Admin" ? "Admin" : "Member")" 
+                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-home w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a asp-controller="Course" asp-action="Index" 
+                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-book w-5"></i>
+                        <span>Training</span>
+                    </a>
+                    <a asp-controller="Resource" asp-action="Index" 
+                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-folder-open w-5"></i>
+                        <span>Resources</span>
+                    </a>
+                    @if (Context.Session.GetString("Role") == "Admin" || Context.Session.GetString("Role") == "Instructor")
+                    {
+                        <a asp-controller="Blog" asp-action="Index" 
+                           class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-blog w-5"></i>
+                            <span>Consultancy</span>
+                        </a>
+                    }
+                    <a asp-controller="Event" asp-action="Index" 
+                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-calendar-alt w-5"></i>
+                        <span>Events</span>
+                    </a>
+                    <a asp-controller="Forum" asp-action="Index" 
+                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-comments w-5"></i>
+                        <span>Community</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="Privacy" 
+                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-chart-line w-5"></i>
+                        <span>Impact</span>
+                    </a>
+                </nav>
+
+                <!-- Bottom Section -->
+                <div class="px-4 py-4 border-t border-gray-200 space-y-1">
+                    <a asp-controller="Profile" asp-action="Index" 
+                       class="flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-cog w-5"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a asp-controller="Auth" asp-action="Logout" 
+                       class="flex items-center space-x-3 px-4 py-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+                        <i class="fas fa-sign-out-alt w-5"></i>
+                        <span>Sign Out</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="lg:pl-64">
+            <!-- Top Header -->
+            <header class="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
+                <div class="px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <!-- Search Bar -->
+                        <div class="flex-1 max-w-2xl">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-search text-gray-400"></i>
+                                </div>
+                                <input type="text" 
+                                       class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                                       placeholder="Search courses, resources...">
+                            </div>
+                        </div>
+
+                        <!-- User Info & Actions -->
+                        <div class="ml-6 flex items-center space-x-4">
+                            <button class="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500"></span>
+                            </button>
+                            
+                            <div class="flex items-center space-x-3">
+                                <div class="text-right hidden md:block">
+                                    <div class="text-sm font-medium text-gray-900">@Context.Session.GetString("Name")</div>
+                                    <div class="text-xs text-gray-500">@Context.Session.GetString("Role")</div>
+                                </div>
+                                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white font-semibold">
+                                    @(Context.Session.GetString("Name")?.Substring(0, 1) ?? "U")
+                                </div>
+                            </div>
+
+                            <a asp-controller="Course" asp-action="Index" 
+                               class="hidden lg:flex items-center space-x-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                                <i class="fas fa-bookmark"></i>
+                                <span>My Learning</span>
+                            </a>
+                        </div>
+
+                        <!-- Mobile Menu Button -->
+                        <button id="mobile-menu-btn" onclick="toggleSidebar()" class="lg:hidden p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="p-6">
+                <!-- Alert Messages -->
+                @if (TempData["Success"] != null)
+                {
+                    <div class="mb-6 bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-sm" role="alert">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <p class="font-medium">@TempData["Success"]</p>
+                            </div>
+                            <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-green-700 hover:text-green-900">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+                @if (TempData["Error"] != null)
+                {
+                    <div class="mb-6 bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-sm" role="alert">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                <p class="font-medium">@TempData["Error"]</p>
+                            </div>
+                            <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-700 hover:text-red-900">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                @RenderBody()
+            </main>
+        </div>
+    }
+    else
+    {
+        <!-- Public Layout (No Sidebar) -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <a asp-controller="Home" asp-action="Index" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">UnganaConnect</span>
+                    </a>
+                    <div class="flex items-center space-x-4">
+                        <a asp-controller="Auth" asp-action="Login" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors">
+                            Login
+                        </a>
+                        <a asp-controller="Auth" asp-action="Register" class="px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
+                            Register
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+    }
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-sm">
+                    &copy; @DateTime.Now.Year UnganaConnect. All rights reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-primary-600 transition-colors">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary-600 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary-600 transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // Highlight active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href').toLowerCase();
+                if (currentPath.includes(href.split('/').filter(p => p)) || 
+                    (currentPath === '/' || currentPath === '/home' && href.includes('home'))) {
+                    link.classList.add('bg-primary-50', 'text-primary-700');
+                    link.classList.remove('text-gray-700');
+                }
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

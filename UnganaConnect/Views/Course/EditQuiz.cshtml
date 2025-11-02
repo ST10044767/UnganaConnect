@@ -1,0 +1,55 @@
+@model UnganaConnect.Models.Course.Quiz
+@{
+    ViewData["Title"] = "Edit Quiz";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">Edit Quiz</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="EditQuiz" method="post" class="row g-3">
+                <input type="hidden" name="quizId" value="@Model.Id" />
+                <div class="col-md-6">
+                    <label class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Instructions</label>
+                    <textarea asp-for="Instructions" class="form-control" rows="3"></textarea>
+                </div>
+
+                <hr />
+                <div id="questions">
+                    @for (int i = 0; i < Model.Questions.Count; i++)
+                    {
+                        var q = Model.Questions.ElementAt(i);
+                        <div class="border rounded p-3 mb-3">
+                            <div class="mb-2">
+                                <label class="form-label">Question</label>
+                                <input name="questionTexts[@i]" class="form-control" value="@q.QuestionText" />
+                            </div>
+                            <div>
+                                @for (int j = 0; j < q.Options.Count; j++)
+                                {
+                                    var o = q.Options.ElementAt(j);
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" type="radio" name="correctOptionIndexes[@i]" value="@j" @(o.IsCorrect?"checked":null) />
+                                        </div>
+                                        <input class="form-control" name="options[@i][@j]" value="@o.Text" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i>Save</button>
+                    <a asp-action="Details" asp-route-id="@Model.Module.CourseId" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
