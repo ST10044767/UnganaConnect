@@ -15,9 +15,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /out .
 
-# Expose the port Render uses
-ENV ASPNETCORE_URLS=http://+:10000
-EXPOSE 10000
+# Expose the port Render/Koyeb expects
+ENV ASPNETCORE_URLS=http://+:8000
+EXPOSE 8000
 
 # Run the app
 ENTRYPOINT ["dotnet", "UnganaConnect.dll"]

@@ -7,6 +7,10 @@ ASP.NET Core MVC frontend application for UnganaConnect platform.
 - User Authentication (Login/Register)
 - Course Management (CRUD operations)
 - Resource Management (CRUD operations)
+-Blog Management (CRUD operations)
+-Forum Management (CRUD operations)
+-Event Management (CRUD operations)
+-Profile Management (CRUD operations)
 - Responsive Bootstrap UI
 - Session-based authentication
 - API integration with backend
