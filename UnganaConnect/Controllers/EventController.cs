@@ -20,12 +20,13 @@ namespace UnganaConnect.Frontend.Controllers
         public async Task<IActionResult> Index()
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
+
             var upcomingEvents = await _context.Events
                 .Include(e => e.Registrations)
                 .OrderBy(e => e.Date)
                 .ToListAsync();
 
-            var myEvents = new List<MyEventViewModel>();
+            List<MyEventViewModel> myEvents = new();
 
             if (!string.IsNullOrEmpty(userEmail))
             {
@@ -95,7 +96,7 @@ namespace UnganaConnect.Frontend.Controllers
             if (string.IsNullOrEmpty(userEmail))
             {
                 TempData["Error"] = "Please log in to register for events.";
-                return RedirectToAction("Index", "Auth");
+                return RedirectToAction("Login", "Auth");
             }
 
             var eventItem = await _context.Events.FindAsync(eventId);
@@ -131,13 +132,14 @@ namespace UnganaConnect.Frontend.Controllers
         // POST Register
         // ==========================
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(EventRegistrationViewModel model)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             if (string.IsNullOrEmpty(userEmail))
             {
                 TempData["Error"] = "Please log in to register for events.";
-                return RedirectToAction("Index", "Auth");
+                return RedirectToAction("Login", "Auth");
             }
 
             if (!ModelState.IsValid)
@@ -156,14 +158,12 @@ namespace UnganaConnect.Frontend.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Check capacity
             if (eventItem.Registrations.Count >= eventItem.MaxParticipants)
             {
                 TempData["Error"] = "Event is full.";
                 return RedirectToAction("Details", new { id = model.EventId });
             }
 
-            // Register user
             var registration = new EventRegistration
             {
                 EventId = model.EventId,
@@ -173,7 +173,10 @@ namespace UnganaConnect.Frontend.Controllers
             };
 
             _context.EventRegistrations.Add(registration);
-            eventItem.Participants = eventItem.Registrations.Count + 1; // update participants
+            await _context.SaveChangesAsync();
+
+            // Optional: Update participant count dynamically after saving
+            eventItem.Participants = await _context.EventRegistrations.CountAsync(r => r.EventId == eventItem.Id);
             await _context.SaveChangesAsync();
 
             TempData["Success"] = "Successfully registered for event!";
@@ -181,7 +184,7 @@ namespace UnganaConnect.Frontend.Controllers
         }
 
         // ==========================
-        // Admin/Instructor: CRUD operations
+        // Admin/Instructor: CRUD
         // ==========================
         [HttpGet]
         public IActionResult Create()
@@ -197,6 +200,7 @@ namespace UnganaConnect.Frontend.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Event model, string? TimeInput)
         {
             var role = HttpContext.Session.GetString("Role");
@@ -206,11 +210,12 @@ namespace UnganaConnect.Frontend.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Parse TimeInput if provided
-            if (!string.IsNullOrEmpty(TimeInput) && TimeSpan.TryParse(TimeInput, out var timeSpan))
-            {
-                model.Time = timeSpan;
-            }
+
+            if(!string.IsNullOrEmpty(TimeInput) && TimeSpan.TryParse(TimeInput, out var timeSpan))
+    model.Time = timeSpan;
+
+            // Ensure UTC kind
+            model.Date = DateTime.SpecifyKind(model.Date, DateTimeKind.Utc);
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -240,6 +245,7 @@ namespace UnganaConnect.Frontend.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Event model, string? TimeInput)
         {
             var role = HttpContext.Session.GetString("Role");
@@ -249,18 +255,16 @@ namespace UnganaConnect.Frontend.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Parse TimeInput if provided
             if (!string.IsNullOrEmpty(TimeInput) && TimeSpan.TryParse(TimeInput, out var timeSpan))
-            {
                 model.Time = timeSpan;
-            }
 
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return View(model);
 
             var eventItem = await _context.Events.FindAsync(model.Id);
-            if (eventItem == null) return NotFound();
+            if (eventItem == null)
+                return NotFound();
 
-            // Update fields manually to preserve navigation properties
             eventItem.Title = model.Title;
             eventItem.Type = model.Type;
             eventItem.Format = model.Format;
@@ -294,12 +298,14 @@ namespace UnganaConnect.Frontend.Controllers
             }
 
             var eventItem = await _context.Events.FindAsync(id);
-            if (eventItem == null) return NotFound();
+            if (eventItem == null)
+                return NotFound();
 
             return View(eventItem);
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var role = HttpContext.Session.GetString("Role");
