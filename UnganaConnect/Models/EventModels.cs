@@ -83,6 +83,7 @@ namespace UnganaConnect.Frontend.Models
     {
         public List<Event> UpcomingEvents { get; set; } = new();
         public List<MyEventViewModel> MyEvents { get; set; } = new();
+        public string SearchQuery { get; set; } = string.Empty;
     }
 
     public class MyEventViewModel
