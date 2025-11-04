@@ -3,39 +3,88 @@
     ViewData["Title"] = "Create Module";
 }
 
-<div class="container py-4">
-    <h2 class="mb-3">Create Module - @ViewBag.CourseTitle</h2>
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <form asp-action="CreateModule" method="post" enctype="multipart/form-data" class="row g-3">
-                @Html.AntiForgeryToken()
-                <input type="hidden" asp-for="CourseId" />
-                <div class="col-md-6">
-                    <label class="form-label">Title</label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Create Module</h1>
+        <p class="text-gray-600">Add a new module to @ViewBag.CourseTitle</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <form asp-action="CreateModule" method="post" enctype="multipart/form-data" class="space-y-6">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="CourseId" />
+            
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm mb-4"></div>
+
+            <!-- Title and Order -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label asp-for="Title" class="block text-sm font-medium text-gray-700 mb-2">
+                        Module Title <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Title" 
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="Enter module title"
+                           required />
+                    <span asp-validation-for="Title" class="text-red-600 text-xs mt-1"></span>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label">Order</label>
-                    <input asp-for="Order" class="form-control" type="number" />
+
+                <div>
+                    <label asp-for="Order" class="block text-sm font-medium text-gray-700 mb-2">
+                        Order
+                    </label>
+                    <input asp-for="Order" 
+                           type="number" 
+                           min="1"
+                           class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                           placeholder="Module order" />
                 </div>
-                <div class="col-12">
-                    <label class="form-label">Content</label>
-                    <textarea asp-for="Content" class="form-control" rows="4"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Video</label>
-                    <input type="file" name="videoFile" class="form-control" accept="video/*" />
-                </div>
-                <div class="col-12 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i>Create</button>
-                    <a asp-action="Details" asp-route-id="@Model.CourseId" class="btn btn-outline-secondary">Cancel</a>
-                </div>
-            </form>
-        </div>
+            </div>
+
+            <!-- Content -->
+            <div>
+                <label asp-for="Content" class="block text-sm font-medium text-gray-700 mb-2">
+                    Content
+                </label>
+                <textarea asp-for="Content" 
+                          rows="6"
+                          class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" 
+                          placeholder="Enter module content..."></textarea>
+            </div>
+
+            <!-- Video Upload -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Video File
+                </label>
+                <input type="file" 
+                       name="videoFile" 
+                       accept="video/*"
+                       class="block w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                <p class="text-xs text-gray-500 mt-1">Upload a video file for this module (optional)</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+                <a asp-action="Details" asp-route-id="@Model.CourseId" 
+                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                    <i class="fas fa-save mr-2"></i>Create Module
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
-@await Html.PartialAsync("~/Views/Shared/_ValidationScriptsPartial.cshtml")
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
 
 

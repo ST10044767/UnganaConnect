@@ -17,14 +17,23 @@ namespace UnganaConnect.Frontend.Controllers
         // ==========================
         // List upcoming events and user's events
         // ==========================
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = null)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
 
-            var upcomingEvents = await _context.Events
+            IQueryable<Event> upcomingEventsQuery = _context.Events
                 .Include(e => e.Registrations)
-                .OrderBy(e => e.Date)
-                .ToListAsync();
+                .OrderBy(e => e.Date);
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                upcomingEventsQuery = upcomingEventsQuery.Where(e =>
+                    e.Title.Contains(searchQuery) ||
+                    e.Instructor.Contains(searchQuery) ||
+                    e.Tags.Any(tag => tag.Contains(searchQuery)));
+            }
+
+            var upcomingEvents = await upcomingEventsQuery.ToListAsync();
 
             List<MyEventViewModel> myEvents = new();
 
@@ -47,7 +56,8 @@ namespace UnganaConnect.Frontend.Controllers
             var viewModel = new EventViewModel
             {
                 UpcomingEvents = upcomingEvents,
-                MyEvents = myEvents
+                MyEvents = myEvents,
+                SearchQuery = searchQuery ?? string.Empty
             };
 
             return View(viewModel);

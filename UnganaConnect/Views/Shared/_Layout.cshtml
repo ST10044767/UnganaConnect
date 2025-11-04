@@ -27,16 +27,16 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#faf5ff',
-                            100: '#f3e8ff',
-                            200: '#e9d5ff',
-                            300: '#d8b4fe',
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                            700: '#7c3aed',
-                            800: '#6b21a8',
-                            900: '#581c87',
+                            50: '#f9ecde',
+                            100: '#f9ecde',
+                            200: '#f9ecde',
+                            300: '#b99f84',
+                            400: '#b99f84',
+                            500: '#ff911d',
+                            600: '#ff911d',
+                            700: '#da4e02',
+                            800: '#da4e02',
+                            900: '#da4e02',
                         },
                     },
                 },
@@ -53,9 +53,7 @@
                 <!-- Logo -->
                 <div class="px-6 py-6 border-b border-gray-200">
                     <a asp-controller="Home" asp-action="Index" class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-xl"></i>
-                        </div>
+                        <img src="~/LogoU.jpeg" alt="UnganaConnect Logo" class="w-10 h-10 rounded-lg object-cover">
                         <span class="text-xl font-bold text-gray-900">UnganaConnect</span>
                     </a>
                 </div>
@@ -82,7 +80,7 @@
                         <a asp-controller="Blog" asp-action="Index" 
                            class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-blog w-5"></i>
-                            <span>Consultancy</span>
+                            <span>Blog</span>
                         </a>
                     }
                     <a asp-controller="Event" asp-action="Index" 
@@ -95,11 +93,7 @@
                         <i class="fas fa-comments w-5"></i>
                         <span>Community</span>
                     </a>
-                    <a asp-controller="Home" asp-action="Privacy" 
-                       class="nav-link flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-chart-line w-5"></i>
-                        <span>Impact</span>
-                    </a>
+
                 </nav>
 
                 <!-- Bottom Section -->
@@ -211,9 +205,7 @@
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <a asp-controller="Home" asp-action="Index" class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-white text-xl"></i>
-                        </div>
+                        <img src="~/LogoU.jpeg" alt="UnganaConnect Logo" class="w-10 h-10 rounded-lg object-cover">
                         <span class="text-xl font-bold text-gray-900">UnganaConnect</span>
                     </a>
                     <div class="flex items-center space-x-4">
