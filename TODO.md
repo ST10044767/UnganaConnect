@@ -1,3 +1,0 @@
-- [x] Update EventViewModel to include SearchQuery property
-- [x] Modify EventController.Index to accept searchQuery parameter and filter events
-- [x] Update Index.cshtml to make search input functional with form submission
