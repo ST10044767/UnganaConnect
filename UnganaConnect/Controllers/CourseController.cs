@@ -714,11 +714,8 @@ namespace UnganaConnect.Controllers
             await _context.SaveChangesAsync();
         }
 
-        // ==============================
-        // CERTIFICATE DOWNLOAD
-        // ==============================
         [HttpGet]
-        public async Task<IActionResult> Certificate(int courseId)
+        public async Task<IActionResult> Certificate(int id)
         {
             var userId = HttpContext.Session.GetString("UserId");
             if (string.IsNullOrEmpty(userId))
@@ -726,15 +723,16 @@ namespace UnganaConnect.Controllers
 
             var guidUserId = Guid.Parse(userId);
 
-            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
+            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
             if (course == null)
                 return NotFound();
 
-            var enrollment = await _context.Enrollments.FirstOrDefaultAsync(e => e.CourseId == courseId && e.UserId == guidUserId);
+            var enrollment = await _context.Enrollments
+                .FirstOrDefaultAsync(e => e.CourseId == id && e.UserId == guidUserId);
             if (enrollment == null || !enrollment.Completed)
             {
                 TempData["Error"] = "Complete the course to download your certificate.";
-                return RedirectToAction("Details", new { id = courseId });
+                return RedirectToAction("Details", new { id });
             }
 
             var vm = new UnganaConnect.Frontend.Models.CertificateViewModel

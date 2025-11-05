@@ -90,6 +90,8 @@ namespace UnganaConnect.Controllers
             return View(viewModel);
         }
 
+
+
         // GET: /Blog/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -158,14 +160,13 @@ namespace UnganaConnect.Controllers
             return View(new CreateBlogPostViewModel());
         }
 
-        // POST: /Blog/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateBlogPostViewModel model, IFormFile? featuredImage)
         {
             var userId = HttpContext.Session.GetString("UserId");
             var role = HttpContext.Session.GetString("Role");
-            
+
             if (string.IsNullOrEmpty(userId) || (role != "Admin" && role != "Instructor"))
             {
                 TempData["Error"] = "Access denied.";
@@ -175,7 +176,10 @@ namespace UnganaConnect.Controllers
             var guidUserId = Guid.Parse(userId);
 
             if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Please fill in all required fields correctly.";
                 return View(model);
+            }
 
             var post = new BlogPost
             {
@@ -193,39 +197,44 @@ namespace UnganaConnect.Controllers
                 PublishedAt = model.Status == "Published" ? DateTime.UtcNow : null
             };
 
-            // Handle featured image upload
+            // Handle featured image upload safely
             if (featuredImage != null && featuredImage.Length > 0)
             {
-                var allowedTypes = new[] { "image/jpeg", "image/png", "image/jpg", "image/gif" };
-                if (!allowedTypes.Contains(featuredImage.ContentType))
-                {
-                    ModelState.AddModelError("FeaturedImage", "Only JPEG, PNG, and GIF images are allowed.");
-                    return View(model);
-                }
-
-                if (featuredImage.Length > 10 * 1024 * 1024) // 10MB
-                {
-                    ModelState.AddModelError("FeaturedImage", "Image size must be less than 10MB.");
-                    return View(model);
-                }
-
                 try
                 {
-                    var imageUrl = await _blobService.UploadAsync(featuredImage, "blog-images");
-                    post.FeaturedImageUrl = imageUrl;
+                    var allowedTypes = new[] { "image/jpeg", "image/png", "image/jpg", "image/gif" };
+                    if (!allowedTypes.Contains(featuredImage.ContentType))
+                    {
+                        TempData["Warning"] = "Invalid image type. Only JPEG, PNG, GIF allowed. Post will be created without image.";
+                    }
+                    else if (featuredImage.Length > 10 * 1024 * 1024) // 10MB
+                    {
+                        TempData["Warning"] = "Image too large (max 10MB). Post will be created without image.";
+                    }
+                    else
+                    {
+                        var imageUrl = await _blobService.UploadAsync(featuredImage, "blog-images");
+                        post.FeaturedImageUrl = imageUrl;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("FeaturedImage", $"Error uploading image: {ex.Message}");
-                    return View(model);
+                    TempData["Warning"] = $"Image upload failed: {ex.Message}. Post will be created without image.";
                 }
             }
 
-            _context.BlogPosts.Add(post);
-            await _context.SaveChangesAsync();
-
-            TempData["Success"] = "Blog post created successfully!";
-            return RedirectToAction("Index");
+            try
+            {
+                _context.BlogPosts.Add(post);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Blog post created successfully!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"Error saving blog post: {ex.Message}";
+                return View(model);
+            }
         }
 
         // GET: /Blog/Edit/5
@@ -412,6 +421,77 @@ namespace UnganaConnect.Controllers
             };
 
             return View(viewModel);
+        }
+
+       
+        [HttpGet]
+        public async Task<IActionResult> MemberBlog()
+        {
+            var userRole = HttpContext.Session.GetString("Role");
+
+            // Only allow Members to access this endpoint
+            if (userRole != "Member")
+            {
+                TempData["Error"] = "Access denied.";
+                return RedirectToAction("Index");
+            }
+
+            var posts = await _context.BlogPosts
+                .Include(b => b.Author)
+                .Where(b => b.Status == "Published")
+                .OrderByDescending(b => b.PublishedAt ?? b.CreatedAt)
+                .ToListAsync();
+
+            var viewModel = posts.Select(p => new BlogPostViewModel
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Excerpt = p.Excerpt ?? (p.Content.Length > 200 ? p.Content.Substring(0, 200) + "..." : p.Content),
+                FeaturedImageUrl = p.FeaturedImageUrl,
+                Category = p.Category,
+                Tags = p.Tags,
+                AuthorName = $"{p.Author.FirstName} {p.Author.LastName}",
+                AuthorProfilePicture = p.Author.ProfilePictureUrl,
+                PublishedAt = p.PublishedAt
+            }).ToList();
+
+            return View("MemberBlog", viewModel); // looks for Views/Blog/MemberBlog.cshtml
+        }
+
+
+        
+        [HttpGet]
+        public async Task<IActionResult> MemberDetails(int id)
+        {
+            var userRole = HttpContext.Session.GetString("Role");
+
+            if (userRole != "Member")
+            {
+                TempData["Error"] = "Access denied.";
+                return RedirectToAction("Index");
+            }
+
+            var post = await _context.BlogPosts
+                .Include(b => b.Author)
+                .FirstOrDefaultAsync(b => b.Id == id && b.Status == "Published");
+
+            if (post == null)
+                return NotFound();
+
+            var viewModel = new BlogPostViewModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Content = post.Content,
+                FeaturedImageUrl = post.FeaturedImageUrl,
+                Category = post.Category,
+                Tags = post.Tags,
+                AuthorName = $"{post.Author.FirstName} {post.Author.LastName}",
+                AuthorProfilePicture = post.Author.ProfilePictureUrl,
+                PublishedAt = post.PublishedAt
+            };
+
+            return View("MemberBlogDetails", viewModel); // looks for Views/Blog/MemberBlogDetails.cshtml
         }
 
         // POST: /Blog/Delete/5

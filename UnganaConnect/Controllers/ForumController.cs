@@ -95,21 +95,24 @@ namespace UnganaConnect.Frontend.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: /Forum/Topic/5
         [HttpGet]
-        public async Task<IActionResult> Topic(int id)
+        public async Task<IActionResult> Topic(int? categoryId)
         {
+            if (categoryId == null)
+                return NotFound();
+
             var topic = await _context.ForumTopics
                 .Include(t => t.Category)
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .FirstOrDefaultAsync(t => t.Id == categoryId.Value);
 
             if (topic == null) return NotFound();
 
+            // increment views
             topic.Views++;
             await _context.SaveChangesAsync();
 
             var replies = await _context.ForumReplies
-                .Where(r => r.TopicId == id)
+                .Where(r => r.TopicId == categoryId.Value)
                 .OrderBy(r => r.CreatedAt)
                 .ToListAsync();
 
@@ -133,8 +136,9 @@ namespace UnganaConnect.Frontend.Controllers
                 RepliesList = replies
             };
 
-            return View(viewModel);
+            return View("Topic", viewModel);
         }
+
 
         // POST: /Forum/Reply
         [HttpPost]

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UnganaConnect.Models.User;
 
 namespace UnganaConnect.Models.Blog
 {
@@ -51,7 +52,7 @@ namespace UnganaConnect.Models.Blog
         [ForeignKey(nameof(Author))]
         public Guid AuthorId { get; set; }
         public UnganaConnect.Models.User.User Author { get; set; } = null!;
-        
+     
         [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         

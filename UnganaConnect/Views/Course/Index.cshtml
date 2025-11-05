@@ -118,18 +118,12 @@
 
                     <!-- Course Meta -->
                     <div class="flex items-center space-x-4 text-sm text-gray-500 mb-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                            <span>4.8</span>
-                        </div>
+                        
                         <div class="flex items-center">
                             <i class="fas fa-clock mr-1"></i>
                             <span>@course.Duration</span>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-users mr-1"></i>
-                            <span>245</span>
-                        </div>
+
                     </div>
 
                     <!-- Category Tag -->
@@ -153,6 +147,11 @@
                                        class="p-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors"
                                        title="Edit">
                                         <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@course.Id"
+                                       class="p-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors"
+                                       title="Delete">
+                                        <i class="fas fa-delete"></i>
                                     </a>
                                     <form asp-action="Publish" method="post" class="inline">
                                         <input type="hidden" name="id" value="@course.Id" />

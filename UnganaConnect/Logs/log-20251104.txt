@@ -1,0 +1,237 @@
+2025-11-04 19:49:15.308 +02:00 [INF] User profile is available. Using 'C:\Users\takas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-04 19:49:27.343 +02:00 [INF] Now listening on: https://localhost:60579
+2025-11-04 19:49:27.737 +02:00 [INF] Now listening on: http://localhost:60580
+2025-11-04 19:49:28.630 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-04 19:49:28.648 +02:00 [INF] Hosting environment: Development
+2025-11-04 19:49:28.664 +02:00 [INF] Content root path: C:\Users\takas\OneDrive\Documents\project\UnganaConnect\UnganaConnect
+2025-11-04 19:49:39.001 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-04 19:49:40.610 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:49:40.730 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:49:42.670 +02:00 [INF] Executing ViewResult, running view Login.
+2025-11-04 19:49:44.078 +02:00 [INF] Executed ViewResult - view Login executed in 1232.9483ms.
+2025-11-04 19:49:44.788 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/css/site.css?v=1XTq3YFRFQtrIx0a2i0OqJUagBUGRUiGKS36MV_bhaU - null null
+2025-11-04 19:49:44.805 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 4041.0323ms
+2025-11-04 19:49:45.454 +02:00 [INF] The file /css/site.css was not modified
+2025-11-04 19:49:45.576 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:49:45.631 +02:00 [INF] HTTP GET / responded 200 in 5041.1582 ms
+2025-11-04 19:49:45.658 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/css/site.css?v=1XTq3YFRFQtrIx0a2i0OqJUagBUGRUiGKS36MV_bhaU - 304 null text/css 813.135ms
+2025-11-04 19:49:46.664 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/site.js?v=kK1uZRXsgKYIejxJ3fYMpViqpIMrRnpihbQS7sqIa1M - null null
+2025-11-04 19:49:47.211 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 200 null text/html; charset=utf-8 8229.4399ms
+2025-11-04 19:49:47.231 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-04 19:49:47.271 +02:00 [INF] The file /js/site.js was not modified
+2025-11-04 19:49:47.364 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_vs/browserLink - null null
+2025-11-04 19:49:47.372 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/site.js?v=kK1uZRXsgKYIejxJ3fYMpViqpIMrRnpihbQS7sqIa1M - 304 null text/javascript 622.2246ms
+2025-11-04 19:49:47.847 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 616.2065ms
+2025-11-04 19:49:48.493 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_vs/browserLink - 200 null text/javascript; charset=UTF-8 1128.6123ms
+2025-11-04 19:49:48.710 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/service-worker.js - null null
+2025-11-04 19:49:49.030 +02:00 [INF] The file /js/service-worker.js was not modified
+2025-11-04 19:49:48.927 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/manifest.json - null null
+2025-11-04 19:49:49.031 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/service-worker.js - 304 null text/javascript 321.2582ms
+2025-11-04 19:49:49.243 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Event - null null
+2025-11-04 19:49:49.243 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course - null null
+2025-11-04 19:49:49.059 +02:00 [INF] The file /manifest.json was not modified
+2025-11-04 19:49:49.153 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-04 19:49:49.339 +02:00 [INF] HTTP GET /Event responded 404 in 42.7343 ms
+2025-11-04 19:49:49.729 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Event - 404 0 null 486.2797ms
+2025-11-04 19:49:49.331 +02:00 [INF] HTTP GET /Course responded 404 in 17.6465 ms
+2025-11-04 19:49:49.946 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Event, Response status code: 404
+2025-11-04 19:49:49.874 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Forum - null null
+2025-11-04 19:49:50.311 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/favicon.ico - null null
+2025-11-04 19:49:50.306 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course - 499 null null 1062.9684ms
+2025-11-04 19:49:50.453 +02:00 [INF] HTTP GET /Forum responded 404 in 11.0070 ms
+2025-11-04 19:49:50.515 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Course, Response status code: 499
+2025-11-04 19:49:50.538 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Forum - 499 null null 667.7471ms
+2025-11-04 19:49:49.330 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/manifest.json - 304 null application/json 402.8207ms
+2025-11-04 19:49:49.724 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:49:49.494 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/images/icon-192.png - null null
+2025-11-04 19:49:49.797 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Resource - null null
+2025-11-04 19:49:50.835 +02:00 [INF] HTTP GET /Resource responded 404 in 0.2315 ms
+2025-11-04 19:49:50.405 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/site.js - null null
+2025-11-04 19:49:50.637 +02:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\takas\OneDrive\Documents\project\UnganaConnect\UnganaConnect\wwwroot\favicon.ico'
+2025-11-04 19:49:50.871 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/favicon.ico - 499 5430 image/x-icon 560.1963ms
+2025-11-04 19:49:50.808 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:49:50.827 +02:00 [INF] HTTP GET /images/icon-192.png responded 404 in 3.0347 ms
+2025-11-04 19:49:50.840 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Resource - 499 null null 1043.3028ms
+2025-11-04 19:49:50.064 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/css/output.css - null null
+2025-11-04 19:49:50.856 +02:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Users\takas\OneDrive\Documents\project\UnganaConnect\UnganaConnect\wwwroot\js\site.js'
+2025-11-04 19:49:50.794 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Forum, Response status code: 499
+2025-11-04 19:49:51.132 +02:00 [INF] Executing ViewResult, running view Login.
+2025-11-04 19:49:51.494 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/images/icon-192.png - 404 0 null 2000.0533ms
+2025-11-04 19:49:51.526 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Resource, Response status code: 499
+2025-11-04 19:49:51.564 +02:00 [INF] Sending file. Request path: '/css/output.css'. Physical path: 'C:\Users\takas\OneDrive\Documents\project\UnganaConnect\UnganaConnect\wwwroot\css\output.css'
+2025-11-04 19:49:51.573 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/site.js - 499 1258 text/javascript 1201.6812ms
+2025-11-04 19:49:51.625 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/images/icon-192.png, Response status code: 404
+2025-11-04 19:49:51.631 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/css/output.css - 499 27426 text/css 1566.5555ms
+2025-11-04 19:49:51.676 +02:00 [INF] Executed ViewResult - view Login executed in 544.8033ms.
+2025-11-04 19:49:51.736 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 853.9331ms
+2025-11-04 19:49:51.761 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:49:53.897 +02:00 [INF] HTTP GET / responded 200 in 4173.8035 ms
+2025-11-04 19:49:54.407 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 200 null text/html; charset=utf-8 5254.2639ms
+2025-11-04 19:50:33.226 +02:00 [INF] Request starting HTTP/2 POST https://localhost:60579/ - application/x-www-form-urlencoded 229
+2025-11-04 19:50:33.509 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:50:33.900 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(UnganaConnect.Models.Auth.LoginViewModel) on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:50:44.638 +02:00 [INF] Request starting HTTP/2 POST https://localhost:60579/ - application/x-www-form-urlencoded 229
+2025-11-04 19:50:44.742 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:50:44.990 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(UnganaConnect.Models.Auth.LoginViewModel) on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:50:48.464 +02:00 [INF] Executed DbCommand (652ms) [Parameters=[@__model_Email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FirstName", u."LastName", u."Location", u."Organization", u."PasswordHash", u."Phone", u."ProfilePictureUrl", u."Role", u."UpdatedAt", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__model_Email_0
+LIMIT 1
+2025-11-04 19:50:49.748 +02:00 [INF] Executed DbCommand (1,220ms) [Parameters=[@__model_Email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FirstName", u."LastName", u."Location", u."Organization", u."PasswordHash", u."Phone", u."ProfilePictureUrl", u."Role", u."UpdatedAt", u."Website"
+FROM "Users" AS u
+WHERE u."Email" = @__model_Email_0
+LIMIT 1
+2025-11-04 19:50:51.208 +02:00 [INF] Executing RedirectResult, redirecting to /Home/Admin.
+2025-11-04 19:50:51.391 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 17308.0811ms
+2025-11-04 19:50:51.377 +02:00 [INF] Executing RedirectResult, redirecting to /Home/Admin.
+2025-11-04 19:50:51.406 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 6158.7928ms
+2025-11-04 19:50:51.432 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:50:51.405 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:50:51.446 +02:00 [INF] Session started; Key:d09e7eab-2b3e-6c62-74c3-3f8ae3483c58, Id:05d4719a-55c2-185b-9bb7-98402d3ae744
+2025-11-04 19:50:51.496 +02:00 [INF] Session started; Key:61d08744-9979-7a06-10dc-7e5b41825498, Id:92fea78c-43fb-8507-b0d7-752bc89a073f
+2025-11-04 19:50:51.506 +02:00 [INF] HTTP POST / responded 302 in 6759.0251 ms
+2025-11-04 19:50:51.515 +02:00 [INF] HTTP POST / responded 302 in 18006.9647 ms
+2025-11-04 19:50:51.632 +02:00 [INF] Request finished HTTP/2 POST https://localhost:60579/ - 499 null null 18406.3771ms
+2025-11-04 19:50:51.632 +02:00 [INF] Request finished HTTP/2 POST https://localhost:60579/ - 302 0 null 6994.4973ms
+2025-11-04 19:50:51.665 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Home/Admin - null null
+2025-11-04 19:50:51.743 +02:00 [INF] Executing endpoint 'UnganaConnect.Frontend.Controllers.HomeController.Admin (UnganaConnect)'
+2025-11-04 19:50:51.765 +02:00 [INF] Route matched with {action = "Admin", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Admin() on controller UnganaConnect.Frontend.Controllers.HomeController (UnganaConnect).
+2025-11-04 19:50:52.889 +02:00 [INF] Executed DbCommand (439ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Courses" AS c
+2025-11-04 19:50:53.518 +02:00 [INF] Executed DbCommand (442ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Users" AS u
+2025-11-04 19:50:56.776 +02:00 [INF] Executed DbCommand (404ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Resources" AS r
+2025-11-04 19:50:57.691 +02:00 [INF] Executed DbCommand (403ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Events" AS e
+WHERE e."Date" >= @__now_0
+2025-11-04 19:50:58.306 +02:00 [INF] Executed DbCommand (423ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."Id", e."Agenda", e."Date", e."Description", e."Duration", e."Format", e."Instructor", e."Level", e."Location", e."Materials", e."MaxParticipants", e."Participants", e."Price", e."Tags", e."Time", e."Title", e."Type"
+FROM "Events" AS e
+WHERE e."Date" >= @__now_0
+ORDER BY e."Date"
+LIMIT @__p_1
+2025-11-04 19:50:58.464 +02:00 [INF] Executing ViewResult, running view Admin.
+2025-11-04 19:50:58.813 +02:00 [INF] Executed ViewResult - view Admin executed in 350.6572ms.
+2025-11-04 19:51:00.380 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-04 19:51:00.412 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_vs/browserLink - null null
+2025-11-04 19:51:00.828 +02:00 [INF] Executed action UnganaConnect.Frontend.Controllers.HomeController.Admin (UnganaConnect) in 8943.2728ms
+2025-11-04 19:51:00.882 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 501.7352ms
+2025-11-04 19:51:00.962 +02:00 [INF] Executed endpoint 'UnganaConnect.Frontend.Controllers.HomeController.Admin (UnganaConnect)'
+2025-11-04 19:51:00.981 +02:00 [INF] HTTP GET /Home/Admin responded 200 in 9239.3225 ms
+2025-11-04 19:51:01.360 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_vs/browserLink - 200 null text/javascript; charset=UTF-8 947.5685ms
+2025-11-04 19:51:01.393 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Home/Admin - 200 null text/html; charset=utf-8 9728.2099ms
+2025-11-04 19:51:01.513 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/service-worker.js - null null
+2025-11-04 19:51:01.513 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/images/icon-192.png - null null
+2025-11-04 19:51:01.580 +02:00 [INF] The file /js/service-worker.js was not modified
+2025-11-04 19:51:01.583 +02:00 [INF] HTTP GET /images/icon-192.png responded 404 in 0.3183 ms
+2025-11-04 19:51:01.584 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/service-worker.js - 304 null text/javascript 73.9539ms
+2025-11-04 19:51:01.758 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/images/icon-192.png - 404 0 null 247.7603ms
+2025-11-04 19:51:01.821 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/images/icon-192.png, Response status code: 404
+2025-11-04 19:51:01.650 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Event - null null
+2025-11-04 19:51:01.650 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-04 19:51:01.650 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course - null null
+2025-11-04 19:51:01.834 +02:00 [INF] HTTP GET /Event responded 404 in 0.2076 ms
+2025-11-04 19:51:01.846 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Event - 404 0 null 195.8328ms
+2025-11-04 19:51:01.844 +02:00 [INF] HTTP GET /Course responded 404 in 0.2272 ms
+2025-11-04 19:51:01.841 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:51:01.930 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Event, Response status code: 404
+2025-11-04 19:51:01.932 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course - 499 null null 282.399ms
+2025-11-04 19:51:01.933 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:51:02.027 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Course, Response status code: 499
+2025-11-04 19:51:02.032 +02:00 [INF] Executing RedirectResult, redirecting to /Home/Index.
+2025-11-04 19:51:02.050 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 19.3017ms
+2025-11-04 19:51:02.057 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:51:02.078 +02:00 [INF] HTTP GET / responded 302 in 237.4246 ms
+2025-11-04 19:51:02.081 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 499 null null 430.7065ms
+2025-11-04 19:51:09.966 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course/Index - null null
+2025-11-04 19:51:12.146 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.CourseController.Index (UnganaConnect)'
+2025-11-04 19:51:13.377 +02:00 [INF] Route matched with {action = "Index", controller = "Course"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String) on controller UnganaConnect.Controllers.CourseController (UnganaConnect).
+2025-11-04 19:51:16.842 +02:00 [INF] Executed DbCommand (810ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Category", c."CreatedAt", c."Description", c."Duration", c."Enrolled", c."Level", c."Progress", c."Rating", c."Status", c."ThumbnailContentType", c."ThumbnailFileName", c."ThumbnailUrl", c."Title", m."Id", m."Content", m."CourseId", m."Order", m."Title", m."UserId", m."VideoContentType", m."VideoFileName", m."VideoFileSize", m."VideoUrl"
+FROM "Courses" AS c
+LEFT JOIN "Modules" AS m ON c."Id" = m."CourseId"
+ORDER BY c."CreatedAt" DESC, c."Id"
+2025-11-04 19:51:17.245 +02:00 [INF] Executing ViewResult, running view Index.
+2025-11-04 19:51:19.202 +02:00 [INF] Executed ViewResult - view Index executed in 1959.0381ms.
+2025-11-04 19:51:19.497 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-04 19:51:19.506 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_vs/browserLink - null null
+2025-11-04 19:51:19.997 +02:00 [INF] Executed action UnganaConnect.Controllers.CourseController.Index (UnganaConnect) in 5170.6549ms
+2025-11-04 19:51:20.023 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 525.5169ms
+2025-11-04 19:51:20.466 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_vs/browserLink - 200 null text/javascript; charset=UTF-8 960.2151ms
+2025-11-04 19:51:20.481 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.CourseController.Index (UnganaConnect)'
+2025-11-04 19:51:20.499 +02:00 [INF] HTTP GET /Course/Index responded 200 in 8353.2657 ms
+2025-11-04 19:51:20.542 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course/Index - 200 null text/html; charset=utf-8 10545.5388ms
+2025-11-04 19:51:20.597 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/service-worker.js - null null
+2025-11-04 19:51:20.648 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/images/icon-192.png - null null
+2025-11-04 19:51:20.650 +02:00 [INF] The file /js/service-worker.js was not modified
+2025-11-04 19:51:20.661 +02:00 [INF] HTTP GET /images/icon-192.png responded 404 in 0.2800 ms
+2025-11-04 19:51:20.662 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/service-worker.js - 304 null text/javascript 65.8117ms
+2025-11-04 19:51:20.665 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/images/icon-192.png - 404 0 null 17.0138ms
+2025-11-04 19:51:20.731 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/images/icon-192.png, Response status code: 404
+2025-11-04 19:51:20.737 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-04 19:51:20.744 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course - null null
+2025-11-04 19:51:20.780 +02:00 [INF] HTTP GET /Course responded 404 in 0.2405 ms
+2025-11-04 19:51:20.759 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:51:20.744 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Event - null null
+2025-11-04 19:51:21.096 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course - 404 0 null 351.8383ms
+2025-11-04 19:51:21.157 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Course, Response status code: 404
+2025-11-04 19:51:21.151 +02:00 [INF] HTTP GET /Event responded 404 in 0.2426 ms
+2025-11-04 19:51:21.168 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Event - 499 null null 424.0381ms
+2025-11-04 19:51:21.127 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:51:22.078 +02:00 [INF] Executing RedirectResult, redirecting to /Home/Index.
+2025-11-04 19:51:22.081 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 2.9349ms
+2025-11-04 19:51:22.067 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Event, Response status code: 499
+2025-11-04 19:51:22.083 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:51:22.097 +02:00 [INF] HTTP GET / responded 302 in 1337.9267 ms
+2025-11-04 19:51:22.099 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 499 null null 1362.3107ms
+2025-11-04 19:51:27.048 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course/Delete/5 - null null
+2025-11-04 19:51:27.100 +02:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-04 19:51:27.427 +02:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-04 19:51:27.490 +02:00 [INF] HTTP GET /Course/Delete/5 responded 405 in 389.8058 ms
+2025-11-04 19:51:27.491 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course/Delete/5 - 405 0 null 442.7072ms
+2025-11-04 19:51:34.998 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course/Index - null null
+2025-11-04 19:51:37.910 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.CourseController.Index (UnganaConnect)'
+2025-11-04 19:51:38.525 +02:00 [INF] Route matched with {action = "Index", controller = "Course"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String) on controller UnganaConnect.Controllers.CourseController (UnganaConnect).
+2025-11-04 19:51:39.791 +02:00 [INF] Executed DbCommand (400ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Category", c."CreatedAt", c."Description", c."Duration", c."Enrolled", c."Level", c."Progress", c."Rating", c."Status", c."ThumbnailContentType", c."ThumbnailFileName", c."ThumbnailUrl", c."Title", m."Id", m."Content", m."CourseId", m."Order", m."Title", m."UserId", m."VideoContentType", m."VideoFileName", m."VideoFileSize", m."VideoUrl"
+FROM "Courses" AS c
+LEFT JOIN "Modules" AS m ON c."Id" = m."CourseId"
+ORDER BY c."CreatedAt" DESC, c."Id"
+2025-11-04 19:51:40.611 +02:00 [INF] Executing ViewResult, running view Index.
+2025-11-04 19:51:43.066 +02:00 [INF] Executed ViewResult - view Index executed in 2454.9242ms.
+2025-11-04 19:51:44.083 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-04 19:51:48.463 +02:00 [INF] Executed action UnganaConnect.Controllers.CourseController.Index (UnganaConnect) in 9103.197ms
+2025-11-04 19:51:48.642 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/_framework/aspnetcore-browser-refresh.js - 200 16511 application/javascript; charset=utf-8 4559.8058ms
+2025-11-04 19:51:49.212 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.CourseController.Index (UnganaConnect)'
+2025-11-04 19:51:49.283 +02:00 [INF] HTTP GET /Course/Index responded 200 in 11373.4742 ms
+2025-11-04 19:51:49.293 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course/Index - 200 null text/html; charset=utf-8 14294.2859ms
+2025-11-04 19:51:49.561 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/js/service-worker.js - null null
+2025-11-04 19:51:50.194 +02:00 [INF] The file /js/service-worker.js was not modified
+2025-11-04 19:51:50.172 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/images/icon-192.png - null null
+2025-11-04 19:51:50.217 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/js/service-worker.js - 304 null text/javascript 655.8806ms
+2025-11-04 19:51:50.576 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Course - null null
+2025-11-04 19:51:50.574 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/Event - null null
+2025-11-04 19:51:50.230 +02:00 [INF] HTTP GET /images/icon-192.png responded 404 in 0.4541 ms
+2025-11-04 19:51:50.569 +02:00 [INF] Request starting HTTP/2 GET https://localhost:60579/ - null null
+2025-11-04 19:51:50.992 +02:00 [INF] HTTP GET /Course responded 404 in 0.5191 ms
+2025-11-04 19:51:50.994 +02:00 [INF] HTTP GET /Event responded 404 in 0.2495 ms
+2025-11-04 19:51:51.017 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Event - 404 0 null 443.2343ms
+2025-11-04 19:51:51.012 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/Course - 404 0 null 436.297ms
+2025-11-04 19:51:52.326 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Course, Response status code: 404
+2025-11-04 19:51:51.008 +02:00 [INF] Executing endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:51:52.329 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller UnganaConnect.Controllers.AuthController (UnganaConnect).
+2025-11-04 19:51:51.006 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/images/icon-192.png - 404 0 null 833.7502ms
+2025-11-04 19:51:52.343 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/images/icon-192.png, Response status code: 404
+2025-11-04 19:51:52.341 +02:00 [INF] Executing RedirectResult, redirecting to /Home/Index.
+2025-11-04 19:51:52.302 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:60579/Event, Response status code: 404
+2025-11-04 19:51:52.368 +02:00 [INF] Executed action UnganaConnect.Controllers.AuthController.Login (UnganaConnect) in 28.0334ms
+2025-11-04 19:51:52.395 +02:00 [INF] Executed endpoint 'UnganaConnect.Controllers.AuthController.Login (UnganaConnect)'
+2025-11-04 19:51:52.396 +02:00 [INF] HTTP GET / responded 302 in 1387.9948 ms
+2025-11-04 19:51:52.417 +02:00 [INF] Request finished HTTP/2 GET https://localhost:60579/ - 499 null null 1848.1433ms

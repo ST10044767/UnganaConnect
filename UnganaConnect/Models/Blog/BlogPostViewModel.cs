@@ -21,6 +21,7 @@ namespace UnganaConnect.Models.Blog
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? PublishedAt { get; set; }
+
     }
     
     public class CreateBlogPostViewModel
@@ -53,6 +54,9 @@ namespace UnganaConnect.Models.Blog
         
         [Display(Name = "Allow Comments")]
         public bool AllowComments { get; set; } = true;
-    }
+ 
+   }
 }
+
+
 

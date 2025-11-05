@@ -32,6 +32,7 @@
 	  <Folder Include="Logs\" />
 	  <Folder Include="Models\Event\" />
 	  <Folder Include="Models\Forum\" />
+	  <Folder Include="wwwroot\images\" />
 	</ItemGroup>
 
 </Project>
